@@ -15,3 +15,6 @@ Template.homeTemplate.events({
     Router.go("/login");
   }
 });
+Template.homeTemplate.rendered = function() {
+  $('#loadingScreen').removeClass("active");
+};

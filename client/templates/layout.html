@@ -1,16 +1,49 @@
 
 <template name="layoutTemplate">
-
     <div id="content">
-      {{#if isLogin}}
-      <div class="ui menu teal top fixed inverted one item">
+      <div class="ui menu teal top fixed inverted one item small">
         <div class="header item">
           Phano
         </div>
       </div>
-        {{else}}
-        {{toLoginTemplate}}
-        {{/if}}
+      <div class="ui container" style="padding-top: 50px;">
+        {{> yield}}
+      </div>
+    </div>
+    <div id="loadingScreen" class="ui dimmer">
+      <div class="ui loader"></div>
+    </div>
+</template>
+
+<template name="loadingTemplate">
+  <div class="ui active dimmer">
+    <div class="ui loader"></div>
+  </div>
+</template>
+
+<template name="loginLayoutTemplate">
+    <div id="content">
+      <div class="ui container" style="padding-top: 50px;">
+        {{> yield}}
+      </div>
+    </div>
+    <div id="loadingScreen" class="ui dimmer">
+      <div class="ui loader"></div>
+    </div>
+</template>
+
+<template name="screenLayoutTemplate">
+    <div id="content">
+      <div class="ui borderless menu teal top fixed inverted small">
+        <a class="item">
+          <i class="home icon"></i>
+          Back to home</a>
+        <div class="menu" style="text-align:center;">
+          <div class="header item">
+            Phano
+          </div>
+        </div>
+      </div>
       <div class="ui container" style="padding-top: 50px;">
         {{> yield}}
       </div>
