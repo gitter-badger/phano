@@ -6,13 +6,13 @@ Template.loginTemplate.events({
     var barcodeResult = "0";
     var customerInfo;
     //-----------------Call barcode scanner-----------------
-    cordova.plugins.barcodeScanner.scan(
-      function(result) {
-        barcodeResult = result.text;
-      },
-      function(error) {
-        alert("We got an error, error code:" + EJSON.stringify(error));
-      });
+    // cordova.plugins.barcodeScanner.scan(
+    //   function(result) {
+    //     barcodeResult = result.text;
+    //   },
+    //   function(error) {
+    //     alert("We got an error, error code:" + EJSON.stringify(error));
+    //   });
 
     //Only run with test purpose
     if (barcodeResult == "0") {
@@ -32,6 +32,8 @@ Template.loginTemplate.events({
           console.log("da verify voi service xong!")
           //--------------if service return true----------------------------
           //barcodeResult = "123456";
+          console.log("call update News");
+          Meteor.call("updateNews");
           Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
             if (err) {
               //không thể đăng nhập vì user này chưa tạo trong hệ thống!
@@ -47,6 +49,7 @@ Template.loginTemplate.events({
                 } else {
                   Meteor.loginWithPassword(barcodeResult, barcodeResult, function(loginErr, loginres) {
                     if (!loginErr) {
+                      //    Meteor.call("getGif", function(err, result) {});
                       Router.go("/");
                     }
                   });
