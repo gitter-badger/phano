@@ -1,0 +1,21 @@
+
+<template name="layoutTemplate">
+
+    <div id="content">
+      {{#if isLogin}}
+      <div class="ui menu teal top fixed inverted one item">
+        <div class="header item">
+          Phano
+        </div>
+      </div>
+        {{else}}
+        {{toLoginTemplate}}
+        {{/if}}
+      <div class="ui container" style="padding-top: 50px;">
+        {{> yield}}
+      </div>
+    </div>
+    <div id="loadingScreen" class="ui dimmer">
+      <div class="ui loader"></div>
+    </div>
+</template>
