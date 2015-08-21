@@ -50,7 +50,7 @@ Meteor.methods({
         sort++;
       }, this);
 
-      // Delete all existing songs from database
+      // Delete all existing songs from databas,e
       News.remove();
 
       // Insert new songs into database
@@ -58,5 +58,5 @@ Meteor.methods({
         News.upsert(news._id, news);
       }, this);
     });
-  }
+  },
 });

@@ -8,6 +8,10 @@ Template.homeTemplate.events({
     $('#loadingScreen').addClass("active");
     Router.go("/news");
   },
+  'click #infonews': function() {
+    $('#loadingScreen').addClass("active");
+    Router.go("/infonews");
+  },
   'click #pharmacy': function() {
     $('#loadingScreen').addClass("active");
     Router.go("/pharmacy");
