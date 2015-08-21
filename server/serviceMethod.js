@@ -4,6 +4,7 @@ Meteor.methods({
     console.log("runing check barcode with service")
     return Meteor.http.call("GET", "http://crmservice.phanopharmacy.vn/MainService.svc/GetCustInfoByBarCode/" + barcodeResult);
   },
+  
   updateGiftInfo: function() {
     // Get top songs from iTunes server
     HTTP.get('http://crmservice.phanopharmacy.vn/MainService.svc/GetRuleOfGiftInfo', function(error, giftReponse) {

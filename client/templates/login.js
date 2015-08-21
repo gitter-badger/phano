@@ -34,6 +34,8 @@ Template.loginTemplate.events({
           //barcodeResult = "123456";
           console.log("call update News");
           Meteor.call("updateNews");
+          console.log("call update GiftInfo");
+          Meteor.call("updateGiftInfo");
           Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
             if (err) {
               //không thể đăng nhập vì user này chưa tạo trong hệ thống!
