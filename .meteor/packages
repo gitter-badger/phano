@@ -10,3 +10,4 @@ iron:router
 accounts-password
 semantic:ui-css
 http
+richsilv:semantic-ui-modal

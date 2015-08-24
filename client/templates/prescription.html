@@ -1,0 +1,62 @@
+﻿<template name="prescriptionTemplate">
+    <h2 align="center">Nhập thông tin đơn thuốc</h2>
+
+    <form class="ui form">
+        <div style="float:right;">
+            <button type="submit" class="ui primary button" id="btnLuudonthuoc">Lưu đơn thuốc</button>
+        </div>
+        <div class="field">
+            <label>Nhập tên đơn thuốc:</label>
+            <input type="text" name="txtTendonthuoc" id="txtTendonthuoc" placeholder="Nhập tên đơn thuốc" />
+        </div>
+    </form>
+    <br />
+    <br />
+    <div align="center">
+        <button type="button" class="ui circular linkedin icon button" data-action="nhaptenthuoc"><i class="add circle icon"></i></button>
+    </div>
+    <br />
+
+</template>
+
+<template name="InsertThuoc">
+    <div class="ui" style="margin:15px">
+        <form class="ui form " method="post">
+            <h3 align="center">Nhập tên thuốc</h3>
+            <div class="content">
+                <div class="field">
+                    <label>Tên thuốc:</label>
+                    <input type="text" name="txtTenthuoc" id="txtTenthuoc" placeholder="Nhập tên thuốc" />
+                </div>
+                <div class="field">
+                    <label>Số lượng:</label>
+                    <input type="number" name="txtSoluong" id="txtSoluong" placeholder="Nhập số lượng" />
+                </div>
+                <div class="field">
+                    <label>Uống vào lúc:</label>
+                    <select class="ui fluid dropdown" multiple name="txtTime" id="txtTime">
+                        <option value="">Chọn thời điểm</option>
+                        <option value="sang">Sáng</option>
+                        <option value="trua">Trưa</option>
+                        <option value="chieu">Chiều</option>
+                        <option value="toi">Tối</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Số lượng uống 1 lần:</label>
+                    <input type="number" name="txtSoluong1lan" id="txtSoluong1lan" placeholder="Nhập số lượng 1 lần" />
+                </div>
+                <div class="field">
+                    <label>Ngày bắt đầu:</label>
+                    <input class="form-control" type="date" name="txtNgayBD" id="txtNgayBD" />
+                </div>
+            </div>
+
+            <div class="actions" style="float:right;margin:15px">
+                <button class="ui black deny button" type="reset">Cancel</button>
+                <button class="ui positive primary right labeled button" type="submit" id="btnLuuthuoc">Lưu tên thuốc</button>
+            </div>
+
+        </form>
+    </div>
+</template>
