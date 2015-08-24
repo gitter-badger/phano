@@ -1,12 +1,12 @@
 ﻿<template name="prescriptionTemplate">
     <h2 align="center">Nhập thông tin đơn thuốc</h2>
 
-    <form class="ui form">
+    <form class="ui form" id="donthuoc">
         <div style="float:right;">
             <button type="submit" class="ui primary button" id="btnLuudonthuoc">Lưu đơn thuốc</button>
         </div>
         <div class="field">
-            <label>Nhập tên đơn thuốc:</label>
+            <label>Nhập đơn thuốc:</label>
             <input type="text" name="txtTendonthuoc" id="txtTendonthuoc" placeholder="Nhập tên đơn thuốc" />
         </div>
     </form>
@@ -54,7 +54,7 @@
 
             <div class="actions" style="float:right;margin:15px">
                 <button class="ui black deny button" type="reset">Cancel</button>
-                <button class="ui positive primary right labeled button" type="submit" id="btnLuuthuoc">Lưu tên thuốc</button>
+                <button class="ui positive primary right labeled button" type="submit" id="btnLuuthuoc">Lưu thuốc</button>
             </div>
 
         </form>
