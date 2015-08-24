@@ -1,0 +1,24 @@
+<template name="userinfoTemplate">
+{{#with showUserInfo}}
+  <div class="ui fluid card">
+  <div class="image">
+    <img src="/img/user.png">
+  </div>
+  <div class="content">
+    <a class="header">{{Name}}</a>
+    <div class="meta">
+      <span class="date">{{Address}}</span>
+    </div>
+    <div class="description">
+      Điện thoại: {{Phone}}
+    </div>
+  </div>
+  <div class="extra content">
+    <a>
+      <i class="user icon"></i>
+      Số điểm hiện tại: {{Point}}
+    </a>
+  </div>
+  </div>
+{{/with}}
+</template>
