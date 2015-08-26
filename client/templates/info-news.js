@@ -1,4 +1,5 @@
 Template.infonewsTemplate.onCreated(function() {
+  $('#loadingScreen').addClass("active");
   var self = this;
   self.autorun(function() {
     self.subscribe('giftinfo');
@@ -12,8 +13,6 @@ Template.infonewsTemplate.helpers({
     return Meteor.user().profile.Point;
   }
 });
-Template.infonewsTemplate.events({
-  "click .btnProductName": function(event, template) {
-    alert("btnclicked");
-  }
-});
+Template.infonewsTemplate.onRendered = function() {
+  $('#loadingScreen').removeClass("active");
+};

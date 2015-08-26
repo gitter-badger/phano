@@ -1,1 +1,4 @@
 /* CSS declarations go here */
+.ui.statistics .statistic > .label, .ui.statistic > .label {
+    font-size: 10px;
+}

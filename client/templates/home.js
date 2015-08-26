@@ -20,9 +20,9 @@ Template.homeTemplate.events({
     $('#loadingScreen').addClass("active");
     Router.go("/pharmacy");
   },
-  'click #prescription': function () {
-      $('#loadingScreen').addClass("active");
-      Router.go("/prescription");
+  'click #prescription': function() {
+    $('#loadingScreen').addClass("active");
+    Router.go("/prescription");
   },
   'click #logout': function() {
     $('#loadingScreen').addClass("active");
@@ -31,6 +31,6 @@ Template.homeTemplate.events({
     Router.go("/login");
   }
 });
-Template.homeTemplate.rendered = function() {
+Template.homeTemplate.onRendered = function() {
   $('#loadingScreen').removeClass("active");
 };
