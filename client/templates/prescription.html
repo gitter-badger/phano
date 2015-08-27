@@ -1,31 +1,42 @@
 ﻿<template name="prescriptionTemplate">
     <h2 align="center">Nhập thông tin đơn thuốc</h2>
 
-    <form class="ui form" id="donthuoc">
+    <form class="ui form" id="donMedicine">
         <div style="float:right;">
-            <button type="submit" class="ui primary button" id="btnLuudonthuoc">Lưu đơn thuốc</button>
+            <button type="submit" class="ui primary button" id="btnLuudonMedicine">Lưu đơn thuốc</button>
         </div>
         <div class="field">
             <label>Nhập đơn thuốc:</label>
-            <input type="text" name="txtTendonthuoc" id="txtTendonthuoc" placeholder="Nhập tên đơn thuốc" />
+            <input type="text" name="txtTendonMedicine" id="txtTendonMedicine" placeholder="Nhập tên đơn thuốc" />
         </div>
     </form>
     <br />
     <br />
+    <div class="ui celled list">
+      {{#each listMedicine}}
+      <div class="item">
+        <i class="map marker icon"></i>
+        <div class="content">
+          <a class="header">{{Name}}</a>
+          <div class="description">Tổng: {{Total}} viên, ngày uống {{DrinkTimesPerDay}} lần, 1 lần uống {{QuantityPerDrink}} viên, ngày bắt đầu uống: {{StartDate}}</div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
     <div align="center">
-        <button type="button" class="ui circular linkedin icon button" data-action="nhaptenthuoc"><i class="add circle icon"></i></button>
+        <button type="button" class="ui circular linkedin icon button" data-action="nhaptenMedicine"><i class="add circle icon"></i></button>
     </div>
     <br />
 </template>
 
-<template name="InsertThuoc">
+<template name="InsertMedicine">
     <div class="ui" style="margin:15px">
-        <form class="ui form " method="post">
+        <form class="ui form" id="newMedicine" method="post">
             <h3 align="center">Nhập tên thuốc</h3>
             <div class="content">
                 <div class="field">
                     <label>Tên thuốc:</label>
-                    <input type="text" name="txtTenthuoc" id="txtTenthuoc" placeholder="Nhập tên thuốc" />
+                    <input type="text" name="txtTenMedicine" id="txtTenMedicine" placeholder="Nhập tên thuốc" />
                 </div>
                 <div class="field">
                     <label>Số lượng:</label>
@@ -49,11 +60,11 @@
                     <label>Ngày bắt đầu:</label>
                     <input class="form-control" type="date" name="txtNgayBD" id="txtNgayBD" />
                 </div>
-            </div>
 
+            </div>
             <div class="actions" style="float:right;margin:15px">
                 <button class="ui black deny button" type="reset">Cancel</button>
-                <button class="ui positive primary right labeled button" type="submit" id="btnLuuthuoc">Lưu thuốc</button>
+                <button class="ui positive primary right labeled button" type="submit" id="btnLuuMedicine">Lưu thuốc</button>
             </div>
 
         </form>
