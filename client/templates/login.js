@@ -32,6 +32,8 @@ Template.loginTemplate.events({
               Meteor.call("updateNews");
               console.log("call update GiftInfo");
               Meteor.call("updateGiftInfo");
+              console.log("call update SearchAllPhano");
+              Meteor.call("ShowPhama");
               Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
                 if (err) {
                   //không thể đăng nhập vì user này chưa tạo trong hệ thống!
