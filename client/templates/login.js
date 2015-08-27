@@ -20,16 +20,17 @@ Template.loginTemplate.events({
         console.log("da lay ra ket qua tai client: " + JSON.stringify(result.data));
         customerInfo = result.data; //results.data should be a JSON object
         //console.log("Parse data:" + customerInfo.Name);
-
-        if (typeof customerInfo !== "undefined" && customerInfo !== null) {
-          console.log("da verify voi service xong!")
-          //--------------if service return true----------------------------
-          //barcodeResult = "123456";
-          console.log("call update News");
-          Meteor.call("updateNews");
-          console.log("call update GiftInfo");
-          Meteor.call("updateGiftInfo");
-          Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
+            if (typeof customerInfo !== "undefined" && customerInfo !== null) {
+              console.log("da verify voi service xong!")
+              //--------------if service return true----------------------------
+              //barcodeResult = "123456";
+              console.log("call update News");
+              Meteor.call("updateNews");
+              console.log("call update GiftInfo");
+              Meteor.call("updateGiftInfo");
+              console.log("call update SearchAllPhano");
+              Meteor.call("ShowPhama");
+              Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
             if (err) {
               //không thể đăng nhập vì user này chưa tạo trong hệ thống!
               //tạo user
