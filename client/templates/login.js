@@ -8,11 +8,10 @@ Template.loginTemplate.events({
     //-----------------Call barcode scanner-----------------
     cordova.plugins.barcodeScanner.scan(
       function(result) {
-        alert(result.text);
         barcodeResult = result.text;
         //Only run with test purpose
         if (barcodeResult == "0" || barcodeResult == "8625455007804") {
-          alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service!");
+          alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
           barcodeResult = "8625455321023";
         }
         //-----------call webservice to check this barcode--------------
@@ -62,7 +61,7 @@ Template.loginTemplate.events({
             //--------------if service return false----------------------------
             else {
               console.log(barcodeResult);
-              alert("Thong tin khong dung, xin hay thu lai bang barcode khac!!!");
+              alert("Không tìm thấy Barcode này trong hệ thống, xin hãy thử lại!!!");
               $('#loadingScreen').removeClass("active");
             }
           }
@@ -70,7 +69,7 @@ Template.loginTemplate.events({
 
       },
       function(error) {
-        alert("We got an error, error code:" + EJSON.stringify(error));
+        alert("Có lồi xảy ra, mã lỗi:" + EJSON.stringify(error));
         $('#loadingScreen').removeClass("active");
       });
   }
