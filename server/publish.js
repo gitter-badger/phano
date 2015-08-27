@@ -12,3 +12,7 @@ Meteor.publish("giftinfo", function() {
   return GiftInfo.find({
   });
 });
+Meteor.publish("searchphama", function() {
+  return SearchAllPhano.find({
+  });
+});

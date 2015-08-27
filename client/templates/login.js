@@ -66,7 +66,6 @@ Template.loginTemplate.events({
             }
           }
         });
-
       },
       function(error) {
         alert("Có lồi xảy ra, mã lỗi:" + EJSON.stringify(error));
