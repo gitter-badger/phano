@@ -7,7 +7,7 @@ Template.prescriptionListTemplate.helpers({
   },
   GotoCreate: function() {
     if (Prescription.find({}).fetch().length < 1)
-      Router.go("/prescription");
+      Router.go("/prescription/0");
   },
   convertToShowDate: function(thisDate) {
     function pad(s) {
@@ -21,5 +21,7 @@ Template.prescriptionListTemplate.events({
   "click #RemovePrescription": function(event) {
     Meteor.call("RemovePrescription", this._id);
   },
-  "click #updatePrescription": function(event) {}
+  "click [data-action='updatePrescription']": function(event) {
+    Router.go("/prescription/" + this._id);
+  }
 });

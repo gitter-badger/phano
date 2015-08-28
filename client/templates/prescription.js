@@ -1,17 +1,9 @@
 
-var listMedicine = [{
-  _id: Random.id(),
-  Name: "Paracetamon",
-  Total: 2,
-  DrinkTimesPerDay: 2,
-  DrinkTime: ['sang', 'toi'],
-  QuantityPerDrink: 1,
-  StartDate: Date()
-}];
-
-var thisMedicine ;
+var listMedicine = [];
+var currentPrescription = {};
+var thisMedicine = {} ;
 var _dep = new Deps.Dependency;
-
+var currentID;
 //============= MAIN TEMPLATE PRESCRIPTION====================//
 // Template.prescriptionTemplate.onRendered(function() {
 //   $('#loadingScreen').removeClass("active");
@@ -61,9 +53,26 @@ var _dep = new Deps.Dependency;
 // });
 
 Template.prescriptionTemplate.helpers({
-    listMedicine: function() {
+    currentPrescription: function() {
+    debugger;
+    currentID = this.prescriptionID;
+    if (currentID != "0") {
+      currentPrescription = Prescription.findOne({
+        _id: currentID
+      });
+    } else {
+      currentPrescription = {
+        _id: Random.id(),
+        UserID: Meteor.userId(),
+        Name: "",
+        listMedicine: listMedicine,
+        isAlarm: true,
+        CreatedAt: new Date()
+      };
+    }
+    console.log(currentPrescription);
     _dep.depend();
-    return listMedicine;
+    return currentPrescription;
   }
 });
 
@@ -91,16 +100,13 @@ Template.prescriptionTemplate.events({
   'submit #donMedicine': function(event) {
     //save Don thuoc
     event.preventDefault();
-    var tendonthuoc = event.target.txtTendonMedicine.value;
-    var prescriptionData = {
-      _id: Random.id(),
-      UserID: Meteor.userId(),
-      Name: tendonthuoc,
-      listMedicine: listMedicine,
-      isAlarm: true,
-      CreatedAt: new Date()
+    if (currentID != "0") {
+      Meteor.call("updatePrescription", currentPrescription);
+    } else {
+      var tendonthuoc = event.target.txtTendonMedicine.value;
+      currentPrescription.Name = tendonthuoc;
+      Meteor.call("insertPrescription", currentPrescription);
     }
-    Meteor.call("insertPrescription", prescriptionData);
     Router.go("/prescription-list");
   }
 });
@@ -155,9 +161,8 @@ Template.InsertMedicine.events({
         QuantityPerDrink: event.target.txtSoluong1lan.value,
         StartDate: dateStartDate
       };
-      listMedicine.push(addMedicine);
+      currentPrescription.listMedicine.push(addMedicine);
     }
-
     _dep.changed();
   }
 });
@@ -178,7 +183,7 @@ Template.medicineTemplate.helpers({
 Template.medicineTemplate.events({
   'click #RemoveMedicine': function(event) {
     //click button Remove Medicine
-    listMedicine = _.without(listMedicine, _.findWhere(listMedicine, {
+    currentPrescription.listMedicine = _.without(currentPrescription.listMedicine, _.findWhere(listMedicine, {
       _id: this._id
     }));
     _dep.changed();
@@ -187,7 +192,7 @@ Template.medicineTemplate.events({
     //click Update Medicine
     var x = $("#txtTendonthuoc").val();
     if (x != "") {
-      thisMedicine = _.findWhere(listMedicine, {
+      currentPrescription.listMedicine = _.findWhere(currentPrescription.listMedicine, {
         _id: this._id
       });
       _dep.changed();

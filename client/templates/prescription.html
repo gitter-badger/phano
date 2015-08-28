@@ -1,13 +1,13 @@
 ﻿<template name="prescriptionTemplate">
     <h2 align="center">Nhập thông tin đơn thuốc</h2>
-
+{{#with currentPrescription}}
     <form class="ui form" id="donMedicine">
         <div style="float:right;">
             <button type="submit" class="ui primary button" id="btnLuudonMedicine">Lưu đơn thuốc</button>
         </div>
         <div class="field">
             <label>Nhập đơn thuốc:</label>
-            <input type="text" name="txtTendonMedicine" id="txtTendonMedicine" placeholder="Nhập tên đơn thuốc" />
+            <input type="text" name="txtTendonMedicine" id="txtTendonMedicine" value={{Name}} placeholder="Nhập tên đơn thuốc" />
         </div>
     </form>
     <br />
@@ -17,6 +17,7 @@
       {{> medicineTemplate}}
       {{/each}}
       </div>
+      {{/with}}
 
     <div align="center">
         <button type="button" class="ui circular linkedin icon button" data-action="nhaptenMedicine"><i class="add circle icon"></i></button>
