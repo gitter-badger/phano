@@ -12,17 +12,12 @@
     </form>
     <br />
     <br />
-    <div class="ui celled list">
+    <div class="ui list">
       {{#each listMedicine}}
-      <div class="item">
-        <i class="map marker icon"></i>
-        <div class="content">
-          <a class="header">{{Name}}</a>
-          <div class="description">Tổng: {{Total}} viên, ngày uống {{DrinkTimesPerDay}} lần, 1 lần uống {{QuantityPerDrink}} viên, ngày bắt đầu uống: {{StartDate}}</div>
-        </div>
-      </div>
+      {{> medicineTemplate}}
       {{/each}}
-    </div>
+      </div>
+
     <div align="center">
         <button type="button" class="ui circular linkedin icon button" data-action="nhaptenMedicine"><i class="add circle icon"></i></button>
     </div>
@@ -31,16 +26,17 @@
 
 <template name="InsertMedicine">
     <div class="ui" style="margin:15px">
+      {{#with thisMedicine}}
         <form class="ui form" id="newMedicine" method="post">
             <h3 align="center">Nhập tên thuốc</h3>
             <div class="content">
                 <div class="field">
                     <label>Tên thuốc:</label>
-                    <input type="text" name="txtTenMedicine" id="txtTenMedicine" placeholder="Nhập tên thuốc" />
+                    <input type="text" name="txtTenMedicine" id="txtTenMedicine" value={{Name}} placeholder="Nhập tên thuốc" />
                 </div>
                 <div class="field">
                     <label>Số lượng:</label>
-                    <input type="number" name="txtSoluong" id="txtSoluong" placeholder="Nhập số lượng" />
+                    <input type="number" name="txtSoluong" id="txtSoluong" value={{Total}} placeholder="Nhập số lượng" />
                 </div>
                 <div class="field">
                     <label>Uống vào lúc:</label>
@@ -54,11 +50,11 @@
                 </div>
                 <div class="field">
                     <label>Số lượng uống 1 lần:</label>
-                    <input type="number" name="txtSoluong1lan" id="txtSoluong1lan" placeholder="Nhập số lượng 1 lần" />
+                    <input type="number" name="txtSoluong1lan" id="txtSoluong1lan" value={{QuantityPerDrink}} placeholder="Nhập số lượng 1 lần" />
                 </div>
                 <div class="field">
                     <label>Ngày bắt đầu:</label>
-                    <input class="form-control" type="date" name="txtNgayBD" id="txtNgayBD" />
+                    <input class="form-control" type="date" value={{convertToEditDate}} name="txtNgayBD" id="txtNgayBD" />
                 </div>
 
             </div>
@@ -66,7 +62,24 @@
                 <button class="ui black deny button" type="reset">Cancel</button>
                 <button class="ui positive primary right labeled button" type="submit" id="btnLuuMedicine">Lưu thuốc</button>
             </div>
-
+            <div class="field">&nbsp;</div>
         </form>
+        {{/with}}
     </div>
+</template>
+
+<template name="medicineTemplate">
+  <div class="item">
+      <div style="float:right;position:relative">
+          <a id="RemoveMedicine"><i class="remove circle icon"></i></a>
+      </div>
+      <i class="icon avatar image lab"></i>
+      <div class="content">
+          <a class="header" data-action="updateInfo">Tên thuốc: {{Name}}</a>
+          <div class="description">Số lượng: {{Total}}</div>
+          <div class="description">Thời gian uống: {{DrinkTime}}</div>
+          <div class="description">Số lượng uống 1 lần: {{QuantityPerDrink}}</div>
+          <div class="description">Ngày bắt đầu: {{convertToShowDate StartDate}}</div>
+      </div>
+  </div>
 </template>
