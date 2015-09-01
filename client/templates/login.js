@@ -5,8 +5,8 @@ Template.loginTemplate.events({
     //start scan barcode!
     var barcodeResult = "0";
     var customerInfo;
-    //------for test with web browser, comment it if build for device!!!!!-------------
-    //===========start comment from here================
+  //  ------for test with web browser, comment it if build for device!!!!!-------------
+  //  ===========start comment from here================
     if (barcodeResult == "0" || barcodeResult == "8625455007804") {
       alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
       barcodeResult = "8625455321023";
@@ -64,10 +64,16 @@ Template.loginTemplate.events({
         }
       }
     });
-    //============End test browser============
+  //============End test browser============
 
+<<<<<<< HEAD
+
+    // ======comment below block to test with browser=====================
+    // -----------------Call barcode scanner-----------------
+=======
     //======comment below block to test with browser=====================
     //-----------------Call barcode scanner-----------------
+>>>>>>> 3bc30ad48e2d3dc1bc3d11cd6f32a2a6eac25427
     // cordova.plugins.barcodeScanner.scan(
     //   function(result) {
     //     barcodeResult = result.text;
@@ -135,6 +141,6 @@ Template.loginTemplate.events({
     //     alert("Có lồi xảy ra, mã lỗi:" + EJSON.stringify(error));
     //     $('#loadingScreen').removeClass("active");
     //   });
-    //======comment upper block to test with browser=====================
+    // ======comment upper block to test with browser=====================
   }
 });
