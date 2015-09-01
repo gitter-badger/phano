@@ -1,20 +1,36 @@
 
 <template name="homeTemplate">
   <div class="ui two statistics">
+    <div class="ui statistic" id="news">
+      <div class="value">
+        <i class="announcement icon"></i>
+      </div>
+      <div class="label">
+         Ưu đãi
+       </div>
+     </div>
     <div class="ui statistic" id="prescription">
         <div class="value">
             <i class="calendar outline icon"></i>
         </div>
         <div class="label">
-            Danh sách đơn thuốc
+            Nhắc nhớ
         </div>
+    </div>
+    <div class="ui statistic" id="pharmacy">
+      <div class="value">
+        <i class="cocktail icon"></i>
+      </div>
+      <div class="label">
+        Tìm nhà thuốc
+      </div>
     </div>
     <div class="ui statistic" id="user">
       <div class="value">
         <i class="user icon"></i>
       </div>
       <div class="label">
-         Thành viên
+         Tài khoản PCare
        </div>
      </div>
     <!-- <div class="ui statistic" id="calendar">
@@ -25,14 +41,7 @@
        Lịch uống thuốc
       </div>
     </div> -->
-    <div class="ui statistic" id="news">
-      <div class="value">
-        <i class="announcement icon"></i>
-      </div>
-      <div class="label">
-         Khuyến mãi
-       </div>
-     </div>
+
      <div class="ui statistic" id="infonews">
        <div class="value">
          <i class="gift icon"></i>
@@ -41,15 +50,15 @@
           Thông Tin Đổi Quà
       </div>
     </div>
-    <div class="ui statistic" id="pharmacy">
+    <div class="ui statistic" id="infonews">
       <div class="value">
-        <i class="cocktail icon"></i>
+        <i class="gift icon"></i>
       </div>
       <div class="label">
-        Nhà thuốc
-      </div>
+         Kết nối
+     </div>
     </div>
-
+{{#if currentUser}}
     <div class="ui statistic" id="logout">
       <div class="value">
         <i class="arrow left icon"></i>
@@ -58,5 +67,7 @@
         Đăng xuất
       </div>
     </div>
+    {{/if}}
+  
   </div>
    </template>

@@ -1,14 +1,18 @@
 
-Template.layoutTemplate.helpers({
-  'toLoginTemplate': function() {
-    console.log("chay cai else");
-    Router.go("/login");
-  },
-  'isLogin': function() {
-    if (Meteor.userId()) {
-      console.log(Meteor.userId());
-      return true;
-    }
-    return false;
+
+// Setup code for Slideout menu in MasterLayout
+
+Template.screenLayoutTemplate.events({
+  "click #btnMenu": function(event, template) {
+    $('.ui.sidebar')
+      .sidebar('toggle')
+    ;
+  }
+});
+Template.layoutTemplate.events({
+  "click #btnMenu": function(event, template) {
+    $('.ui.sidebar')
+      .sidebar('toggle')
+    ;
   }
 });

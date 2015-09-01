@@ -21,3 +21,8 @@ Meteor.publish("prescription", function() {
     UserID: this.userId
   });
 });
+Meteor.publish("users", function() {
+  return Meteor.users.find({
+    UserID: this.userId
+  });
+})

@@ -25,12 +25,10 @@ Template.homeTemplate.events({
     Router.go("/prescription-list");
   },
   'click #logout': function() {
-    $('#loadingScreen').addClass("active");
     console.log("log out click")
     Meteor.logout(function() {});
-    Router.go("/login");
   }
 });
-Template.homeTemplate.onRendered = function() {
+Template.homeTemplate.onCreated = function() {
   $('#loadingScreen').removeClass("active");
 };

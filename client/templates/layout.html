@@ -1,9 +1,40 @@
 
 <template name="layoutTemplate">
-    <div id="content">
-      <div class="ui menu teal top fixed inverted one item small">
-        <div class="header item">
-          Phano
+  <div class="ui left demo vertical inverted sidebar labeled icon menu">
+    <a class="item" href="{{pathFor route='home'}}">
+      <i class="home icon"></i>
+      Home
+    </a>
+    <a class="item" href="{{pathFor route='prescriptionlist'}}">
+      <i class="block layout icon"></i>
+      Nhắc nhớ
+    </a>
+    <a class="item" href="{{pathFor route='pharmacy'}}">
+      <i class="smile icon"></i>
+      Tìm nhà thuốc
+    </a>
+    <a class="item" href="{{pathFor route='news'}}">
+      <i class="smile icon"></i>
+      Ưu đãi
+    </a>
+    <a class="item" href="{{pathFor route='userinfo'}}">
+      <i class="smile icon"></i>
+      Tài khoản PCare
+    </a>
+    <a class="item" href="/">
+      <i class="smile icon"></i>
+      Kết nối Phano
+    </a>
+</div>
+    <div id="content" class=" pusher">
+      <div class="ui borderless menu teal top fixed inverted small">
+        <a class="item" id="btnMenu">
+          <i class="home icon"></i>
+          Menu</a>
+        <div class="menu" style="text-align:center;">
+          <div class="header item">
+            Phano
+          </div>
         </div>
       </div>
       <div class="ui container" style="padding-top: 50px;">
@@ -33,16 +64,47 @@
 </template>
 
 <template name="screenLayoutTemplate">
-    <div id="content">
+  <div class="ui left demo vertical inverted sidebar labeled icon menu">
+    <a class="item" href="{{pathFor route='home'}}">
+      <i class="home icon"></i>
+      Home
+    </a>
+    <a class="item" href="{{pathFor route='prescriptionlist'}}">
+      <i class="block layout icon"></i>
+      Nhắc nhớ
+    </a>
+    <a class="item" href="{{pathFor route='pharmacy'}}">
+      <i class="smile icon"></i>
+      Tìm nhà thuốc
+    </a>
+    <a class="item" href="{{pathFor route='news'}}">
+      <i class="smile icon"></i>
+      Ưu đãi
+    </a>
+    <a class="item" href="{{pathFor route='userinfo'}}">
+      <i class="smile icon"></i>
+      Tài khoản PCare
+    </a>
+    <a class="item" href="/">
+      <i class="smile icon"></i>
+      Kết nối Phano
+    </a>
+</div>
+    <div id="content" class=" pusher">
       <div class="ui borderless menu teal top fixed inverted small">
-        <a class="item" href="/">
+        <a class="item" id="btnMenu">
           <i class="home icon"></i>
-          Back to home</a>
+          Menu</a>
         <div class="menu" style="text-align:center;">
           <div class="header item">
             Phano
           </div>
         </div>
+        <div class="right menu">
+  <a class="ui item" href="{{pathFor route='home'}}">
+    Back
+  </a>
+</div>
       </div>
       <div class="ui container" style="padding-top: 50px;">
         {{> yield}}

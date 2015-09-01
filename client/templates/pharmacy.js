@@ -8,9 +8,7 @@ if (Meteor.isClient) {
       return SearchAllPhano.find({});
     },
     exampleMapOptions: function() {
-      debugger;
       var listPhano = SearchAllPhano.find().fetch();
-      console.log(listPhano);
       GoogleMaps.ready('exampleMap', function(map) {
         // Add a marker to the map once it's ready
         _.each(listPhano, function(phano) {

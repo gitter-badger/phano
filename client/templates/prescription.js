@@ -54,7 +54,6 @@ var currentID;
 
 Template.prescriptionTemplate.helpers({
     currentPrescription: function() {
-    debugger;
     currentID = this.prescriptionID;
     if (currentID != "0") {
       currentPrescription = Prescription.findOne({
