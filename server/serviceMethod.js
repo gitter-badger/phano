@@ -76,6 +76,7 @@ Meteor.methods({
         insertPhama.ADDRESS_EN = phama.ADDRESS_EN;
         insertPhama.PHAMANAME_EN = phama.PHAMANAME_EN;
         insertPhama.PHONE_EN = phama.PHONE_EN;
+        insertPhama.DISTRICT = phama.DISTRICT;
         insertPhama.CITY = phama.CITY;
         insertPhama.DISTRICT_EN = phama.DISTRICT_EN;
         insertPhama.CITY_EN = phama.CITY_EN;
@@ -96,8 +97,7 @@ Meteor.methods({
 
       // Delete all existing songs from databas,e
       SearchAllPhano.remove();
-
-      // Insert new songs into database
+      // Insert new songs into databasezzz
       _.each(listPhama, function(phama) {
         SearchAllPhano.upsert(phama._id, phama);
       }, this);
