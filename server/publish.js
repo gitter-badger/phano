@@ -15,3 +15,8 @@ Meteor.publish("giftinfo", function() {
     Meteor.publish("searchphama", function() {
 return SearchAllPhano.find({});
 });
+Meteor.publish("prescription", function() {
+  return Prescription.find({
+    UserID: this.userId
+  });
+});

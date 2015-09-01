@@ -22,7 +22,7 @@ Template.homeTemplate.events({
   },
   'click #prescription': function() {
     $('#loadingScreen').addClass("active");
-    Router.go("/prescription");
+    Router.go("/prescription-list");
   },
   'click #logout': function() {
     $('#loadingScreen').addClass("active");

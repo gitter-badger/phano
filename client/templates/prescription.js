@@ -1,94 +1,205 @@
 
-
-var listMedicine = [{
-  Name: "Paracetamon",
-  Total: 2,
-  DrinkTimesPerDay: 2,
-  DrinkTime: ['sang', 'toi'],
-  QuantityPerDrink: 1,
-  StartDate: Date()
-}];
+var listMedicine = [];
+var currentPrescription = {};
+var thisMedicine = {} ;
 var _dep = new Deps.Dependency;
+var currentID;
+//============= MAIN TEMPLATE PRESCRIPTION====================//
+// Template.prescriptionTemplate.onRendered(function() {
+//   $('#loadingScreen').removeClass("active");
+//   var now = new Date().getTime();
+//   var schedule = [{
+//     id: 0,
+//     title: "Đến giờ uống thuốc test 1!",
+//     text: "Xin hãy uống 2 viên thuốc X",
+//     at: new Date(now + 5 * 1000)
+//   }, {
+//     id: 1,
+//     title: "Đến giờ uống thuốc test 2!",
+//     text: "Xin hãy uống 1 viên thuốc Y",
+//     at: new Date(now + 1e5 * 1000)
+//   }, {
+//     id: 2,
+//     title: "Đến giờ uống thuốc test 3!",
+//     text: "Xin hãy uống 2 viên thuốc Z",
+//     at: new Date(now + 25 * 1000)
+//   }, {
+//     id: 3,
+//     title: "Đến giờ uống thuốc test 4!",
+//     text: "Xin hãy uống 2 viên thuốc XX",
+//     at: new Date(now + 35 * 1000)
+//   }, {
+//     id: 4,
+//     title: "Đến giờ uống thuốc test 5!",
+//     text: "Xin hãy uống 2 viên thuốc YY",
+//     at: new Date(now + 45 * 1000)
+//   }];
+//   cordova.plugins.notification.local.hasPermission(function(granted) {
+//     if (!granted) {
+//       cordova.plugins.notification.local.registerPermission(function(per) {
+//         if (per) {
+//           alert('Chương trình đã có quyền gửi thông báo uống thuốc');
+//           alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
+//           cordova.plugins.notification.local.schedule(schedule);
+//         }
+//
+//       });
+//     } else {
+//       alert('Chương trình đã có quyền gửi thông báo uống thuốc');
+//       alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
+//       cordova.plugins.notification.local.schedule(schedule);
+//     }
+//   });
+// });
 
-Template.InsertMedicine.onRendered(function() {
-  $('#txtTime').dropdown();
-});
-
-Template.prescriptionTemplate.onRendered(function() {
-  $('#loadingScreen').removeClass("active");
-  var now = new Date().getTime();
-  var schedule = [{
-    id: 0,
-    title: "Đến giờ uống thuốc test 1!",
-    text: "Xin hãy uống 2 viên thuốc X",
-    at: new Date(now + 5 * 1000)
-  }, {
-    id: 1,
-    title: "Đến giờ uống thuốc test 2!",
-    text: "Xin hãy uống 1 viên thuốc Y",
-    at: new Date(now + 1e5 * 1000)
-  }, {
-    id: 2,
-    title: "Đến giờ uống thuốc test 3!",
-    text: "Xin hãy uống 2 viên thuốc Z",
-    at: new Date(now + 25 * 1000)
-  }, {
-    id: 3,
-    title: "Đến giờ uống thuốc test 4!",
-    text: "Xin hãy uống 2 viên thuốc XX",
-    at: new Date(now + 35 * 1000)
-  }, {
-    id: 4,
-    title: "Đến giờ uống thuốc test 5!",
-    text: "Xin hãy uống 2 viên thuốc YY",
-    at: new Date(now + 45 * 1000)
-  }];
-  cordova.plugins.notification.local.hasPermission(function(granted) {
-    if (!granted) {
-      cordova.plugins.notification.local.registerPermission(function(per) {
-        if (per) {
-          alert('Chương trình đã có quyền gửi thông báo uống thuốc');
-          alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
-          cordova.plugins.notification.local.schedule(schedule);
-        }
-
+Template.prescriptionTemplate.helpers({
+    currentPrescription: function() {
+    debugger;
+    currentID = this.prescriptionID;
+    if (currentID != "0") {
+      currentPrescription = Prescription.findOne({
+        _id: currentID
       });
     } else {
-      alert('Chương trình đã có quyền gửi thông báo uống thuốc');
-      alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
-      cordova.plugins.notification.local.schedule(schedule);
+      currentPrescription = {
+        _id: Random.id(),
+        UserID: Meteor.userId(),
+        Name: "",
+        listMedicine: listMedicine,
+        isAlarm: true,
+        CreatedAt: new Date()
+      };
     }
-  });
+    console.log(currentPrescription);
+    _dep.depend();
+    return currentPrescription;
+  }
 });
 
+//bắt sự kiện form nhập tên đơn thuốc
+Template.prescriptionTemplate.events({
+  'click [data-action="nhaptenMedicine"]': function(event) {
+    // call modal add new medicine
+    var x = $("#txtTendonMedicine").val();
+    if (x != "") {
+      thisMedicine = {
+        _id: Random.id(),
+        Name: "",
+        Total: '',
+        DrinkTimesPerDay: '',
+        DrinkTime: '',
+        QuantityPerDrink: '',
+        StartDate: new Date()
+      };
+      _dep.changed();
+      SemanticModal.generalModal('InsertMedicine');
+    } else {
+      alert("Bạn chưa nhập tên đơn thuốc!!!");
+    }
+  },
+  'submit #donMedicine': function(event) {
+    //save Don thuoc
+    event.preventDefault();
+    if (currentID != "0") {
+      Meteor.call("updatePrescription", currentPrescription);
+    } else {
+      var tendonthuoc = event.target.txtTendonMedicine.value;
+      currentPrescription.Name = tendonthuoc;
+      Meteor.call("insertPrescription", currentPrescription);
+    }
+    Router.go("/prescription-list");
+  }
+});
+//==============END MAIN TEMPLATE PRESCRIPTION===============//
+
+
+//============= TEMPLATE INSERT MEDICINE FORM====================//
+
+Template.InsertMedicine.onRendered(function() {
+  $('#txtTime').dropdown('set exactly', thisMedicine.DrinkTime);
+});
+
+Template.InsertMedicine.helpers({
+  thisMedicine: function() {
+    _dep.depend();
+    return thisMedicine;
+  },
+  convertToEditDate: function() {
+    _dep.depend();
+    return new Date(thisMedicine.StartDate).toISOString().slice(0, 10);
+  }
+});
 
 //Bắt sự kiện form nhập thuốc
 Template.InsertMedicine.events({
   'submit #newMedicine': function(event) {
+    //medicine form post
     event.preventDefault();
     var timesPerDay = $('#txtTime').val();
-    var addMedicine = {
-      Name: event.target.txtTenMedicine.value,
-      Total: event.target.txtSoluong.value,
-      DrinkTimesPerDay: timesPerDay.length,
-      DrinkTime: timesPerDay,
-      QuantityPerDrink: event.target.txtSoluong1lan.value,
-      StartDate: event.target.txtNgayBD.value
-    };
-    listMedicine.push(addMedicine);
-    console.log(listMedicine);
+    var dateStartDate = new Date(event.target.txtNgayBD.value);
+
+    var updateMedicine = _.findWhere(listMedicine, {
+      _id: this._id
+    });
+    if (updateMedicine) {
+      //update medicne
+      updateMedicine.Name = event.target.txtTenMedicine.value;
+      updateMedicine.Total = event.target.txtSoluong.value;
+      updateMedicine.DrinkTimesPerDay = timesPerDay.length;
+      updateMedicine.DrinkTime = timesPerDay;
+      updateMedicine.QuantityPerDrink = event.target.txtSoluong1lan.value;
+      updateMedicine.StartDate = dateStartDate;
+
+    } else {
+      // add medicine
+      var addMedicine = {
+        _id: Random.id(),
+        Name: event.target.txtTenMedicine.value,
+        Total: event.target.txtSoluong.value,
+        DrinkTimesPerDay: timesPerDay.length,
+        DrinkTime: timesPerDay,
+        QuantityPerDrink: event.target.txtSoluong1lan.value,
+        StartDate: dateStartDate
+      };
+      currentPrescription.listMedicine.push(addMedicine);
+    }
     _dep.changed();
   }
 });
-//bắt sự kiện form nhập tên đơn thuốc
-Template.prescriptionTemplate.events({
-  'click [data-action="nhaptenMedicine"]': function() {
-    SemanticModal.generalModal('InsertMedicine');
+
+//==============END TEMPLATE INSERT MEDICINE FORM===============//
+
+//============= TEMPLATE lIST MEDICINE====================//
+Template.medicineTemplate.helpers({
+  convertToShowDate: function(thisDate) {
+    function pad(s) {
+      return (s < 10) ? '0' + s : s;
+    }
+    var d = new Date(thisDate);
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('/');
   }
 });
-Template.prescriptionTemplate.helpers({
-  listMedicine: function() {
-    _dep.depend();
-    return listMedicine;
+
+Template.medicineTemplate.events({
+  'click #RemoveMedicine': function(event) {
+    //click button Remove Medicine
+    currentPrescription.listMedicine = _.without(currentPrescription.listMedicine, _.findWhere(listMedicine, {
+      _id: this._id
+    }));
+    _dep.changed();
+  },
+  'click [data-action="updateInfo"]': function() {
+    //click Update Medicine
+    var x = $("#txtTendonthuoc").val();
+    if (x != "") {
+      currentPrescription.listMedicine = _.findWhere(currentPrescription.listMedicine, {
+        _id: this._id
+      });
+      _dep.changed();
+      SemanticModal.generalModal('InsertMedicine');
+    } else {
+      alert("Bạn chưa có tên đơn thuốc!!!");
+    }
   }
 });
+//============= END TEMPLATE lIST MEDICINE====================//

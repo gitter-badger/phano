@@ -1,0 +1,18 @@
+<template name="prescriptionListTemplate">
+    <div class="ui list">
+      {{GotoCreate}}
+  {{#each listPrescription}}
+  <div class="item">
+      <div style="float:right;position:relative">
+          <a id="RemovePrescription"><i class="remove circle icon"></i></a>
+      </div>
+      <i class="icon avatar image lab"></i>
+      <div class="content">
+          <a class="header" data-action="updatePrescription">{{Name}}</a>
+          <div class="description">Ngày tạo: {{convertToShowDate CreatedAt}}</div>
+          <div class="description">Đang bật thông báo: {{isAlarm}}</div>
+      </div>
+  </div>
+    {{/each}}
+</div>
+</template>
