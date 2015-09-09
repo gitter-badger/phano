@@ -66,14 +66,8 @@ Template.loginTemplate.events({
     });
   //============End test browser============
 
-<<<<<<< HEAD
-
     // ======comment below block to test with browser=====================
     // -----------------Call barcode scanner-----------------
-=======
-    //======comment below block to test with browser=====================
-    //-----------------Call barcode scanner-----------------
->>>>>>> 3bc30ad48e2d3dc1bc3d11cd6f32a2a6eac25427
     // cordova.plugins.barcodeScanner.scan(
     //   function(result) {
     //     barcodeResult = result.text;

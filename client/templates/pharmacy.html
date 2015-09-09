@@ -1,5 +1,5 @@
 <template name="pharmacy">
-  <h1>TÌM NHÀ THUỐC:</h1>
+  <h1>TÌM NHÀ THUỐC GẦN NHẤT:</h1>
   <div class="field" style="margin:15px">
     <form id="search">
       <select class="ui dropdown" id="searchCity">
@@ -8,7 +8,7 @@
         <option value="Đà Nẵng">Đà Nẵng</option>
         <option value="Bình Dương">Bình Dương</option>
         <option value="Cần Thơ">Cần Thơ</option>
-        <option value="Cà Mau">Cà Mau</option>
+        <option value="Tiền Giang">Tiền Giang</option>
         <option value="Lâm Đồng">Lâm Đồng</option>
         <option value="Đồng Nai">Đồng Nai</option>
         <option value="Cà Mau">Cà Mau</option>
@@ -17,28 +17,21 @@
     <div>
       <form id="submitDis">
         <select class="ui dropdown" id="searchDistrict">
-          <option value="">Chọn Quận</option>
-          {{#each ShowDistrict}}<option value={{DISTRICT}}>{{DISTRICT}}</option>{{/each}}
+          <option value="">Quận/huyện</option>
+          {{#each ShowDistrict}}<option value={{this}}>{{this}}</option>{{/each}}
         </select>
         <button type="submit" class="ui icon button" name="submitDistrict">
           <i class="search icon"></i>
         </button>
       </form>
     </div>
+
   </div>
-  <div class="ui relaxed divided list">
-    {{#each ShowAll}}
-    <div class="item">
-      <i class="home icon"></i>
-      <div class="content">
-        <a class="header">{{PHAMANAME}}</a>
-        <div class="address">ĐỊA CHỈ: {{ADDRESS}}. {{DISTRICT}}. {{CITY}}</div>
-        <div class="phone">TEL: {{PHONE}}</div>
-      </div>
+    <div class="map-container">
+      {{#unless geolocationError}}
+        {{> googleMap name="map" options=mapOptions}}
+      {{else}}
+        Geolocation failed: {{geolocationError}}
+      {{/unless}}
     </div>
-    {{/each}}
-  </div>
-  <center><div class="map-container">
-    {{> googleMap name="exampleMap" options=exampleMapOptions}}
-  </div></center>
 </template>
