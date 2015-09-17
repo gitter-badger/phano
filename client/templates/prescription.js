@@ -2,7 +2,6 @@
 var listMedicine = [];
 var currentPrescription = {};
 var thisMedicine = {} ;
-var _dep = new Deps.Dependency;
 var currentID;
 //============= MAIN TEMPLATE PRESCRIPTION====================//
 // Template.prescriptionTemplate.onRendered(function() {
@@ -53,60 +52,25 @@ var currentID;
 // });
 
 Template.prescriptionTemplate.helpers({
-    currentPrescription: function() {
-    currentID = this.prescriptionID;
-    if (currentID != "0") {
-      currentPrescription = Prescription.findOne({
-        _id: currentID
-      });
-    } else {
-      currentPrescription = {
-        _id: Random.id(),
-        UserID: Meteor.userId(),
-        Name: "",
-        listMedicine: listMedicine,
-        isAlarm: true,
-        CreatedAt: new Date()
-      };
-    }
-    console.log(currentPrescription);
-    _dep.depend();
-    return currentPrescription;
+  currentPrescription: function() {
+    return Prescription.find();
   }
 });
 
 //bắt sự kiện form nhập tên đơn thuốc
 Template.prescriptionTemplate.events({
-  'click [data-action="nhaptenMedicine"]': function(event) {
+  'click [data-action="addNew"]': function(event) {
     // call modal add new medicine
-    var x = $("#txtTendonMedicine").val();
-    if (x != "") {
-      thisMedicine = {
-        _id: Random.id(),
-        Name: "",
-        Total: '',
-        DrinkTimesPerDay: '',
-        DrinkTime: '',
-        QuantityPerDrink: '',
-        StartDate: new Date()
-      };
-      _dep.changed();
-      SemanticModal.generalModal('InsertMedicine');
-    } else {
-      alert("Bạn chưa nhập tên đơn thuốc!!!");
-    }
-  },
-  'submit #donMedicine': function(event) {
-    //save Don thuoc
-    event.preventDefault();
-    if (currentID != "0") {
-      Meteor.call("updatePrescription", currentPrescription);
-    } else {
-      var tendonthuoc = event.target.txtTendonMedicine.value;
-      currentPrescription.Name = tendonthuoc;
-      Meteor.call("insertPrescription", currentPrescription);
-    }
-    Router.go("/prescription-list");
+    thisMedicine = {
+      _id: Random.id(),
+      UserId: Meteor.userId(),
+      Text: '',
+      Repeat: '',
+      StartTime: '00:00',
+      StartDate: new Date(),
+      IsActive: true,
+    };
+    SemanticModal.generalModal('InsertMedicine');
   }
 });
 //==============END MAIN TEMPLATE PRESCRIPTION===============//
@@ -115,17 +79,18 @@ Template.prescriptionTemplate.events({
 //============= TEMPLATE INSERT MEDICINE FORM====================//
 
 Template.InsertMedicine.onRendered(function() {
-  $('#txtTime').dropdown('set exactly', thisMedicine.DrinkTime);
+  $('#txtRepeat').dropdown('set exactly', thisMedicine.Repeat);
 });
 
 Template.InsertMedicine.helpers({
   thisMedicine: function() {
-    _dep.depend();
     return thisMedicine;
   },
   convertToEditDate: function() {
-    _dep.depend();
     return new Date(thisMedicine.StartDate).toISOString().slice(0, 10);
+  },
+  convertToEditTime: function() {
+    return "00:00"
   }
 });
 
@@ -134,35 +99,31 @@ Template.InsertMedicine.events({
   'submit #newMedicine': function(event) {
     //medicine form post
     event.preventDefault();
-    var timesPerDay = $('#txtTime').val();
-    var dateStartDate = new Date(event.target.txtNgayBD.value);
-
+    var Repeat = $('#txtRepeat').val();
+    var dateStartDate = new Date(event.target.txtDate.value + " " + event.target.txtTime.value);
     var updateMedicine = _.findWhere(listMedicine, {
       _id: this._id
     });
     if (updateMedicine) {
       //update medicne
-      updateMedicine.Name = event.target.txtTenMedicine.value;
-      updateMedicine.Total = event.target.txtSoluong.value;
-      updateMedicine.DrinkTimesPerDay = timesPerDay.length;
-      updateMedicine.DrinkTime = timesPerDay;
-      updateMedicine.QuantityPerDrink = event.target.txtSoluong1lan.value;
+      updateMedicine.Text = event.target.txtTime.value;
+      updateMedicine.Text = event.target.txtText.value;
+      updateMedicine.Repeat = Repeat;
       updateMedicine.StartDate = dateStartDate;
-
+      Meteor.call("updatePrescription", updateMedicine);
     } else {
       // add medicine
       var addMedicine = {
         _id: Random.id(),
-        Name: event.target.txtTenMedicine.value,
-        Total: event.target.txtSoluong.value,
-        DrinkTimesPerDay: timesPerDay.length,
-        DrinkTime: timesPerDay,
-        QuantityPerDrink: event.target.txtSoluong1lan.value,
-        StartDate: dateStartDate
+        UserId: Meteor.userId(),
+        Text: event.target.txtText.value,
+        Repeat: Repeat,
+        StartTime: event.target.txtTime.value,
+        StartDate: dateStartDate,
+        IsActive: true,
       };
-      currentPrescription.listMedicine.push(addMedicine);
+      Meteor.call("insertPrescription", addMedicine);
     }
-    _dep.changed();
   }
 });
 
@@ -182,23 +143,18 @@ Template.medicineTemplate.helpers({
 Template.medicineTemplate.events({
   'click #RemoveMedicine': function(event) {
     //click button Remove Medicine
-    currentPrescription.listMedicine = _.without(currentPrescription.listMedicine, _.findWhere(listMedicine, {
+    Prescription.remove({
       _id: this._id
-    }));
-    _dep.changed();
+    });
+
   },
   'click [data-action="updateInfo"]': function() {
     //click Update Medicine
-    var x = $("#txtTendonthuoc").val();
-    if (x != "") {
-      currentPrescription.listMedicine = _.findWhere(currentPrescription.listMedicine, {
-        _id: this._id
-      });
-      _dep.changed();
-      SemanticModal.generalModal('InsertMedicine');
-    } else {
-      alert("Bạn chưa có tên đơn thuốc!!!");
-    }
+    thisMedicine = Prescription.findOne({
+      _id: this._id
+    });
+
+    SemanticModal.generalModal('InsertMedicine');
   }
 });
 //============= END TEMPLATE lIST MEDICINE====================//
