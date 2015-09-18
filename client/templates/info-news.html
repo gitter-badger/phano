@@ -1,16 +1,26 @@
 <template name="infonewsTemplate">
-    <a class="header">{{ProdName}}</a>
+  <a class="header">{{ProdName}}</a>
 
   <div class="ui relaxed divided list">
-  BẢNG QUY ĐỔI ĐIỂM LẤY QÙA TƯƠNG ỨNG
-  {{#each showInfo}}
-  <div class="item">
-    <i class="gift icon"></i>
-    <div class="content">
-      <a class="header">{{ProdName}}</a>
-      <div class="Point">Số điểm cần: {{Point}} (bạn đang có {{currentPoint}} điểm)</div>
+    ,<h1>KẾT NỐI PHANO</h1>
+    <div id="notes-input">
+      <button id="take-photo">Take a photo!</button>
+      <form>
+        Or, enter a note:<br/>
+        <input type="text" placeholder="Yummy / I bolused XXX">
+        <input type="submit" value="Save">
+      </form>
     </div>
-  </div>
+
+    {{#each notes}}
+      <div>
+        <h2>{{livestamp timestamp}}</h2>
+        {{#if photo}}
+          <img src="{{photo}}">
+        {{else}}
+          <p>{{note}}</p>
+        {{/if}}
+      </div>
     {{/each}}
-</div>
+  </div>
 </template>

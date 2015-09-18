@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-  var MAP_ZOOM = 14;
+  var MAP_ZOOM = 13;
   Meteor.startup(function(e) {
     GoogleMaps.load();
   });
@@ -15,7 +15,7 @@ if (Meteor.isClient) {
       var closestMapMarker2;
       var listMarker=[];
       var listPhano = SearchAllPhano.find({}).fetch();
-       var infowindow = new google.maps.InfoWindow();
+      var infowindow = new google.maps.InfoWindow();
       self.autorun(function() {
         self.subscribe('searchphama');
         var latLng = Geolocation.latLng();
@@ -28,7 +28,12 @@ if (Meteor.isClient) {
                 lat: phano.LAT,
                 lng: phano.LONG
               },
-              content:phano.PHAMANAME
+              Content:{
+                name: phano.PHAMANAME,
+                add:phano.ADDRESS,
+                city: phano.CITY,
+                tel:phano.PHONE
+              },
             });
             listMarker.push(newMarker);
           });
@@ -64,37 +69,60 @@ if (Meteor.isClient) {
           closestMarker1 =listMarker[closest1];
           closestMarker2 =listMarker[closest2];
         }
+        /////////////////////////////////////////////////////////////////////////////////////////marker 1
         if(!closestMapMarker){
           closestMapMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(closestMarker.position.lat(), closestMarker.position.lng()),
+            position: new google.maps.LatLng(closestMarker.position.lat(),closestMarker.position.lng()),
             map: map.instance
           });
-          function addInfoWindow(closestMapMarker, message) {
-            var infoWindow = new google.maps.InfoWindow({
-                content: message
-            });
-              console.log(closestMapMarker);
-            google.maps.event.addListener(closestMapMarker, 'click', function () {
-                infoWindow.open(map, closestMapMarker);
-            });
         }
-        }if(!closestMapMarker1) {
-          closestMapMarker = new google.maps.Marker({
+        var infowindow = new google.maps.InfoWindow({
+          content:
+          "<b>"+closestMarker.Content.name +"</b>"+"<br/>"+
+          "Địa Chỉ: "+closestMarker.Content.add + closestMarker.Content.city+"<br/>"+
+          "TEL: "+ closestMarker.Content.tel
+        });
+        google.maps.event.addListener(closestMapMarker, 'click', function() {
+          map.instance.setCenter(closestMapMarker.getPosition());
+              infowindow.open(map.instance, closestMapMarker);
+        });
+
+      /////////////////////////////////////////////////////////////////////////////////////////marker 2
+        if(!closestMapMarker1) {
+          closestMapMarker1 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker1.position.lat(), closestMarker1.position.lng()),
             map: map.instance
-          })  ;
-        }if (!closestMapMarker2) {
-          closestMapMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(closestMarker2.position.lat(), closestMarker2.position.lng()),
-            map: map.instance
           });
         }
-        // }else {
-        //   closestMapMarker.setPosition(closestMarker.position);
-        //   closestMapMarker.setPosition(closestMarker1.position);
-        //   closestMapMarker.setPosition(closestMarker2.position);
-        //   //my location
-        // }
+        var infowindow1 = new google.maps.InfoWindow({
+          content:
+          "<b>"+closestMarker1.Content.name +"</b>"+"<br/>"+
+          "Địa Chỉ: "+closestMarker1.Content.add + closestMarker1.Content.city+"<br/>"+
+          "TEL: "+ closestMarker1.Content.tel
+        });
+        google.maps.event.addListener(closestMapMarker1, 'click', function() {
+          map.instance.setCenter(closestMapMarker1.getPosition());
+          infowindow1.open(map.instance, closestMapMarker1);
+        });
+
+        /////////////////////////////////////////////////////////////////////////////////////////marker 3
+        if (!closestMapMarker2) {
+          closestMapMarker2 = new google.maps.Marker({
+            position: new google.maps.LatLng(closestMarker2.position.lat(), closestMarker2.position.lng()),
+            map: map.instance,
+          });
+        }   var infowindow2 = new google.maps.InfoWindow({
+          content:
+          "<b>"+closestMarker2.Content.name +"</b>"+"<br/>"+
+          "Địa Chỉ: "+closestMarker2.Content.add + closestMarker2.Content.city+"<br/>"+
+          "TEL: "+ closestMarker2.Content.tel
+        });
+        google.maps.event.addListener(closestMapMarker2, 'click', function() {
+          map.instance.setCenter(closestMapMarker2.getPosition());
+            infowindow2.open(map.instance, closestMapMarker2);
+        });
+
+
         if (! marker) {
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(latLng.lat, latLng.lng),
@@ -103,9 +131,10 @@ if (Meteor.isClient) {
         }else {
           marker.setPosition(latLng);
         }
-
+        map.instance.setZoom(MAP_ZOOM);
         map.instance.setCenter(marker.getPosition());
       });
+
     });
   });
   Template.pharmacy.helpers({
