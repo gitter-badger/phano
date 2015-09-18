@@ -1,67 +1,75 @@
-﻿<template name="prescriptionTemplate">
-{{#each currentPrescription}}
-    <div class="ui list">
-      {{> medicineTemplate}}
-      </div>
-      {{/each}}
-    <div align="center">
-        <button type="button" class="ui circular linkedin icon button" data-action="addNew"><i class="add circle icon"></i></button>
-    </div>
-    <br />
+<template name="prescriptionTemplate">
+  {{#each currentPrescription}}
+  <div class="ui divided selection list">
+    {{> medicineTemplate}}
+  </div>
+  {{/each}}
+  <div align="center">
+    <button type="button" class="ui circular linkedin icon button" data-action="addNew"><i class="plus icon"></i></button>
+  </div>
+  <br />
 </template>
 
 <template name="InsertMedicine">
-    <div class="ui" style="margin:15px">
-      {{#with thisMedicine}}
-        <form class="ui form" id="newMedicine" method="post">
-            <h3 align="center">Thêm nhắc nhớ</h3>
-            <div class="content">
-              <div class="field">
-                  <label>Thời gian:</label>
-                  <input class="form-control" type="time" value={{StartTime}} name="txtTime" id="txtTime" />
-              </div>
-              <div class="field">
-                  <label>Ngày nhắc nhớ:</label>
-                  <input class="form-control" type="date" value={{convertToEditDate}} name="txtDate" id="txtDate" />
-              </div>
-                <div class="field">
-                    <label>Nội dung nhắc nhớ:</label>
-                    <input type="text" name="txtText" id="txtText" value={{Text}} placeholder="Nhập nội dung nhắc nhớ" />
-                </div>
-                <div class="field">
-                    <label>Lặp lại</label>
-                    <select class="ui fluid dropdown" multiple name="txtRepeat" value={{Repeat}} id="txtRepeat">
-                        <option value="">Không lặp lại</option>
-                        <option value="mon">Thứ hai</option>
-                        <option value="tue">Thứ ba</option>
-                        <option value="wed">Thứ tư</option>
-                        <option value="thu">Thứ năm</option>
-                        <option value="fri">Thứ sáu</option>
-                        <option value="sat">Thứ bảy</option>
-                        <option value="sun">Chủ nhật</option>
-                    </select>
-                </div>
-            </div>
-            <div class="actions" style="float:right;margin:15px">
-                <button class="ui black deny button" type="reset">Cancel</button>
-                <button class="ui positive primary right labeled button" type="submit" id="btnLuuMedicine">Lưu thuốc</button>
-            </div>
-            <div class="field">&nbsp;</div>
-        </form>
-        {{/with}}
-    </div>
+  <div class="ui" style="margin:15px">
+    {{#with thisMedicine}}
+    <form class="ui form" id="newMedicine" method="post">
+      <h3 align="center">Thêm nhắc nhớ</h3>
+      <div class="content">
+        <div class="field">
+          <label>Thời gian:</label>
+          <input class="form-control" type="time" value={{StartTime}} name="txtTime" id="txtTime" />
+        </div>
+        <div class="field">
+          <label>Ngày nhắc nhớ:</label>
+          <input class="form-control" type="date" value={{convertToEditDate}} name="txtDate" id="txtDate" />
+        </div>
+        <div class="field">
+          <label>Nội dung nhắc nhớ:</label>
+          <input type="text" name="txtText" id="txtText" value={{Text}} placeholder="Nhập nội dung nhắc nhớ" />
+        </div>
+        <div class="field">
+          <label>Lặp lại</label>
+          <select class="ui fluid dropdown" multiple name="txtRepeat" value={{Repeat}} id="txtRepeat">
+            <option value="">Không lặp lại</option>
+            <option value="mon">Thứ hai</option>
+            <option value="tue">Thứ ba</option>
+            <option value="wed">Thứ tư</option>
+            <option value="thu">Thứ năm</option>
+            <option value="fri">Thứ sáu</option>
+            <option value="sat">Thứ bảy</option>
+            <option value="sun">Chủ nhật</option>
+          </select>
+        </div>
+      </div>
+      <div class="actions" style="float:right;margin:15px">
+        <button class="ui black deny button" type="reset">Hủy</button>
+        <button class="ui positive primary right labeled button" type="submit" id="btnLuuMedicine">Lưu</button>
+      </div>
+      <div class="field">&nbsp;</div>
+    </form>
+    {{/with}}
+  </div>
 </template>
 
 <template name="medicineTemplate">
-  <div class="item">
-      <div style="float:right;position:relative">
-          <a id="RemoveMedicine"><i class="remove circle icon"></i></a>
+  <div class="item" >
+    <div class="right floated middle aligned content">
+      <div class="ui fitted toggle checkbox" >
+        <input type="checkbox" checked="{{IsActive}}" data-action="toggleChecked">
+        <label></label>
       </div>
-      <i class="icon avatar image lab"></i>
-      <div class="content">
-          <a class="header" data-action="updateInfo">{{StartDate}}</a>
-          <div class="description">{{Text}}</div>
-          <div class="description">{{Repeat}}</div>
-      </div>
+    </div>
+    <div class="left floated middle aligned content">
+      <button class="circular red ui icon button" data-action="removeMedicine">
+        <i class="icon minus"></i>
+      </button>
+    </div>
+    <i class="icon alarm outline"></i>
+    <a class="content" data-action="updateInfo">
+      <a class="header" >{{StartTime}} - {{convertToShowDate StartDate}}</a>
+      <div class="description">{{Text}}</div>
+      <div class="description">{{Repeat}}</div>
+    </a>
   </div>
 </template>
