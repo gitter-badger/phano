@@ -5,8 +5,8 @@ Template.loginTemplate.events({
     //start scan barcode!
     var barcodeResult = "0";
     var customerInfo;
-  //  ------for test with web browser, comment it if build for device!!!!!-------------
-  //  ===========start comment from here================
+    //  ------for test with web browser, comment it if build for device!!!!!-------------
+    //  ===========start comment from here================
     if (barcodeResult == "0" || barcodeResult == "8625455007804") {
       alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
       barcodeResult = "8625455321023";
@@ -17,7 +17,7 @@ Template.loginTemplate.events({
         alert("Khong the ket noi voi service !!!");
         $('#loadingScreen').removeClass("active");
       } else {
-        console.log("da lay ra ket qua tai client: " + JSON.stringify(result.data));
+        console.log("da lay ra ket qua tai lient: " + JSON.stringify(result.data));
         customerInfo = result.data; //results.data should be a JSON object
         //console.log("Parse data:" + customerInfo.Name);
         if (typeof customerInfo !== "undefined" && customerInfo !== null) {
@@ -64,7 +64,7 @@ Template.loginTemplate.events({
         }
       }
     });
-  //============End test browser============
+    //============End test browser============
 
     // ======comment below block to test with browser=====================
     // -----------------Call barcode scanner-----------------

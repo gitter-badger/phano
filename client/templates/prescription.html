@@ -1,26 +1,11 @@
 ﻿<template name="prescriptionTemplate">
-    <h2 align="center">Nhập thông tin đơn thuốc</h2>
-{{#with currentPrescription}}
-    <form class="ui form" id="donMedicine">
-        <div style="float:right;">
-            <button type="submit" class="ui primary button" id="btnLuudonMedicine">Lưu đơn thuốc</button>
-        </div>
-        <div class="field">
-            <label>Nhập đơn thuốc:</label>
-            <input type="text" name="txtTendonMedicine" id="txtTendonMedicine" value={{Name}} placeholder="Nhập tên đơn thuốc" />
-        </div>
-    </form>
-    <br />
-    <br />
+{{#each currentPrescription}}
     <div class="ui list">
-      {{#each listMedicine}}
       {{> medicineTemplate}}
-      {{/each}}
       </div>
-      {{/with}}
-
+      {{/each}}
     <div align="center">
-        <button type="button" class="ui circular linkedin icon button" data-action="nhaptenMedicine"><i class="add circle icon"></i></button>
+        <button type="button" class="ui circular linkedin icon button" data-action="addNew"><i class="add circle icon"></i></button>
     </div>
     <br />
 </template>
@@ -29,35 +14,33 @@
     <div class="ui" style="margin:15px">
       {{#with thisMedicine}}
         <form class="ui form" id="newMedicine" method="post">
-            <h3 align="center">Nhập tên thuốc</h3>
+            <h3 align="center">Thêm nhắc nhớ</h3>
             <div class="content">
+              <div class="field">
+                  <label>Thời gian:</label>
+                  <input class="form-control" type="time" value={{StartTime}} name="txtTime" id="txtTime" />
+              </div>
+              <div class="field">
+                  <label>Ngày nhắc nhớ:</label>
+                  <input class="form-control" type="date" value={{convertToEditDate}} name="txtDate" id="txtDate" />
+              </div>
                 <div class="field">
-                    <label>Tên thuốc:</label>
-                    <input type="text" name="txtTenMedicine" id="txtTenMedicine" value={{Name}} placeholder="Nhập tên thuốc" />
+                    <label>Nội dung nhắc nhớ:</label>
+                    <input type="text" name="txtText" id="txtText" value={{Text}} placeholder="Nhập nội dung nhắc nhớ" />
                 </div>
                 <div class="field">
-                    <label>Số lượng:</label>
-                    <input type="number" name="txtSoluong" id="txtSoluong" value={{Total}} placeholder="Nhập số lượng" />
-                </div>
-                <div class="field">
-                    <label>Uống vào lúc:</label>
-                    <select class="ui fluid dropdown" multiple name="txtTime" id="txtTime">
-                        <option value="">Chọn thời điểm</option>
-                        <option value="sang">Sáng</option>
-                        <option value="trua">Trưa</option>
-                        <option value="chieu">Chiều</option>
-                        <option value="toi">Tối</option>
+                    <label>Lặp lại</label>
+                    <select class="ui fluid dropdown" multiple name="txtRepeat" value={{Repeat}} id="txtRepeat">
+                        <option value="">Không lặp lại</option>
+                        <option value="mon">Thứ hai</option>
+                        <option value="tue">Thứ ba</option>
+                        <option value="wed">Thứ tư</option>
+                        <option value="thu">Thứ năm</option>
+                        <option value="fri">Thứ sáu</option>
+                        <option value="sat">Thứ bảy</option>
+                        <option value="sun">Chủ nhật</option>
                     </select>
                 </div>
-                <div class="field">
-                    <label>Số lượng uống 1 lần:</label>
-                    <input type="number" name="txtSoluong1lan" id="txtSoluong1lan" value={{QuantityPerDrink}} placeholder="Nhập số lượng 1 lần" />
-                </div>
-                <div class="field">
-                    <label>Ngày bắt đầu:</label>
-                    <input class="form-control" type="date" value={{convertToEditDate}} name="txtNgayBD" id="txtNgayBD" />
-                </div>
-
             </div>
             <div class="actions" style="float:right;margin:15px">
                 <button class="ui black deny button" type="reset">Cancel</button>
@@ -76,11 +59,9 @@
       </div>
       <i class="icon avatar image lab"></i>
       <div class="content">
-          <a class="header" data-action="updateInfo">Tên thuốc: {{Name}}</a>
-          <div class="description">Số lượng: {{Total}}</div>
-          <div class="description">Thời gian uống: {{DrinkTime}}</div>
-          <div class="description">Số lượng uống 1 lần: {{QuantityPerDrink}}</div>
-          <div class="description">Ngày bắt đầu: {{convertToShowDate StartDate}}</div>
+          <a class="header" data-action="updateInfo">{{StartDate}}</a>
+          <div class="description">{{Text}}</div>
+          <div class="description">{{Repeat}}</div>
       </div>
   </div>
 </template>
