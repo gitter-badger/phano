@@ -15,10 +15,17 @@ Meteor.publish("giftinfo", function() {
 Meteor.publish("searchphama", function() {
   return SearchAllPhano.find({});
 });
-Meteor.publish("prescription", function() {
+Meteor.publish("prescription", function(DeviceID) {
+  check(DeviceID, String);
   return Prescription.find({
-    UserId: this.userId
+    "$or": [{
+      UserId: this.userId
+    },
+      {
+        DeviceId: DeviceID
+      }]
   });
+
 });
 Meteor.publish("users", function() {
   return Meteor.users.find({
