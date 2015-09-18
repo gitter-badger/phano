@@ -44,3 +44,8 @@ App.launchScreens({
 
 App.setPreference('StatusBarOverlaysWebView', 'false');
 App.setPreference('StatusBarBackgroundColor', '#000000');
+App.setPreference('StatusBarOverlaysWebView', 'false');
+App.setPreference('StatusBarBackgroundColor', '#000000');
+App.accessRule('http://maps.googleapis.com/*');
+App.accessRule('http://maps.google.com/*');
+App.accessRule('http://maps.gstatic.com/*');

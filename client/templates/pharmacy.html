@@ -1,32 +1,5 @@
 <template name="pharmacy">
-  <h1>TÌM NHÀ THUỐC GẦN NHẤT:</h1>
-  <div class="field" style="margin:15px">
-    <form id="search">
-      <select class="ui dropdown" id="searchCity">
-        <option value="">Chọn Thành Phố :</option>
-        <option value="TP.Hồ Chí Minh">TP.Hồ Chí Minh</option>
-        <option value="Đà Nẵng">Đà Nẵng</option>
-        <option value="Bình Dương">Bình Dương</option>
-        <option value="Cần Thơ">Cần Thơ</option>
-        <option value="Tiền Giang">Tiền Giang</option>
-        <option value="Lâm Đồng">Lâm Đồng</option>
-        <option value="Đồng Nai">Đồng Nai</option>
-        <option value="Cà Mau">Cà Mau</option>
-      </select>
-    </form> <br>
-    <div>
-      <form id="submitDis">
-        <select class="ui dropdown" id="searchDistrict">
-          <option value="">Quận/huyện</option>
-          {{#each ShowDistrict}}<option value={{this}}>{{this}}</option>{{/each}}
-        </select>
-        <button type="submit" class="ui icon button" name="submitDistrict">
-          <i class="search icon"></i>
-        </button>
-      </form>
-    </div>
-
-  </div>
+  <h1>NHÀ THUỐC GẦN NHẤT:</h1>
     <div class="map-container">
       {{#unless geolocationError}}
         {{> googleMap name="map" options=mapOptions}}
