@@ -7,7 +7,11 @@ App.info({
   version: '1.0.1'
 });
 
+<<<<<<< Updated upstream
 // App.icons({
+=======
+//  App.icons({
+>>>>>>> Stashed changes
 //   // iOS
 //   'iphone': 'public/img/icons/icon-60x60.png',
 //   'iphone_2x': 'public/img/icons/icon-60x60@2x.png',
@@ -20,8 +24,13 @@ App.info({
 //   'android_hdpi': 'public/img/icons/icon-72x72.png',
 //   'android_xhdpi': 'public/img/icons/icon-96x96.png'
 // });
+<<<<<<< Updated upstream
 //
 // App.launchScreens({
+=======
+
+//  App.launchScreens({
+>>>>>>> Stashed changes
 //   // iOS
 //   'iphone': 'public/img/splash/splash-320x480.png',
 //   'iphone_2x': 'public/img/splash/splash-320x480@2x.png',
