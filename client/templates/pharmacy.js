@@ -72,7 +72,7 @@ if (Meteor.isClient) {
         /////////////////////////////////////////////////////////////////////////////////////////marker 1
         if(!closestMapMarker){
           closestMapMarker = new google.maps.Marker({
-            position: new google.maps.LatLng(closestMarker.position.lat(),closestMarker.position.lng()),
+            position: new google.maps.LatLng(closestMarker.position.lat(), closestMarker.position.lng()),
             map: map.instance
           });
         }
@@ -84,10 +84,10 @@ if (Meteor.isClient) {
         });
         google.maps.event.addListener(closestMapMarker, 'click', function() {
           map.instance.setCenter(closestMapMarker.getPosition());
-              infowindow.open(map.instance, closestMapMarker);
+          infowindow.open(map.instance, closestMapMarker);
         });
 
-      /////////////////////////////////////////////////////////////////////////////////////////marker 2
+        /////////////////////////////////////////////////////////////////////////////////////////marker 2
         if(!closestMapMarker1) {
           closestMapMarker1 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker1.position.lat(), closestMarker1.position.lng()),
@@ -119,7 +119,7 @@ if (Meteor.isClient) {
         });
         google.maps.event.addListener(closestMapMarker2, 'click', function() {
           map.instance.setCenter(closestMapMarker2.getPosition());
-            infowindow2.open(map.instance, closestMapMarker2);
+          infowindow2.open(map.instance, closestMapMarker2);
         });
 
 

@@ -2,25 +2,6 @@
   <a class="header">{{ProdName}}</a>
 
   <div class="ui relaxed divided list">
-    ,<h1>KẾT NỐI PHANO</h1>
-    <div id="notes-input">
-      <button id="take-photo">Take a photo!</button>
-      <form>
-        Or, enter a note:<br/>
-        <input type="text" placeholder="Yummy / I bolused XXX">
-        <input type="submit" value="Save">
-      </form>
-    </div>
-
-    {{#each notes}}
-      <div>
-        <h2>{{livestamp timestamp}}</h2>
-        {{#if photo}}
-          <img src="{{photo}}">
-        {{else}}
-          <p>{{note}}</p>
-        {{/if}}
-      </div>
-    {{/each}}
+    <h1>KẾT NỐI PHANO</h1>
   </div>
 </template>
