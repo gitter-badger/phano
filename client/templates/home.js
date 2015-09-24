@@ -27,6 +27,14 @@ Template.homeTemplate.events({
   'click #logout': function() {
     console.log("log out click")
     Meteor.logout(function() {});
+  },
+  'click #photo': function() {
+    $('#loadingScreen').addClass("active");
+    Router.go("/scanprescription");
+  },
+  'click #list': function() {
+    $('#loadingScreen').addClass("active");
+    Router.go("/listprescription");
   }
 });
 Template.homeTemplate.onCreated = function() {

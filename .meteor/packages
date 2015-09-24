@@ -15,3 +15,5 @@ dburles:google-maps
 mdg:geolocation
 mdg:camera
 email
+cfs:gridfs
+cfs:standard-packages
