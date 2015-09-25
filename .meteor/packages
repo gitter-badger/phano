@@ -15,3 +15,6 @@ dburles:google-maps
 mdg:geolocation
 mdg:camera
 email
+accounts-ui
+twbs:bootstrap
+bootstrap

@@ -1,0 +1,64 @@
+<template name="AdminChat">
+  {{> chat}}
+</template>
+<template name="chat">
+  <div class="container">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <a class="brand" href="#">PageChatAdmin</a>
+        <ul class="nav">
+        </ul>
+        <ul class="nav pull-right">
+          <li><a>{{> loginButtons align="right"}}</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {{#if currentUser}}
+    <div class="row-fluid">
+      <div class="span12 well">
+        {{> messages}}
+      </div>
+    </div>
+    <div class="row-fluid">
+      <div class="span8 well">
+        {{> input}}
+      </div>
+      <div class="span4 well">
+        {{> rooms}}
+      </div>
+    </div>
+    {{else}}
+    <div class="hero-unit">
+      <h1>Welcome ADMIN to page chat</h1>
+      <p>XIN MỜI ĐĂNG NHẬP ĐỂ VÀO PHÒNG CHAT</p>
+    </div>
+    {{/if}}
+  </div>
+</template>
+<template name="message">
+  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{msg}}</i></p>
+</template>
+<template name="input">
+  <input type="text" id="msg" placeholder="xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
+  <input type="button" id="sendMesg" value="GỬI" class="btn btn-primary sendMesg">
+</template>
+<template name="messages">
+  <h4>Bạn đang chát với: {{name}}</h4>
+  <div id="messages" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
+    {{#each messages}}
+    {{> message}}
+    {{/each}}
+  </div>
+</template>
+<template name="rooms">
+  <h4>danh sách khách hàng cần hỗ trợ:</h4>
+  <ul>
+    {{#each rooms}}
+    {{> room}}
+    {{/each}}
+  </ul>
+</template>
+<template name="room">
+  <li style="cursor: pointer; {{roomstyle}}">{{name}}-({{phone}})</li>
+</template>

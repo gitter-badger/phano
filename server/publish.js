@@ -1,8 +1,14 @@
 /**
- * @Discription: Publish the data
- * @Author: HungHH
- */
+* @Discription: Publish the data
+* @Author: HungHH
+*/
 
+Meteor.publish("rooms", function () {
+  return Rooms.find({}, {sort: {ts: -1}});
+});
+Meteor.publish("messages", function () {
+  return Messages.find({}, {sort: {ts: -1}});
+});
 Meteor.publish("news", function() {
   return News.find({
   });
@@ -21,9 +27,9 @@ Meteor.publish("prescription", function(DeviceID) {
     "$or": [{
       UserId: this.userId
     },
-      {
-        DeviceId: DeviceID
-      }]
+    {
+      DeviceId: DeviceID
+    }]
   });
 
 });

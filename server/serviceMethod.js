@@ -104,3 +104,44 @@ Meteor.methods({
     });
   },
 });
+Meteor.startup(function () {
+  Messages.remove({});
+  Rooms.remove({});
+  // if (Rooms.find().count() === 0) {
+  //   ["khachhang1", "khachhang2", "khachhang3", "khachhang4"].forEach(function(r) {
+  //     Rooms.insert({roomname: r});
+  //   });
+  // }
+});
+Rooms.deny({
+  insert: function (userId, doc) {
+    return (userId === null);
+  },
+  update: function (userId, doc, fieldNames, modifier) {
+    return true;
+  },
+  remove: function (userId, doc) {
+    return true;
+  }
+});
+Rooms.allow({
+  insert: function (userId, doc) {
+    return (userId !== null);
+  }
+});
+Messages.deny({
+  insert: function (userId, doc) {
+    return (userId === null);
+  },
+  update: function (userId, doc, fieldNames, modifier) {
+    return true;
+  },
+  remove: function (userId, doc) {
+    return true;
+  }
+});
+Messages.allow({
+  insert: function (userId, doc) {
+    return (userId !== null);
+  }
+});

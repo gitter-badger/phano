@@ -1,7 +1,53 @@
 <template name="infonewsTemplate">
   <a class="header">{{ProdName}}</a>
-
   <div class="ui relaxed divided list">
-    <h1>KẾT NỐI PHANO</h1>
-  </div>
-</template>
+    <div class="navbar-inner">
+      <div>
+        <h4><b><a class="brand" href="http://www.phanopharmacy.com/">
+          CÔNG TY CỔ PHẦN DƯỢC PHẨM PHA NO</a></b></h4>
+          <b>Địa chỉ:</b>	31 Hồ Biểu Chánh, Phường 12, Quận Phú Nhuận, TP.HCM<br>
+          <b>Điện thoại:</b><a href="tel:+84838477222" onClick="alert('Bạn muốn gọi vào số điện thoại này')">(+84.8) 38 47 72 22</a><br>
+          <b>Email:</b>	<a href="mailto:contact@phanopharmacy.com">contact@phanopharmacy.com</a>
+        </div>
+      </div>
+    </div>
+<div>
+    {{>createNewRoom}}
+</div>
+    <div>
+      <form name="windowChat">
+        {{>userChat}}
+      </form>
+    </div>
+  </template>
+  <template name="createNewRoom">
+    <div class="navbar-inner" style="width: 100%">
+      <div>
+        <b><h6>CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
+        <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px"><br>
+        <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px"><br><br>
+        <center><input type="button" id="createRoom" value="Bắt đầu trò chuyện" class="btn btn-primary sendMsg"></center><br>
+      </div>
+    </div>
+  </template>
+  <template name="userChat">
+    <div class="span8 well">
+      {{> messagesCus}}<br>
+      {{> inputChat}}
+    </div>
+  </template>
+  <template name="inputChat">
+    <input type="text" id="txtIput" value="xin chao! toi can duoc giup do" placeholder="" style="width: 50%; margin-bottom: 0px">
+    <input type="button" id="sendMes" value="Send message" class="btn btn-primary sendMsg">
+    <input type="button" id="send" value="Send" class="btn btn-primary sendMsg">
+  </template>
+  <template name="messageCus">
+    <p><strong>{{name}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{txtIput}}</i></p>
+  </template>
+  <template name="messagesCus">
+    <div id="messagesCus" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
+      {{#each messagesCus}}
+      {{> inputChat}}
+      {{/each}}
+    </div>
+  </template>
