@@ -37,4 +37,7 @@ Meteor.publish("users", function() {
   return Meteor.users.find({
     UserID: this.userId
   });
-})
+});
+Meteor.publish("photos", function() {
+  return PrescriptionPhoto.find();
+});

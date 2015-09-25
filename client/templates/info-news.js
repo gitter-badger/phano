@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 if (Meteor.isClient) {
   Meteor.subscribe("rooms");
   Meteor.subscribe("messages");
@@ -23,3 +24,5 @@ Template.inputChat.events({
     }
   });
 }
+=======
+>>>>>>> 72fcd970b271c4c75db360d9e76b0c450cc7be98

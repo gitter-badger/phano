@@ -1,0 +1,40 @@
+<template name="scanprescriptionTemplate">
+  <a class="header">{{ProdName}}</a>
+
+  <div class="ui relaxed divided list">
+    <form class="ui fluid form">
+      <p>
+        {{#if photo}}
+        <div style="text-align:center;">
+          <img src={{photo}} />
+        </div>
+        {{else}}
+        <div style="text-align:center;">
+          <img src="./img/photo_default.png" />
+        </div>
+        {{/if}}
+      </p>
+      <p style="text-align: center;">
+        <input type="button" class="ui button" id="capture" value="Chụp đơn thuốc" />
+      </p>
+      <!-- <div><textarea>{{strings}}</textarea></div> -->
+        {{#if isUser }}
+        <div></div>
+        {{else}}
+        <div class="field">
+          <label>Họ tên:</label>
+          <input type="text" placeholder="Vui lòng nhập họ tên của bạn" id="txtName" />
+        </div>
+        <div class="field">
+          <label>Số điện thoại:</label>
+          <input type="text" placeholder="Vui lòng nhập số điện thoại của bạn" id="txtPhone" />
+        </div>
+        {{/if}}
+        <div class="field">&nbsp;</div>
+      <div style="float: right;">
+        <button class="ui button" id="btnSave"> Lưu thông tin</button>
+      </div>
+      <div class="field">&nbsp;</div>
+    </form>
+  </div>
+</template>
