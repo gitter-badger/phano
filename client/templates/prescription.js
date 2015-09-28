@@ -4,18 +4,10 @@ var currentPrescription = {};
 var thisMedicine = {} ;
 var currentID;
 var DeviceId;
-var arrPrescription = [];
 //============= MAIN TEMPLATE PRESCRIPTION====================//
 Template.prescriptionTemplate.onRendered(function() {
   $('#loadingScreen').removeClass("active");
   var date = new Date();
-  var presDetail = Meteor.subscribe("prescriptionDetail");
-  if(presDetail.ready()) {
-    var arr = Prescription.find({});
-    arr.forEach(function(pres){
-      arrPrescription.push(pres);
-    });
-  }
   var schedule = [{
     id: 0,
     title: "Đến giờ uống thuốc test 1!",
@@ -61,8 +53,18 @@ Template.prescriptionTemplate.onRendered(function() {
           var d = weekday[date.getDay()];
           var h = date.getHours();
           var m = date.getMinutes();
-          arrPrescription.forEach(function(res){
-
+          var time = h + ":" + m;
+          var id = 1;
+          var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+          arr.forEach(function(res){
+            var timeRepeat = res.Repeat;
+            cordova.plugins.notification.local.schedule({
+              id:id,
+              title: "Phano care",
+              message: res.Text,
+              at: new Date(),
+            });
+            id = id +1;
           });
           cordova.plugins.notification.local.schedule(schedule);
         }
@@ -74,6 +76,7 @@ Template.prescriptionTemplate.onRendered(function() {
       cordova.plugins.notification.local.schedule(schedule);
     }
   });
+
 });
 
 Template.prescriptionTemplate.helpers({

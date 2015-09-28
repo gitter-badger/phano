@@ -41,14 +41,5 @@ Template.scanprescriptionTemplate.events({
     }
     return false;
   },
-  'text': function(){
-    var re= new Date();
-    // var d= date.substr(0,3);
-    //lấy ngày
-    var d=re.getDay();
-    var h=re.getHours();
-    var m=re.getMinutes();
-    var time=(h-m);
-    return time;
-  }
+  
 });
