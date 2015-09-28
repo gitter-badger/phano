@@ -4,10 +4,18 @@ var currentPrescription = {};
 var thisMedicine = {} ;
 var currentID;
 var DeviceId;
+var arrPrescription = [];
 //============= MAIN TEMPLATE PRESCRIPTION====================//
 Template.prescriptionTemplate.onRendered(function() {
   $('#loadingScreen').removeClass("active");
-  var now = new Date().getTime();
+  var date = new Date();
+  var presDetail = Meteor.subscribe("prescriptionDetail");
+  if(presDetail.ready()) {
+    var arr = Prescription.find({});
+    arr.forEach(function(pres){
+      arrPrescription.push(pres);
+    });
+  }
   var schedule = [{
     id: 0,
     title: "Đến giờ uống thuốc test 1!",
@@ -40,6 +48,22 @@ Template.prescriptionTemplate.onRendered(function() {
         if (per) {
           alert('Chương trình đã có quyền gửi thông báo uống thuốc');
           alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
+
+          var weekday = new Array(7);
+          weekday[0]=  "Sun";
+          weekday[1] = "Mon";
+          weekday[2] = "Tue";
+          weekday[3] = "Wed";
+          weekday[4] = "Thur";
+          weekday[5] = "Fri";
+          weekday[6] = "Sat";
+
+          var d = weekday[date.getDay()];
+          var h = date.getHours();
+          var m = date.getMinutes();
+          arrPrescription.forEach(function(res){
+
+          });
           cordova.plugins.notification.local.schedule(schedule);
         }
 

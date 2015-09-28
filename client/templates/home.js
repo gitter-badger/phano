@@ -26,7 +26,7 @@ Template.homeTemplate.events({
   },
   'click #logout': function() {
     console.log("log out click")
-    Meteor.logout(function() {});
+    Meteor.logout();
   },
   'click #photo': function() {
     $('#loadingScreen').addClass("active");

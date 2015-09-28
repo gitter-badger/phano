@@ -6,21 +6,22 @@
       <p>
         {{#if photo}}
         <div style="text-align:center;">
-          <img src={{photo}} />
+          <img src={{photo}}  style="width: 60%;"/>
         </div>
         {{else}}
         <div style="text-align:center;">
-          <img src="./img/photo_default.png" />
+          <img src="./img/photo_default.png" style="width: 60%;"/>
         </div>
         {{/if}}
       </p>
       <p style="text-align: center;">
-        <input type="button" class="ui button" id="capture" value="Chụp đơn thuốc" />
+        <input type="button" class="ui blue button" id="capture" value="Chụp đơn thuốc" />
       </p>
       <!-- <div><textarea>{{strings}}</textarea></div> -->
         {{#if isUser }}
         <div></div>
         {{else}}
+        <p>{{text}}</p>
         <div class="field">
           <label>Họ tên:</label>
           <input type="text" placeholder="Vui lòng nhập họ tên của bạn" id="txtName" />
@@ -30,9 +31,9 @@
           <input type="text" placeholder="Vui lòng nhập số điện thoại của bạn" id="txtPhone" />
         </div>
         {{/if}}
-        <div class="field">&nbsp;</div>
       <div style="float: right;">
-        <button class="ui button" id="btnSave"> Lưu thông tin</button>
+        <input type="button" class="ui grey button" id="Cancel" value="Làm lại" />
+        <input type="button" class="ui blue button" id="btnSave" value="Lưu thông tin" />
       </div>
       <div class="field">&nbsp;</div>
     </form>
