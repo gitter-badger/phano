@@ -1,6 +1,6 @@
 
 <template name="layoutTemplate">
-  <div class="ui left demo vertical inverted sidebar labeled icon menu">
+  <div class="ui right demo vertical inverted sidebar labeled icon menu">
     <a class="item" href="{{pathFor route='home'}}">
       <i class="home icon"></i>
       Home
@@ -28,19 +28,23 @@
 </div>
     <div id="content" class=" pusher"  style="height: 100%;">
       <div class="ui borderless menu teal top fixed inverted small">
-        <a class="item" id="btnMenu">
-          <i class="home icon"></i>
-          Menu</a>
-        <div class="menu" style="text-align:center;">
-          <div class="header item">
-            Phano
+        <div class="right menu">
+          <a class="item" id="btnMenu">
+            <i class="align justify icon big"></i>
+          </a>
+      </div>
+      </div>
+      <div class="style-background" style="height:95%;">
+        <div class="style-background-image">
+          <div class="ui container" style="padding-top: 100px;">
+            {{> yield}}
           </div>
         </div>
+        <div class="style-footer"></div>
       </div>
-      <div class="ui container" style="padding-top: 50px; height: 100%;background-image: url('./icon/background.png'); background-size: 100%;
-      background-position: bottom;background-repeat:no-repeat; width:100%;">
-        {{> yield}}
-      </div>
+    </div>
+    <div>
+
     </div>
     <div id="loadingScreen" class="ui dimmer">
       <div class="ui loader"></div>
@@ -65,7 +69,7 @@
 </template>
 
 <template name="screenLayoutTemplate">
-  <div class="ui left demo vertical inverted sidebar labeled icon menu">
+  <div class="ui right demo vertical inverted sidebar labeled icon menu">
     <a class="item" href="{{pathFor route='home'}}">
       <i class="home icon"></i>
       Home
@@ -93,19 +97,14 @@
 </div>
     <div id="content" class=" pusher">
       <div class="ui borderless menu teal top fixed inverted small">
-        <a class="item" id="btnMenu">
-          <i class="home icon"></i>
-          Menu</a>
-        <div class="menu" style="text-align:center;">
-          <div class="header item">
-            Phano
+          <a class="item" href="{{pathFor route='home'}}">
+            Back
+          </a>
+          <div class="right menu">
+            <a class="item" id="btnMenu">
+              <i class="align justify icon big"></i>
+            </a>
           </div>
-        </div>
-        <div class="right menu">
-  <a class="ui item" href="{{pathFor route='home'}}">
-    Back
-  </a>
-</div>
       </div>
       <div class="ui container" style="padding-top: 50px;">
         {{> yield}}

@@ -3,12 +3,12 @@ Template.loginTemplate.events({
   'click #btnLogin': function(event) {
     $('#loadingScreen').addClass("active");
     //start scan barcode!
-    var barcodeResult = "0";
+    var barcodeResult = $('#txtCode').val();
     var customerInfo;
     //  ------for test with web browser, comment it if build for device!!!!!-------------
     //  ===========start comment from here================
     if (Meteor.isClient) {
-      if (barcodeResult == "0" || barcodeResult == "8625455007804") {
+      if (barcodeResult == null || barcodeResult == "8625455007804") {
         alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
         barcodeResult = "8625455321023";
       }
@@ -56,6 +56,7 @@ Template.loginTemplate.events({
                 Router.go("/");
               }
             });
+            $('#txtCode').val('');
           }
           //--------------if service return false----------------------------
           else {
@@ -65,6 +66,7 @@ Template.loginTemplate.events({
           }
         }
       });
+
     }
 
     //============End test browser============

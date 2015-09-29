@@ -15,7 +15,8 @@ dburles:google-maps
 mdg:geolocation
 mdg:camera
 email
+
 accounts-ui
-bootstrap
+
 cfs:gridfs
 cfs:standard-packages

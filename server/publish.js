@@ -41,3 +41,8 @@ Meteor.publish("users", function() {
 Meteor.publish("photos", function() {
   return PrescriptionPhoto.find();
 });
+Meteor.publish("prescriptionDetail", function() {
+  return Prescription.find({
+    IsActive: true,
+  });
+});
