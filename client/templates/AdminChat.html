@@ -5,11 +5,11 @@
   <div class="container">
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <a class="brand" href="#">PageChatAdmin</a>
+        <a style="float:right;" href="#">PageChatAdmin</a>
         <ul class="nav">
         </ul>
         <ul class="nav pull-right">
-          <li><a>{{> loginButtons align="right"}}</a></li>
+          <li><a>{{> loginButtons align="left"}}</a></li>
         </ul>
       </div>
     </div>
@@ -30,21 +30,30 @@
     </div>
     {{else}}
     <div class="hero-unit">
-      <h1>Welcome ADMIN to page chat</h1>
-      <p>XIN MỜI ĐĂNG NHẬP ĐỂ VÀO PHÒNG CHAT</p>
+      <h3 style="text-align:center;">Welcome ADMIN to page chat</h3>
+      <p style="text-align:center;">Bạn chưa đăng nhập</p>
     </div>
     {{/if}}
   </div>
 </template>
+
 <template name="message">
-  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{msg}}</i></p>
+  <p>
+    <strong>{{user}}</strong>
+    <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i>
+  </p>
 </template>
 <template name="input">
-  <input type="text" id="msg" placeholder="xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
-  <input type="button" id="sendMesg" value="GỬI" class="btn btn-primary sendMesg">
+  <form id="NewTextForm" class="ui form">
+    <div class="field">
+      <input type="text" id="msg" name="msg" placeholder="Xin mời nhập tin nhắn">
+    </div>
+    <input type="submit" id="sendMesg" value="GỬI" class="ui button sendMesg">
+  </form>
 </template>
+
 <template name="messages">
-  <h4>Bạn đang chát với: {{name}}</h4>
+  <h4>Bạn đang chat với: {{user}}</h4>
   <div id="messages" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
     {{#each messages}}
     {{> message}}
@@ -52,7 +61,7 @@
   </div>
 </template>
 <template name="rooms">
-  <h4>danh sách khách hàng cần hỗ trợ:</h4>
+  <h4>Danh sách khách hàng cần hỗ trợ:</h4>
   <ul>
     {{#each rooms}}
     {{> room}}
@@ -60,5 +69,5 @@
   </ul>
 </template>
 <template name="room">
-  <li style="cursor: pointer; {{roomstyle}}">{{name}}-({{phone}})</li>
+  <li style="cursor: pointer; {{roomstyle}}" >{{user}}-({{phone}})</li>
 </template>

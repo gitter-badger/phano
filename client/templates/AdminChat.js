@@ -8,20 +8,15 @@ if (Meteor.isClient) {
 
 
   Template.input.events({
-    'click .sendMesg': function(e) {
-      _sendMessage();
-    },
-    'keyup #msg': function(e) {
-      if (e.type == "keyup" && e.which == 14) {
-        _sendMessage();
-      }
+    'submit #NewTextForm': function(event) {
+      event.preventDefault();
+      var text = event.target.msg.value;
+      Messages.insert({user: Meteor.user().username, text: text, ts: new Date(), RoomID: Session.get("RoomID")});
+      msg.value = "";
+      msg.focus();
     }
   });
 
-  _sendMessage = function() {
-    var el = document.getElementById("msg");
-    Messages.insert({user: Meteor.user().username, text: el.value, ts: new Date(), room: Session.get("RoomID")});
-  };
   Template.messages.helpers({
     messages: function() {
       return Messages.find({RoomID: Session.get("RoomID")}, {sort: {ts: -1}});
@@ -39,7 +34,8 @@ if (Meteor.isClient) {
 
   Template.rooms.events({
     'click li': function(e) {
-      Session.set("RoomID", e.target.innerText);
+      Session.set("RoomID", this._id);
+
     },
   });
 

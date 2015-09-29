@@ -18,25 +18,42 @@ Template.scanprescriptionTemplate.events({
 
     if(Meteor.userId()) {
       var userDetail = Meteor.users.findOne({_id: Meteor.userId()});
-      var profile = userDetail.profile;
-      var name = profile.Name;
-      var phone = profile.Phone;
-      Meteor.call('insertPrescriptionPhoto', pic, name, phone);
+      if(userDetail.username != "Admin"){
+        var profile = userDetail.profile;
+        var name = profile.Name;
+        var phone = profile.Phone;
+        var namepres = $('#txtPres').val();
+        Meteor.call('insertPrescriptionPhoto', pic, name, phone,namepres);
+        $('#txtName').val('');
+        $('#txtPhone').val('');
+        $('#txtPres').val('');
+        Session.set('photo', null);
+      }
+      else {
+        Meteor.logout();
+      }
     } else {
       var name = $('#txtName').val();
       var phone = $('#txtPhone').val();
-      if(vali(phone)) {
-        Meteor.call('insertPrescriptionPhoto', pic, name, phone);
-      }
-      else {
-        console.log('So dien thoai sai');
-      }
+      // if(vali(phone)) {
+      //   Meteor.call('insertPrescriptionPhoto', pic, name, phone);
+      // }
+      // else {
+      //   console.log('So dien thoai sai');
+      // }
+      var namepres = $('#txtPres').val();
+      Meteor.call('insertPrescriptionPhoto', pic, name, phone,namepres);
+      $('#txtName').val('');
+      $('#txtPhone').val('');
+      $('#txtPres').val('');
+      Session.set('photo', null);
     }
   },
   'click #Cancel': function() {
     Session.set('photo', null);
     $('#txtName').val('');
     $('#txtPhone').val('');
+    $('#txtPres').val('');
     return Session.get('photo');
   },
  });

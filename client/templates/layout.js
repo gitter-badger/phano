@@ -7,6 +7,9 @@ Template.screenLayoutTemplate.events({
     $('.ui.sidebar')
       .sidebar('toggle')
     ;
+  },
+  "click #back": function() {
+    history.back();
   }
 });
 Template.layoutTemplate.events({

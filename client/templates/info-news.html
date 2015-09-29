@@ -3,51 +3,63 @@
   <div class="ui relaxed divided list">
     <div class="navbar-inner">
       <div>
-        <h4><b><a class="brand" href="http://www.phanopharmacy.com/">
-          CÔNG TY CỔ PHẦN DƯỢC PHẨM PHA NO</a></b></h4>
+        <h4><a class="brand" href="http://www.phanopharmacy.com/">
+          CÔNG TY CỔ PHẦN DƯỢC PHẨM PHANO</a></h4>
           <b>Địa chỉ:</b>	31 Hồ Biểu Chánh, Phường 12, Quận Phú Nhuận, TP.HCM<br>
           <b>Điện thoại:</b><a href="tel:+84838477222" onClick="alert('Bạn muốn gọi vào số điện thoại này')">(+84.8) 38 47 72 22</a><br>
           <b>Email:</b>	<a href="mailto:contact@phanopharmacy.com">contact@phanopharmacy.com</a>
         </div>
       </div>
     </div>
-<div>
-    {{>createNewRoom}}
-</div>
     <div>
-      <form name="windowChat">
-        {{>userChat}}
-      </form>
+      {{>createNewRoom}}
     </div>
-  </template>
-  <template name="createNewRoom">
-    <div class="navbar-inner" style="width: 100%">
-      <div>
-        <b><h6>CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
-        <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px"><br>
-        <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px"><br><br>
-        <center><input type="button" id="createRoom" value="Bắt đầu trò chuyện" class="btn btn-primary sendMsg"></center><br>
-      </div>
-    </div>
-  </template>
-  <template name="userChat">
-    <div class="span8 well">
+    <div>
       {{> messagesCus}}<br>
       {{> inputChat}}
     </div>
   </template>
+  <template name="createNewRoom">
+    <form id="createRoomName" class="ui form">
+    <div class="navbar-inner" style="width: 100%" id="hidden">
+      <div>
+        <b><h5>CHAT HỖ TRỢ TRỰC TUYẾN</h5></b>
+        <div class="field">
+          <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
+        </div>
+        <div class="field">
+          <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px">
+        </div>
+        <center>
+          <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui button teal createRoom">
+        </center><br />
+      </div>
+    </div>
+  </form>
+  </template>
   <template name="inputChat">
-    <input type="text" id="txtIput" value="xin chao! toi can duoc giup do" placeholder="" style="width: 50%; margin-bottom: 0px">
-    <input type="button" id="sendMes" value="Send message" class="btn btn-primary sendMsg">
-    <input type="button" id="send" value="Send" class="btn btn-primary sendMsg">
+    <form id="inputChatMes"  class="ui form">
+      <div class="field">
+        <input type="text" id="txtIput" placeholder="Nội dung">
+      </div>
+      <div class="field">
+        <input type="submit" value="Send Message" class="ui button teal sendMes" style="float:right;">
+      </div>
+  </form>
   </template>
   <template name="messageCus">
-    <p><strong>{{name}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{txtIput}}</i></p>
+    <p><strong>{{user}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
   </template>
   <template name="messagesCus">
     <div id="messagesCus" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
       {{#each messagesCus}}
-      {{> inputChat}}
+      {{> messageCus}}
       {{/each}}
     </div>
   </template>
+  <!-- <Template name="windowChat">
+    <form name="winChat" type="hidden">
+    {{> messagesCus}}<br>
+    {{> inputChat}}
+  </form>
+  </Template> -->

@@ -3,66 +3,82 @@
 
   <div class="ui top attached tabular menu">
     <a class="item active" data-tab="first">Đơn thuốc của tôi</a>
-    <a class="item" data-tab="second">Danh sách đơn thuốc</a>
+    <a class="item" data-tab="second">Đơn thuốc đã scan</a>
   </div>
-  <div class="ui bottom attached tab segment active" data-tab="first">
+  <div class="ui bottom attached tab segment active" data-tab="first" >
     <div class="ui relaxed divided list">
+      {{#if isUser}}
       <div class="item">
         <div class="content">
-          <a class="header">Đơn thuốc 1</a>
+          <div class="header">
+            <a data-action="xem">Đơn thuốc 1</a>
+            <button class="ui button" style="margin-left:10%;" data-action="ReOrder">Refill</button>
+          </div>
         </div>
       </div>
-      <div class="item">
-        <div class="content">
-          <a class="header">Đơn thuốc 1</a>
-        </div>
-      </div>
-      <div class="item">
-        <div class="content">
-          <a class="header">Đơn thuốc 1</a>
-        </div>
-      </div>
+      {{else}}
+      <div  style="height: 400px;">Bạn chưa đăng nhập</div>
+      {{/if}}
   </div>
   </div>
   <div class="ui bottom attached tab segment" data-tab="second">
-    <div class="ui relaxed divided list">
-      {{#each showPhoto}}
-      <div class="item">
-        <div class="content">
-          <a class="header">{{name}}</a>
-          <div style="float: left;">
-            <button class="ui button">Review</button>
-            <button class="ui button">Order</button>
-        </div>
-        </div>
-      </div>
-      {{/each}}
+    <div class="ui middle aligned selection list">
+      {{#if testPhoto}}
+        {{#each showPhoto}}
+          <div class="item">
+            <div class="ui avatar image">
+              <i class="first aid icon"></i>
+            </div>
+            <div class="content">
+              <a class="header" data-action="xem">{{namepres}}</a>
+              <div class="description">{{convertToShowDate datescan}}</div>
+            </div>
+          </div>
+        {{/each}}
+      {{else}}
+        <div>Bạn chưa có scan hình nào</div>
+    {{/if}}
   </div>
-</div>
+  </div>
+  <!-- <div class="ui pointing secondary menu">
+    <a class="item active" data-tab="first">Đơn thuốc của tôi</a>
+    <a class="item" data-tab="second">Danh sách đơn thuốc</a>
+  </div>
+  <div class="ui tab segment active" data-tab="first">
+    aaaaaaaaaaaaaa
+  </div>
+  <div class="ui tab segment" data-tab="second">
+    bbbbbbbbbbbbbbb
+  </div> -->
 </template>
 <template name="photoPrescription">
   <div class="ui" style="margin:15px">
+    {{#with photoDetails}}
     <form class="ui form" id="newMedicine" method="post">
       <h3 align="center">Thông tin đơn thuốc</h3>
       <div class="content">
         <div class="field">
-          <label>Đơn thuốc::</label>
-          <img src="" />
+          <p><img src={{photo}} /></p>
+        </div>
+        <div class="field">
+          <label>Tên đơn thuốc:</label>
+          <input class="form-control" type="text" value={{namepres}} name="txtName" id="txtName" readonly />
         </div>
         <div class="field">
           <label>Họ tên:</label>
-          <input type="text" name="txtName" id="txtName" placeholder="Nhập họ tên" />
+          <input class="form-control" type="text" value={{name}} name="txtNamepres" id="txtNamepres" readonly />
         </div>
         <div class="field">
           <label>Số điện thoại:</label>
-          <input type="text" name="txtPhone" id="txtPhone" placeholder="Nhập số điện thoại" />
+          <input class="form-control" type="text" value={{phone}} name="txtPhone" id="txtPhone" readonly />
         </div>
       </div>
       <div class="actions" style="float:right;margin:15px">
-        <button class="ui black deny button" type="reset">Hủy</button>
-        <button class="ui positive primary right labeled button" type="submit" id="btnLuuMedicine">Lưu</button>
+        <button class="ui black deny button" type="reset">Cancel</button>
+        <button class="ui positive primary right labeled button" type="button" data-action="Order" >Order</button>
       </div>
       <div class="field">&nbsp;</div>
     </form>
+    {{/with}}
   </div>
 </template>

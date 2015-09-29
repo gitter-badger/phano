@@ -5,23 +5,31 @@
       <i class="home icon"></i>
       Home
     </a>
-    <a class="item" href="{{pathFor route='prescription'}}">
+    <!-- <a class="item" href="{{pathFor route='prescription'}}">
       <i class="block layout icon"></i>
       Nhắc nhớ
     </a>
     <a class="item" href="{{pathFor route='pharmacy'}}">
       <i class="smile icon"></i>
       Tìm nhà thuốc
-    </a>
-    <a class="item" href="{{pathFor route='news'}}">
+    </a> -->
+    <a class="item" href="{{pathFor route='listprescription'}}">
       <i class="smile icon"></i>
-      Ưu đãi
+      Danh sách đơn thuốc
+    </a>
+    <a class="item" href="{{pathFor route='managerphoto'}}">
+      <i class="smile icon"></i>
+      Danh sách đơn thuốc đã đặt
+    </a>
+    <a class="item" href="{{pathFor route='infonews'}}">
+      <i class="smile icon"></i>
+      Kết nối Phano
     </a>
     <a class="item" href="{{pathFor route='userinfo'}}">
       <i class="smile icon"></i>
       Tài khoản PCare
     </a>
-    <a class="item" href="/">
+    <a class="item" href="{{pathFor route='infonews'}}">
       <i class="smile icon"></i>
       Kết nối Phano
     </a>
@@ -36,7 +44,7 @@
       </div>
       <div class="style-background" style="height:95%;">
         <div class="style-background-image">
-          <div class="ui container" style="padding-top: 100px;">
+          <div class="ui container header-menu">
             {{> yield}}
           </div>
         </div>
@@ -74,13 +82,21 @@
       <i class="home icon"></i>
       Home
     </a>
-    <a class="item" href="{{pathFor route='prescription'}}">
+    <!-- <a class="item" href="{{pathFor route='prescription'}}">
       <i class="block layout icon"></i>
       Nhắc nhớ
     </a>
     <a class="item" href="{{pathFor route='pharmacy'}}">
       <i class="smile icon"></i>
       Tìm nhà thuốc
+    </a> -->
+    <a class="item" href="{{pathFor route='listprescription'}}">
+      <i class="smile icon"></i>
+      Danh sách đơn thuốc
+    </a>
+    <a class="item" href="{{pathFor route='managerphoto'}}">
+      <i class="smile icon"></i>
+      Danh sách đơn thuốc đã đặt
     </a>
     <a class="item" href="{{pathFor route='news'}}">
       <i class="smile icon"></i>
@@ -97,7 +113,7 @@
 </div>
     <div id="content" class=" pusher">
       <div class="ui borderless menu teal top fixed inverted small">
-          <a class="item" href="{{pathFor route='home'}}">
+          <a class="item" id="back">
             Back
           </a>
           <div class="right menu">
