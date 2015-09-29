@@ -9,34 +9,49 @@
     <div class="ui relaxed divided list">
       <div class="item">
         <div class="content">
-          <a class="header">Đơn thuốc 1</a>
+          <div class="header">
+            <a data-action="xem">Đơn thuốc 1</a>
+            <button class="ui button" style="margin-left:10%;">Refill</button>
+          </div>
         </div>
       </div>
       <div class="item">
         <div class="content">
-          <a class="header">Đơn thuốc 1</a>
+          <div class="header">
+            <a data-action="xem">Đơn thuốc 2</a>
+            <button class="ui button" style="margin-left:10%;">Refill</button>
+          </div>
         </div>
       </div>
       <div class="item">
         <div class="content">
-          <a class="header">Đơn thuốc 1</a>
+          <div class="header">
+            <a data-action="xem">Đơn thuốc 3</a>
+            <button class="ui button" style="margin-left:10%;">Refill</button>
+          </div>
         </div>
       </div>
   </div>
   </div>
   <div class="ui bottom attached tab segment" data-tab="second">
     <div class="ui relaxed divided list">
-      {{#each showPhoto}}
+      <!-- {{#each showPhoto}} -->
       <div class="item">
         <div class="content">
-          <a class="header">{{name}}</a>
-          <div style="float: left;">
-            <button class="ui button">Review</button>
-            <button class="ui button">Order</button>
-        </div>
+          <a class="header" data-action="xem">Van Tuan Van Tuan Van Tuan Van Tuan</a>
         </div>
       </div>
-      {{/each}}
+      <div class="item">
+        <div class="content">
+          <a class="header" data-action="xem">Van Tuan Van Tuan Van Tuan Van Tuan</a>
+        </div>
+      </div>
+      <div class="item">
+        <div class="content">
+          <a class="header" data-action="xem">Van Tuan Van Tuan Van Tuan Van Tuan</a>
+        </div>
+      </div>
+      <!-- {{/each}} -->
   </div>
 </div>
 </template>
@@ -46,21 +61,24 @@
       <h3 align="center">Thông tin đơn thuốc</h3>
       <div class="content">
         <div class="field">
-          <label>Đơn thuốc::</label>
-          <img src="" />
+          <p><img src="{{photo}}" /></p>
+        </div>
+        <div class="field">
+          <label>Tên đơn thuốc:</label>
+          <p>{{namepres}}</p>
         </div>
         <div class="field">
           <label>Họ tên:</label>
-          <input type="text" name="txtName" id="txtName" placeholder="Nhập họ tên" />
+          <div>{{name}}</div>
         </div>
         <div class="field">
           <label>Số điện thoại:</label>
-          <input type="text" name="txtPhone" id="txtPhone" placeholder="Nhập số điện thoại" />
+          <p>{{phone}}</p>
         </div>
       </div>
       <div class="actions" style="float:right;margin:15px">
-        <button class="ui black deny button" type="reset">Hủy</button>
-        <button class="ui positive primary right labeled button" type="submit" id="btnLuuMedicine">Lưu</button>
+        <button class="ui black deny button" type="reset">Cancel</button>
+        <button class="ui positive primary right labeled button" data-action="Order">Order</button>
       </div>
       <div class="field">&nbsp;</div>
     </form>

@@ -16,10 +16,12 @@ Template.scanprescriptionTemplate.events({
       var profile = userDetail.profile;
       var name = profile.Name;
       var phone = profile.Phone;
-      Meteor.call('insertPrescriptionPhoto', pic, name, phone);
+      var namepres = $('#txtPres').val();
+      Meteor.call('insertPrescriptionPhoto', pic, name, phone,namepres);
     } else {
       var name = $('#txtName').val();
       var phone = $('#txtPhone').val();
+      var namepres = $('#txtPres').val();
       Meteor.call('insertPrescriptionPhoto', pic, name, phone);
     }
   },
@@ -41,5 +43,5 @@ Template.scanprescriptionTemplate.events({
     }
     return false;
   },
-  
+
 });

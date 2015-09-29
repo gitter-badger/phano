@@ -9,3 +9,8 @@ Template.listprescriptionTemplate.helpers({
     }
   },
 });
+Template.listprescriptionTemplate.events({
+  'click [data-action="xem"]' : function() {
+    SemanticModal.generalModal('photoPrescription');
+  },
+});
