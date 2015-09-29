@@ -20,23 +20,28 @@
     </div>
   </template>
   <template name="createNewRoom">
-    <form id="createRoomName">
-
+    <form id="createRoomName" class="ui form">
     <div class="navbar-inner" style="width: 100%" id="hidden">
       <div>
         <b><h6>CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
-        <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px"><br>
-        <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px"><br><br>
-        <center><input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="btn btn-primary createRoom"></center><br>
+        <div class="field">
+          <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
+        </div>
+        <div class="field">
+          <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px">
+        </div>
+        <center>
+          <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui button createRoom">
+        </center>
       </div>
     </div>
   </form>
   </template>
-  <template name="inputChat">
-      <form id="inputChatMes">
-    <input type="text" id="txtIput" placeholder="" style="width: 50%; margin-bottom: 0px">
-    <input type="submit" value="send Message" class="btn btn-primary sendMes">
-</form>
+  <template name="inputChat"  class="ui form">
+    <form id="inputChatMes">
+      <input type="text" id="txtIput" placeholder="" style="width: 50%; margin-bottom: 0px">
+      <input type="submit" value="send Message" class="btn btn-primary sendMes">
+  </form>
   </template>
   <template name="messageCus">
     <p><strong>{{user}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
