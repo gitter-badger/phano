@@ -15,11 +15,7 @@ dburles:google-maps
 mdg:geolocation
 mdg:camera
 email
-<<<<<<< HEAD
 accounts-ui
-twbs:bootstrap
 bootstrap
-=======
 cfs:gridfs
 cfs:standard-packages
->>>>>>> 72fcd970b271c4c75db360d9e76b0c450cc7be98

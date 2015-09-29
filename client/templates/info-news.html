@@ -11,43 +11,46 @@
         </div>
       </div>
     </div>
-<div>
-    {{>createNewRoom}}
-</div>
     <div>
-      <form name="windowChat">
-        {{>userChat}}
-      </form>
+      {{>createNewRoom}}
     </div>
-  </template>
-  <template name="createNewRoom">
-    <div class="navbar-inner" style="width: 100%">
-      <div>
-        <b><h6>CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
-        <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px"><br>
-        <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px"><br><br>
-        <center><input type="button" id="createRoom" value="Bắt đầu trò chuyện" class="btn btn-primary sendMsg"></center><br>
-      </div>
-    </div>
-  </template>
-  <template name="userChat">
-    <div class="span8 well">
+    <div>
       {{> messagesCus}}<br>
       {{> inputChat}}
     </div>
   </template>
+  <template name="createNewRoom">
+    <form id="createRoomName">
+
+    <div class="navbar-inner" style="width: 100%" id="hidden">
+      <div>
+        <b><h6>CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
+        <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px"><br>
+        <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px"><br><br>
+        <center><input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="btn btn-primary createRoom"></center><br>
+      </div>
+    </div>
+  </form>
+  </template>
   <template name="inputChat">
-    <input type="text" id="txtIput" value="xin chao! toi can duoc giup do" placeholder="" style="width: 50%; margin-bottom: 0px">
-    <input type="button" id="sendMes" value="Send message" class="btn btn-primary sendMsg">
-    <input type="button" id="send" value="Send" class="btn btn-primary sendMsg">
+      <form id="inputChatMes">
+    <input type="text" id="txtIput" placeholder="" style="width: 50%; margin-bottom: 0px">
+    <input type="submit" value="send Message" class="btn btn-primary sendMes">
+</form>
   </template>
   <template name="messageCus">
-    <p><strong>{{name}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{txtIput}}</i></p>
+    <p><strong>{{user}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
   </template>
   <template name="messagesCus">
     <div id="messagesCus" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
       {{#each messagesCus}}
-      {{> inputChat}}
+      {{> messageCus}}
       {{/each}}
     </div>
   </template>
+  <!-- <Template name="windowChat">
+    <form name="winChat" type="hidden">
+    {{> messagesCus}}<br>
+    {{> inputChat}}
+  </form>
+  </Template> -->

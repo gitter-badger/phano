@@ -37,14 +37,16 @@
   </div>
 </template>
 <template name="message">
-  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{msg}}</i></p>
+  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
 </template>
 <template name="input">
-  <input type="text" id="msg" placeholder="xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
-  <input type="button" id="sendMesg" value="GỬI" class="btn btn-primary sendMesg">
+  <form id="NewTextForm">
+  <input type="text" id="msg" name="msg" placeholder="xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
+  <input type="submit" id="sendMesg" value="GỬI" class="btn btn-primary sendMesg">
+</form>
 </template>
 <template name="messages">
-  <h4>Bạn đang chát với: {{name}}</h4>
+  <h4>Bạn đang chát với: {{user}}</h4>
   <div id="messages" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
     {{#each messages}}
     {{> message}}
@@ -60,5 +62,5 @@
   </ul>
 </template>
 <template name="room">
-  <li style="cursor: pointer; {{roomstyle}}">{{name}}-({{phone}})</li>
+  <li style="cursor: pointer; {{roomstyle}}" >{{user}}-({{phone}})</li>
 </template>
