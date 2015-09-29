@@ -5,12 +5,17 @@ Template.scanprescriptionTemplate.events({
       Session.set('photo', data);
     });
   },
+  'vali': function(phone) {
+    var a = /^[0][1|9]\d{8,9}$/;
+    return a.test(phone);
+  },
 
   'click #btnSave': function() {
     var pic = Session.get('photo');
     // var path = pic.substr(0, 23);
     // var splitted = pic.slice(23,-22);
     // var value = path ;
+
     if(Meteor.userId()) {
       var userDetail = Meteor.users.findOne({_id: Meteor.userId()});
       var profile = userDetail.profile;
@@ -20,7 +25,12 @@ Template.scanprescriptionTemplate.events({
     } else {
       var name = $('#txtName').val();
       var phone = $('#txtPhone').val();
-      Meteor.call('insertPrescriptionPhoto', pic, name, phone);
+      if(vali(phone)) {
+        Meteor.call('insertPrescriptionPhoto', pic, name, phone);
+      }
+      else {
+        console.log('So dien thoai sai');
+      }
     }
   },
   'click #Cancel': function() {
@@ -41,14 +51,5 @@ Template.scanprescriptionTemplate.events({
     }
     return false;
   },
-  'text': function(){
-    var re= new Date();
-    // var d= date.substr(0,3);
-    //lấy ngày
-    var d=re.getDay();
-    var h=re.getHours();
-    var m=re.getMinutes();
-    var time=(h-m);
-    return time;
-  }
+
 });

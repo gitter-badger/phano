@@ -9,13 +9,6 @@ var arrPrescription = [];
 Template.prescriptionTemplate.onRendered(function() {
   $('#loadingScreen').removeClass("active");
   var date = new Date();
-  var presDetail = Meteor.subscribe("prescriptionDetail");
-  if(presDetail.ready()) {
-    var arr = Prescription.find({});
-    arr.forEach(function(pres){
-      arrPrescription.push(pres);
-    });
-  }
   var schedule = [{
     id: 0,
     title: "Đến giờ uống thuốc test 1!",
@@ -61,8 +54,23 @@ Template.prescriptionTemplate.onRendered(function() {
           var d = weekday[date.getDay()];
           var h = date.getHours();
           var m = date.getMinutes();
-          arrPrescription.forEach(function(res){
+          var id = 1;
 
+          var arr = Prescription.find({});
+          arr.forEach(function(res){
+            var repeat = res.Repeat;
+            repeat.forEach(function(day){
+              if(day == d){
+
+              }
+            });
+            cordova.plugins.notification.local.schedule({
+              id: id,
+              title: "Phano care",
+              message: res.Text,
+              at: new Date(now + 5*1000),
+            });
+            id = id +1;
           });
           cordova.plugins.notification.local.schedule(schedule);
         }
@@ -71,6 +79,30 @@ Template.prescriptionTemplate.onRendered(function() {
     } else {
       alert('Chương trình đã có quyền gửi thông báo uống thuốc');
       alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
+      var weekday = new Array(7);
+      weekday[0]=  "Sun";
+      weekday[1] = "Mon";
+      weekday[2] = "Tue";
+      weekday[3] = "Wed";
+      weekday[4] = "Thur";
+      weekday[5] = "Fri";
+      weekday[6] = "Sat";
+
+      var d = weekday[date.getDay()];
+      var h = date.getHours();
+      var m = date.getMinutes();
+      var id = 1;
+
+      var arr = Prescription.find({});
+      arr.forEach(function(res){
+        cordova.plugins.notification.local.schedule({
+          id: id,
+          title: "Phano care",
+          message: res.Text,
+          at: new Date(now + 5*1000),
+        });
+        id = id +1;
+      });
       cordova.plugins.notification.local.schedule(schedule);
     }
   });
@@ -155,11 +187,11 @@ Template.InsertMedicine.events({
       //update medicne
       if (Meteor.userId())
         updateMedicine.UserId = Meteor.userId();
-      updateMedicine.StartTime = event.target.txtTime.value;
-      updateMedicine.Text = event.target.txtText.value;
-      updateMedicine.Repeat = Repeat;
-      updateMedicine.StartDate = dateStartDate;
-      Meteor.call("updatePrescription", updateMedicine);
+        updateMedicine.StartTime = event.target.txtTime.value;
+        updateMedicine.Text = event.target.txtText.value;
+        updateMedicine.Repeat = Repeat;
+        updateMedicine.StartDate = dateStartDate;
+        Meteor.call("updatePrescription", updateMedicine);
     } else {
       // add medicine
       var addMedicine = {
