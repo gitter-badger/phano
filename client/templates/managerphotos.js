@@ -15,12 +15,12 @@ Template.tempalteManagerphoto.helpers({
   },
   testPhoto: function() {
     if(photos.ready()){
-      var res = PrescriptionPhoto.find({});
-      if(res != null) {
-        return true;
+      var res = PrescriptionPhoto.find({status:"ORDER"}).fetch();
+      if(res.length == 0) {
+        return false;
       }
     }
-    return false;
+    return true;
   },
 });
 

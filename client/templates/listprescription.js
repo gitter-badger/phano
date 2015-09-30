@@ -22,13 +22,11 @@ Template.listprescriptionTemplate.helpers({
     return false;
   },
   testPhoto: function() {
-    if(photos.ready()){
-      var res = PrescriptionPhoto.find({});
-      if(res != null) {
-        return true;
-      }
+    var res = PrescriptionPhoto.find({status:"null"}).fetch();
+    if(res.length == 0) {
+      return false;
     }
-    return false;
+    return true;
   },
   convertToShowDate: function(thisDate) {
     function pad(s) {

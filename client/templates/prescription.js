@@ -21,32 +21,32 @@ Template.prescriptionTemplate.onRendered(function() {
   var h = date.getHours();
   var m = date.getMinutes();
 
-  var schedule = [{
-    id: 0,
-    title: "Đến giờ uống thuốc test 1!",
-    text: "Xin hãy uống 2 viên thuốc X",
-    at: new Date(now + 5 * 1000)
-  }, {
-    id: 1,
-    title: "Đến giờ uống thuốc test 2!",
-    text: "Xin hãy uống 1 viên thuốc Y",
-    at: new Date(now + 1e5 * 1000)
-  }, {
-    id: 2,
-    title: "Đến giờ uống thuốc test 3!",
-    text: "Xin hãy uống 2 viên thuốc Z",
-    at: new Date(now + 25 * 1000)
-  }, {
-    id: 3,
-    title: "Đến giờ uống thuốc test 4!",
-    text: "Xin hãy uống 2 viên thuốc XX",
-    at: new Date(now + 35 * 1000)
-  }, {
-    id: 4,
-    title: "Đến giờ uống thuốc test 5!",
-    text: "Xin hãy uống 2 viên thuốc YY",
-    at: new Date(now + 45 * 1000)
-  }];
+  // var schedule = [{
+  //   id: 0,
+  //   title: "Đến giờ uống thuốc test 1!",
+  //   text: "Xin hãy uống 2 viên thuốc X",
+  //   at: new Date(now + 5 * 1000)
+  // }, {
+  //   id: 1,
+  //   title: "Đến giờ uống thuốc test 2!",
+  //   text: "Xin hãy uống 1 viên thuốc Y",
+  //   at: new Date(now + 1e5 * 1000)
+  // }, {
+  //   id: 2,
+  //   title: "Đến giờ uống thuốc test 3!",
+  //   text: "Xin hãy uống 2 viên thuốc Z",
+  //   at: new Date(now + 25 * 1000)
+  // }, {
+  //   id: 3,
+  //   title: "Đến giờ uống thuốc test 4!",
+  //   text: "Xin hãy uống 2 viên thuốc XX",
+  //   at: new Date(now + 35 * 1000)
+  // }, {
+  //   id: 4,
+  //   title: "Đến giờ uống thuốc test 5!",
+  //   text: "Xin hãy uống 2 viên thuốc YY",
+  //   at: new Date(now + 45 * 1000)
+  // }];
   cordova.plugins.notification.local.hasPermission(function(granted) {
     if (!granted) {
       cordova.plugins.notification.local.registerPermission(function(per) {
@@ -56,52 +56,51 @@ Template.prescriptionTemplate.onRendered(function() {
 
           var id = 1;
           var time = h + ":" + m;
-          var id = 1;
-        //   var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
-        //   if(arr != null){
-        //   arr.forEach(function(res){
-        //     var timeRepeat = res.Repeat;
-        //     timeRepeat.forEach(function(day){
-        //       if(d == day && time == res.StartTime){
-        //         cordova.plugins.notification.local.schedule({
-        //           id:id,
-        //           title: "Phano care",
-        //           message: res.Text,
-        //           at: new Date(),
-        //         });
-        //       }
-        //     });
-        //     id = id +1;
-        //   });
-        // }
-          cordova.plugins.notification.local.schedule(schedule);
+          var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+          if(arr.length != 0){
+          arr.forEach(function(res){
+            var timeRepeat = res.Repeat;
+            timeRepeat.forEach(function(day){
+              if(d == day && time == res.StartTime){
+                cordova.plugins.notification.local.schedule({
+                  id:id,
+                  title: "Phano care",
+                  message: res.Text,
+                  at: new Date(),
+                });
+              }
+            });
+            id = id +1;
+          });
+        }
+          // cordova.plugins.notification.local.schedule(schedule);
         }
 
       });
     } else {
       alert('Chương trình đã có quyền gửi thông báo uống thuốc');
       alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
-      
+
       var time = h + ":" + m;
       var id = 1;
-    //   var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
-    //   if(arr != null){
-    //   arr.forEach(function(res){
-    //     var timeRepeat = res.Repeat;
-    //     timeRepeat.forEach(function(day){
-    //       if(d == day && time == res.StartTime){
-    //         cordova.plugins.notification.local.schedule({
-    //           id:id,
-    //           title: "Phano care",
-    //           message: res.Text,
-    //           at: new Date(),
-    //         });
-    //       }
-    //     });
-    //     id = id +1;
-    //   });
-    // }
-      cordova.plugins.notification.local.schedule(schedule);
+      var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+      if(arr.length != 0){
+      arr.forEach(function(res){
+        var timeRepeat = res.Repeat;
+        timeRepeat.forEach(function(day){
+          if(d == day && time == res.StartTime){
+            cordova.plugins.notification.local.schedule({
+              id:id,
+              title: "Phano care",
+              message: res.Text,
+              at: new Date(),
+            });
+          }
+        });
+        id = id +1;
+      });
+    }
+      // cordova.plugins.notification.local.schedule(schedule);
     }
   });
 
