@@ -12,11 +12,15 @@
       </div>
     </div>
     <div>
-      {{>createNewRoom}}
-    </div>
-    <div>
-      {{> messagesCus}}<br>
-      {{> inputChat}}
+      {{#unless currentUser}}
+      {{#if showUserInfo}}
+      <p id="UserInfor">{{>createNewRoom}}</p>
+      {{/if}}
+      {{/unless}}
+      <p id="chatBox" style="visibility:{{isShowChatBox}}">
+        {{> messagesCus}}
+        {{> inputChat}}
+      </p>
     </div>
   </template>
   <template name="createNewRoom">
@@ -35,31 +39,27 @@
         </center><br />
       </div>
     </div>
-  </form>
+    </form>
   </template>
   <template name="inputChat">
-    <form id="inputChatMes"  class="ui form">
-      <div class="field">
-        <input type="text" id="txtIput" placeholder="Nội dung">
+    <form id="inputChatMes">
+      <div class="ui fluid action input">
+        <input type="text" id="txtIput" value="Xin chào! tôi cần được giúp đỡ" placeholder="Xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
+        <div class="ui button"><input type="submit" value="Gửi Tin Nhắn" class="ui violet button sendMes"></div>
       </div>
-      <div class="field">
-        <input type="submit" value="Send Message" class="ui button teal sendMes" style="float:right;">
-      </div>
-  </form>
+    </form>
   </template>
   <template name="messageCus">
-    <p><strong>{{user}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
+
+    <p><strong class="ui label"> <img class="ui right spaced avatar image" src="/img/user.jpg">{{user}}</strong><span style="font-size: 0.5em; color: darkgray"></span>:
+      <i class="ui left pointing white basic label"><i style="font-size: 1.2em;">{{text}}</i><br><i style="font-size: 0.7em;">({{timestamp}})</i></i>
+    </p>
   </template>
   <template name="messagesCus">
-    <div id="messagesCus" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
+    Hỗ Trợ Trực Tuyến
+    <div id="messagesCus" style="background-color: #ffffff; border: 3px solid darkgray; max-height: 200px; overflow: auto">
       {{#each messagesCus}}
       {{> messageCus}}
       {{/each}}
     </div>
   </template>
-  <!-- <Template name="windowChat">
-    <form name="winChat" type="hidden">
-    {{> messagesCus}}<br>
-    {{> inputChat}}
-  </form>
-  </Template> -->
