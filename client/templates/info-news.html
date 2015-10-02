@@ -5,52 +5,59 @@
       <div>
         <h4><b><a class="brand" href="http://www.phanopharmacy.com/">
           CÔNG TY CỔ PHẦN DƯỢC PHẨM PHA NO</a></b></h4>
-          <b>Địa chỉ:</b>	31 Hồ Biểu Chánh, Phường 12, Quận Phú Nhuận, TP.HCM<br>
-          <b>Điện thoại:</b><a href="tel:+84838477222" onClick="alert('Bạn muốn gọi vào số điện thoại này')">(+84.8) 38 47 72 22</a><br>
-          <b>Email:</b>	<a href="mailto:contact@phanopharmacy.com">contact@phanopharmacy.com</a>
+          <b><i class="home icon"></i>Địa chỉ:</b>	31 Hồ Biểu Chánh, Phường 12, Quận Phú Nhuận, TP.HCM<br>
+          <b><i class="phone icon"></i>Điện thoại:</b><a href="tel:+84838477222" onClick="alert('Bạn muốn gọi vào số điện thoại này')">(+84.8) 38 47 72 22</a><br>
+          <b><i class="mail icon"></i>Email:</b>	<a href="mailto:contact@phanopharmacy.com">contact@phanopharmacy.com</a><br>
         </div>
       </div>
     </div>
     <div>
-      {{>createNewRoom}}
-    </div>
-    <div>
-      {{> messagesCus}}<br>
-      {{> inputChat}}
+      {{#unless currentUser}}
+      {{#if showUserInfo}}
+      <p id="UserInfor">{{>createNewRoom}}</p>
+      {{/if}}
+      {{/unless}}
+      <p id="chatBox" style="visibility:{{isShowChatBox}}">
+        {{> messagesCus}}
+        {{> inputChat}}
+      </p>
     </div>
   </template>
   <template name="createNewRoom">
     <form id="createRoomName">
-
-    <div class="navbar-inner" style="width: 100%" id="hidden">
-      <div>
-        <b><h6>CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
-        <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px"><br>
-        <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px"><br><br>
-        <center><input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="btn btn-primary createRoom"></center><br>
+      <div class="navbar-inner" style="width: 100%" id="hidden">
+        <div>
+          <b><h6><i class="wechat icon"></i> CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
+          <div class="ui input focus">
+            <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
+          </div><br>
+          <div class="ui input focus">
+            <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px">
+          </div><br><br>
+          <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui violet button createRoom">
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
   </template>
   <template name="inputChat">
-      <form id="inputChatMes">
-    <input type="text" id="txtIput" placeholder="" style="width: 50%; margin-bottom: 0px">
-    <input type="submit" value="send Message" class="btn btn-primary sendMes">
-</form>
+    <form id="inputChatMes">
+      <div class="ui fluid action input">
+        <input type="text" id="txtIput" value="Xin chào! tôi cần được giúp đỡ" placeholder="Xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
+        <div class="ui button"><input type="submit" value="Gửi Tin Nhắn" class="ui violet button sendMes"></div>
+      </div>
+    </form>
   </template>
   <template name="messageCus">
-    <p><strong>{{user}}</strong><span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
+
+    <p><strong class="ui label"> <img class="ui right spaced avatar image" src="/img/user.jpg">{{user}}</strong><span style="font-size: 0.5em; color: darkgray"></span>:
+      <i class="ui left pointing white basic label"><i style="font-size: 1.2em;">{{text}}</i><br><i style="font-size: 0.7em;">({{timestamp}})</i></i>
+    </p>
   </template>
   <template name="messagesCus">
-    <div id="messagesCus" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
+    Hỗ Trợ Trực Tuyến
+    <div id="messagesCus" style="background-color: #ffffff; border: 3px solid darkgray; max-height: 200px; overflow: auto">
       {{#each messagesCus}}
       {{> messageCus}}
       {{/each}}
     </div>
   </template>
-  <!-- <Template name="windowChat">
-    <form name="winChat" type="hidden">
-    {{> messagesCus}}<br>
-    {{> inputChat}}
-  </form>
-  </Template> -->

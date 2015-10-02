@@ -3,58 +3,75 @@
 </template>
 <template name="chat">
   <div class="container">
-    <div class="navbar navbar-fixed-top">
-      <div class="navbar-inner">
-        <a class="brand" href="#">PageChatAdmin</a>
-        <ul class="nav">
-        </ul>
-        <ul class="nav pull-right">
-          <li><a>{{> loginButtons align="right"}}</a></li>
-        </ul>
-      </div>
-    </div>
-
     {{#if currentUser}}
-    <div class="row-fluid">
-      <div class="span12 well">
-        {{> messages}}
+    <div class="ui internally celled grid">
+      <div class="row">
+        <div class="three wide column" style="width: 200%; max-height: 600px; overflow: auto;margin-left:5px;">
+          <div class="span4 well">
+            <a>{{> loginButtons align="left"}}</a>
+            {{> rooms}}
+          </div>
+        </div>
+        <div class="ten wide column">
+          <div class="ui attached message">
+            <div class="header">
+              <h3>BẠN ĐANG CHÁT VỚI: {{user}}</h3>
+            </div>
+          </div>
+          <form class="ui form attached fluid segment">
+            <div class="two fields">
+              <div class="row-fluid">
+                <div class="span12 well">
+                  {{> messages}}
+                </div>
+              </div>
+            </div>
+            <div class="inline field">
+            </div>
+          </form>
+          <div class="ui bottom attached warning message" style="position: absolute; left: 0px;right: 0px;bottom: 0px;font-size: 15px;">
+          {{> input}}
+        </div>
       </div>
     </div>
-    <div class="row-fluid">
-      <div class="span8 well">
-        {{> input}}
-      </div>
-      <div class="span4 well">
-        {{> rooms}}
-      </div>
-    </div>
-    {{else}}
-    <div class="hero-unit">
-      <h1>Welcome ADMIN to page chat</h1>
-      <p>XIN MỜI ĐĂNG NHẬP ĐỂ VÀO PHÒNG CHAT</p>
-    </div>
-    {{/if}}
   </div>
+  {{else}}
+  <center><div class="hero-unit">
+    <h1>Welcome ADMIN to page chat</h1>
+    <h3>XIN MỜI ĐĂNG NHẬP ĐỂ VÀO PHÒNG CHAT</h3>
+    {{>LoginForm}}
+  </div></center>
+  {{/if}}
+</div>
 </template>
 <template name="message">
-  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <i>{{text}}</i></p>
+  <div class="message">
+    <a href="" class="message_username">{{user}}</a>
+    <span style="font-size: 0.7em; color: darkgray">
+      ({{timestamp}}):
+    </span>
+    <span class="message_content">{{text}}</span>
+  </div>
+  <!-- <form>
+  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <span><i>{{text}}</i></span></p>
+</form> -->
 </template>
 <template name="input">
   <form id="NewTextForm">
-  <input type="text" id="msg" name="msg" placeholder="xin mời nhập tin nhắn" style="width: 50%; margin-bottom: 0px">
-  <input type="submit" id="sendMesg" value="GỬI" class="btn btn-primary sendMesg">
-</form>
+    <input type="text" id="msg" name="msg" placeholder="xin mời nhập tin nhắn"
+    style="border: 1px solid darkgray;width: 70%; max-height: 200px; overflow: auto">
+    <button type="submit" class="ui violet button sendMesg">Send Message</button>
+  </form>
 </template>
 <template name="messages">
-  <h4>Bạn đang chát với: {{user}}</h4>
-  <div id="messages" style="background-color: #ffffff; border: 1px solid darkgray; max-height: 200px; overflow: auto">
+  <form id="messages" style="background-color: #ffffff; border: 1px solid darkgray;width: 100%; max-height: 400px; overflow: auto">
     {{#each messages}}
     {{> message}}
     {{/each}}
-  </div>
+  </form>
 </template>
 <template name="rooms">
-  <h4>danh sách khách hàng cần hỗ trợ:</h4>
+  <h3>DANH SÁCH KHÁCH HÀNG:</h3>
   <ul>
     {{#each rooms}}
     {{> room}}
@@ -62,5 +79,27 @@
   </ul>
 </template>
 <template name="room">
-  <li style="cursor: pointer; {{roomstyle}}" >{{user}}-({{phone}})</li>
+  <div class="ui relaxed divided list" style="cursor: pointer; {{roomstyle}}">
+    <div class="item">
+      <i class="mail icon"></i>
+      <div class="content">
+        <a class="header">{{user}}</a>
+        <div class="description">({{phone}})<i class="mail icon delete"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<template name="LoginForm">
+  <a><form class="ui form" id="login">
+    <div class="field">
+      <label>Tài Khoản</label>
+      <input type="text" id="txtName" placeholder="Tên Tài Khoản">
+    </div>
+    <div class="field">
+      <label>Mật Khẩu</label>
+      <input type="password" id="txtPass" placeholder="Mật Khẩu">
+    </div>
+    <input type="submit" id="login" value="dang nhap" class="ui violet button login">
+  </form></a>
 </template>

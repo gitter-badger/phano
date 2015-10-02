@@ -105,8 +105,8 @@ Meteor.methods({
   },
 });
 Meteor.startup(function () {
-  Messages.remove({});
-  Rooms.remove({});
+  // Messages.remove({});
+  // Rooms.remove({});
   // if (Rooms.find().count() === 0) {
   //   ["khachhang1", "khachhang2", "khachhang3", "khachhang4"].forEach(function(r) {
   //     Rooms.insert({roomname: r});

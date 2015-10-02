@@ -2,7 +2,7 @@ if (Meteor.isClient) {
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
   });
-  Session.setDefault("RoomID","chưa chọn ai???");
+  Session.setDefault("RoomID","");
   Meteor.subscribe("rooms");
   Meteor.subscribe("messages");
 
@@ -11,7 +11,7 @@ if (Meteor.isClient) {
     'submit #NewTextForm': function(event) {
       event.preventDefault();
       var text = event.target.msg.value;
-      Messages.insert({user: Meteor.user().username, text: text, ts: new Date(), RoomID: Session.get("RoomID")});
+      Meteor.call("insertChat",{user: Meteor.user().username, text: text, ts: new Date(), RoomID: Session.get("RoomID")})
       msg.value = "";
       msg.focus();
     }
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
       return Messages.find({RoomID: Session.get("RoomID")}, {sort: {ts: -1}});
     },
     name: function() {
-      return Session.get("RoomID");
+      return Session.get("RoomID",this.user);
     }
   });
 
@@ -33,10 +33,12 @@ if (Meteor.isClient) {
   });
 
   Template.rooms.events({
-    'click li': function(e) {
+    'click div': function(e) {
       Session.set("RoomID", this._id);
-
     },
+    "click .delete": function () {
+      Meteor.call("deleteTask", this._id);
+    }
   });
 
   Template.rooms.helpers({
@@ -50,4 +52,19 @@ if (Meteor.isClient) {
       return Session.equals("RoomID", this.name) ? "font-weight: bold" : "";
     }
   });
+  Template.LoginForm.events({
+    'submit #login': function(event){
+      event.preventDefault();
+      var name = event.target.txtName.value;
+      var pass = event.target.txtPass.value;
+      if (name=="admin") {
+        if (pass=="654321") {
+      return Meteor.loginWithPassword('admin', '654321');
+        } else {
+          alert("password wrong")
+        }
+      } else {  alert("username wrong")
+    }
+  }
+});
 }
