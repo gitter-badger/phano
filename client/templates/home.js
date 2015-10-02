@@ -9,7 +9,7 @@ Template.homeTemplate.events({
     Router.go("/news");
   },
   'click #user': function() {
-    $('#loadingScreen').addClass("active");
+    // $('#loadingScreen').addClass("active");
     Router.go("/userinfo");
   },
   'click #infonews': function() {
@@ -36,6 +36,14 @@ Template.homeTemplate.events({
     $('#loadingScreen').addClass("active");
     Router.go("/listprescription");
   }
+});
+Template.homeTemplate.onRendered(function(){
+  // console.log("call update News");
+  Meteor.call("updateNews");
+  // console.log("call update GiftInfo");
+  Meteor.call("updateGiftInfo");
+  // console.log("call update SearchAllPhano");
+  Meteor.call("ShowPhama");
 });
 Template.homeTemplate.onCreated = function() {
   $('#loadingScreen').removeClass("active");

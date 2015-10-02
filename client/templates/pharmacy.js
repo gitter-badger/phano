@@ -35,7 +35,6 @@ if (Meteor.isClient) {
                 city: phano.CITY,
                 tel:phano.PHONE
               },
-              icon:'./icon/image10.png',
             });
             listMarker.push(newMarker);
           });
@@ -76,7 +75,7 @@ if (Meteor.isClient) {
           closestMapMarker = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker.position.lat(), closestMarker.position.lng()),
             map: map.instance,
-            icon:'./icon/image10.png',
+            icon:'./image10.png',
           });
         }
         var infowindow = new google.maps.InfoWindow({
@@ -95,7 +94,7 @@ if (Meteor.isClient) {
           closestMapMarker1 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker1.position.lat(), closestMarker1.position.lng()),
             map: map.instance,
-            icon: './icon/image10.png',
+            icon: './image10.png',
           });
         }
         var infowindow1 = new google.maps.InfoWindow({
@@ -114,7 +113,8 @@ if (Meteor.isClient) {
           closestMapMarker2 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker2.position.lat(), closestMarker2.position.lng()),
             map: map.instance,
-            icon:'./icon/image10.png',
+            mapTypeId: google.maps.MapTypeId.HYBRID,
+            icon:'./image10.png',
           });
         }   var infowindow2 = new google.maps.InfoWindow({
           content:
@@ -132,7 +132,6 @@ if (Meteor.isClient) {
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(latLng.lat, latLng.lng),
             map: map.instance,
-            icon: './icon/image10.png',
           });
         }else {
           marker.setPosition(latLng);

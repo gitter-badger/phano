@@ -25,12 +25,13 @@ Template.loginTemplate.events({
             console.log("da verify voi service xong!")
             //--------------if service return true----------------------------
             //barcodeResult = "123456";
-            console.log("call update News");
-            Meteor.call("updateNews");
-            console.log("call update GiftInfo");
-            Meteor.call("updateGiftInfo");
-            console.log("call update SearchAllPhano");
-            Meteor.call("ShowPhama");
+            //------------- Test thử--------------------
+            // console.log("call update News");
+            // Meteor.call("updateNews");
+            // console.log("call update GiftInfo");
+            // Meteor.call("updateGiftInfo");
+            // console.log("call update SearchAllPhano");
+            // Meteor.call("ShowPhama");
             Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
               if (err) {
                 //không thể đăng nhập vì user này chưa tạo trong hệ thống!
