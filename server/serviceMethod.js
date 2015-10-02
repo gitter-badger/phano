@@ -60,6 +60,36 @@ Meteor.methods({
       }, this);
     });
   },
+  updateSaleInfo: function() {
+    // Get top songs from iTunes server
+    HTTP.get('http://crm.phanopharmacy.vn/MainService.svc/GetSalesInfo', function(error, newsReponse) {
+      var listSalseInfo = [];
+      var entries = newsReponse.data;
+      var sort = 0;
+      _.each(entries, function(sale) {
+        var insertSaleInfo = {};
+        insertSaleInfo._id = sale.Oid;
+        insertSaleInfo.DocumentTime = sale.DocumentTime;
+        insertSaleInfo.DrugStoreCode = sale.DrugStoreCode;
+        insertSaleInfo.Options = sale.Options;
+        insertSaleInfo.PhanoCareMarked = sale.PhanocareMarked;
+        insertSaleInfo.Serial = sale.Serial;
+        insertSaleInfo.Total = sale.Total;
+        // Add news to list
+        listSalseInfo.push(insertSaleInfo);
+        // Increase sort
+        sort++;
+      }, this);
+
+      // Delete all existing songs from databas,e
+      SalesInfo.remove();
+
+      // Insert new songs into database
+      _.each(listSalseInfo, function(sale) {
+        SalesInfo.upsert(sale._id, sale);
+      }, this);
+    });
+  },
   ShowPhama: function() {
     // Get top songs from iTunes server
     HTTP.get('http://www.phanopharmacy.com/api/webmethod', function(error, phamaReponse) {
@@ -102,6 +132,7 @@ Meteor.methods({
       }, this);
     });
   },
+
 });
 Meteor.startup(function () {
   // Messages.remove({});

@@ -44,6 +44,10 @@ Template.homeTemplate.onRendered(function(){
   Meteor.call("updateGiftInfo");
   // console.log("call update SearchAllPhano");
   Meteor.call("ShowPhama");
+
+  Meteor.call("updateGiftInfo");
+
+  Meteor.call("updateSaleInfo");
 });
 Template.homeTemplate.onCreated = function() {
   $('#loadingScreen').removeClass("active");

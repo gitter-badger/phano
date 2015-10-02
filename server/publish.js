@@ -18,6 +18,10 @@ Meteor.publish("giftinfo", function() {
   return GiftInfo.find({
   });
 });
+Meteor.publish("salesinfo", function() {
+  return SalesInfo.find({
+  });
+});
 Meteor.publish("searchphama", function() {
   return SearchAllPhano.find({});
 });
