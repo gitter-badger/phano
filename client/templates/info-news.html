@@ -3,11 +3,11 @@
   <div class="ui relaxed divided list">
     <div class="navbar-inner">
       <div>
-        <h4><b><a class="brand" href="http://www.phanopharmacy.com/">
-          CÔNG TY CỔ PHẦN DƯỢC PHẨM PHA NO</a></b></h4>
-          <b><i class="home icon"></i>Địa chỉ:</b>	31 Hồ Biểu Chánh, Phường 12, Quận Phú Nhuận, TP.HCM<br>
-          <b><i class="phone icon"></i>Điện thoại:</b><a href="tel:+84838477222" onClick="alert('Bạn muốn gọi vào số điện thoại này')">(+84.8) 38 47 72 22</a><br>
-          <b><i class="mail icon"></i>Email:</b>	<a href="mailto:contact@phanopharmacy.com">contact@phanopharmacy.com</a><br>
+        <h4><a class="brand" href="http://www.phanopharmacy.com/">
+          CÔNG TY CỔ PHẦN DƯỢC PHẨM PHANO</a></h4>
+          <b>Địa chỉ:</b>	31 Hồ Biểu Chánh, Phường 12, Quận Phú Nhuận, TP.HCM<br>
+          <b>Điện thoại:</b><a href="tel:+84838477222" onClick="alert('Bạn muốn gọi vào số điện thoại này')">(+84.8) 38 47 72 22</a><br>
+          <b>Email:</b>	<a href="mailto:contact@phanopharmacy.com">contact@phanopharmacy.com</a>
         </div>
       </div>
     </div>
@@ -24,19 +24,21 @@
     </div>
   </template>
   <template name="createNewRoom">
-    <form id="createRoomName">
-      <div class="navbar-inner" style="width: 100%" id="hidden">
-        <div>
-          <b><h6><i class="wechat icon"></i> CHAT HỖ TRỢ TRỰC TUYẾN</h6></b>
-          <div class="ui input focus">
-            <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
-          </div><br>
-          <div class="ui input focus">
-            <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px">
-          </div><br><br>
-          <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui violet button createRoom">
+    <form id="createRoomName" class="ui form">
+    <div class="navbar-inner" style="width: 100%" id="hidden">
+      <div>
+        <b><h5>CHAT HỖ TRỢ TRỰC TUYẾN</h5></b>
+        <div class="field">
+          <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
         </div>
+        <div class="field">
+          <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px">
+        </div>
+        <center>
+          <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui button teal createRoom">
+        </center><br />
       </div>
+    </div>
     </form>
   </template>
   <template name="inputChat">

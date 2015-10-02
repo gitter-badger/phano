@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-  var MAP_ZOOM = 13;
+  var MAP_ZOOM = 14;
   Meteor.startup(function(e) {
     GoogleMaps.load();
   });
@@ -23,10 +23,11 @@ if (Meteor.isClient) {
         return;
         else {
           _.forEach(listPhano, function(phano) {
+
             newMarker = new google.maps.Marker({
               position: {
                 lat: phano.LAT,
-                lng: phano.LONG
+                lng: phano.LONG,
               },
               Content:{
                 name: phano.PHAMANAME,
@@ -34,6 +35,7 @@ if (Meteor.isClient) {
                 city: phano.CITY,
                 tel:phano.PHONE
               },
+              icon:'./icon/image10.png',
             });
             listMarker.push(newMarker);
           });
@@ -73,7 +75,8 @@ if (Meteor.isClient) {
         if(!closestMapMarker){
           closestMapMarker = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker.position.lat(), closestMarker.position.lng()),
-            map: map.instance
+            map: map.instance,
+            icon:'./icon/image10.png',
           });
         }
         var infowindow = new google.maps.InfoWindow({
@@ -91,7 +94,8 @@ if (Meteor.isClient) {
         if(!closestMapMarker1) {
           closestMapMarker1 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker1.position.lat(), closestMarker1.position.lng()),
-            map: map.instance
+            map: map.instance,
+            icon: './icon/image10.png',
           });
         }
         var infowindow1 = new google.maps.InfoWindow({
@@ -110,6 +114,7 @@ if (Meteor.isClient) {
           closestMapMarker2 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker2.position.lat(), closestMarker2.position.lng()),
             map: map.instance,
+            icon:'./icon/image10.png',
           });
         }   var infowindow2 = new google.maps.InfoWindow({
           content:
@@ -127,6 +132,7 @@ if (Meteor.isClient) {
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(latLng.lat, latLng.lng),
             map: map.instance,
+            icon: './icon/image10.png',
           });
         }else {
           marker.setPosition(latLng);

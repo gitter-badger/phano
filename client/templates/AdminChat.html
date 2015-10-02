@@ -6,7 +6,7 @@
     {{#if currentUser}}
     <div class="ui internally celled grid">
       <div class="row">
-        <div class="three wide column" style="width: 200%; max-height: 600px; overflow: auto;margin-left:5px;">
+        <div class="three wide column" style="width: 200%; max-height: 600px; overflow: auto">
           <div class="span4 well">
             <a>{{> loginButtons align="left"}}</a>
             {{> rooms}}
@@ -44,6 +44,7 @@
   {{/if}}
 </div>
 </template>
+
 <template name="message">
   <div class="message">
     <a href="" class="message_username">{{user}}</a>
@@ -61,7 +62,7 @@
     <input type="text" id="msg" name="msg" placeholder="xin mời nhập tin nhắn"
     style="border: 1px solid darkgray;width: 70%; max-height: 200px; overflow: auto">
     <button type="submit" class="ui violet button sendMesg">Send Message</button>
-  </form>
+</form>
 </template>
 <template name="messages">
   <form id="messages" style="background-color: #ffffff; border: 1px solid darkgray;width: 100%; max-height: 400px; overflow: auto">

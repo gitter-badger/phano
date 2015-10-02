@@ -1,0 +1,52 @@
+<template name="tempalteManagerphoto">
+  <div>
+    <h2 style="text-align: center;">Danh sách các đơn thuốc đã được đặt</h2>
+    <div class="ui middle aligned selection list">
+      {{#if testPhoto}}
+        {{#each showOrder}}
+        <div class="item">
+          <div class="ui avatar image">
+            <i class="first aid icon"></i>
+          </div>
+          <div class="content">
+            <a class="header" data-action="xem">{{namepres}}</a>
+            <div class="description">{{convertToShowDate dateorder}}</div>
+          </div>
+        </div>
+        {{/each}}
+      {{else}}
+        <div>Bạn chưa order đơn thuốc nào</div>
+      {{/if}}
+    </div>
+  </div>
+</template>
+<template name="photoOrderPrescription">
+  <div class="ui" style="margin:15px">
+    {{#with photoDetails}}
+    <form class="ui form" id="newMedicine" method="post">
+      <h3 align="center">Thông tin đơn thuốc</h3>
+      <div class="content">
+        <div class="field">
+          <p><img src={{photo}} /></p>
+        </div>
+        <div class="field">
+          <label>Tên đơn thuốc:</label>
+          <input class="form-control" type="text" value={{namepres}} name="txtName" id="txtName" readonly />
+        </div>
+        <div class="field">
+          <label>Họ tên:</label>
+          <input class="form-control" type="text" value={{name}} name="txtNamepres" id="txtNamepres" readonly />
+        </div>
+        <div class="field">
+          <label>Số điện thoại:</label>
+          <input class="form-control" type="text" value={{phone}} name="txtPhone" id="txtPhone" readonly />
+        </div>
+      </div>
+      <div class="actions" style="float:right;margin:15px">
+        <button class="ui teal deny button" type="reset">Đóng</button>
+      </div>
+      <div class="field">&nbsp;</div>
+    </form>
+    {{/with}}
+  </div>
+</template>

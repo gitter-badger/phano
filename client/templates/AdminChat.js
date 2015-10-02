@@ -2,7 +2,7 @@ if (Meteor.isClient) {
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
   });
-  Session.setDefault("RoomID","");
+  Session.setDefault("RoomID","thong bao toan bo");
   Meteor.subscribe("rooms");
   Meteor.subscribe("messages");
 
@@ -22,7 +22,7 @@ if (Meteor.isClient) {
       return Messages.find({RoomID: Session.get("RoomID")}, {sort: {ts: -1}});
     },
     name: function() {
-      return Session.get("RoomID",this.user);
+      return Session.get("RoomID",this.name);
     }
   });
 

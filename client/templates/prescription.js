@@ -8,32 +8,45 @@ var DeviceId;
 Template.prescriptionTemplate.onRendered(function() {
   $('#loadingScreen').removeClass("active");
   var date = new Date();
-  var schedule = [{
-    id: 0,
-    title: "Đến giờ uống thuốc test 1!",
-    text: "Xin hãy uống 2 viên thuốc X",
-    at: new Date(now + 5 * 1000)
-  }, {
-    id: 1,
-    title: "Đến giờ uống thuốc test 2!",
-    text: "Xin hãy uống 1 viên thuốc Y",
-    at: new Date(now + 1e5 * 1000)
-  }, {
-    id: 2,
-    title: "Đến giờ uống thuốc test 3!",
-    text: "Xin hãy uống 2 viên thuốc Z",
-    at: new Date(now + 25 * 1000)
-  }, {
-    id: 3,
-    title: "Đến giờ uống thuốc test 4!",
-    text: "Xin hãy uống 2 viên thuốc XX",
-    at: new Date(now + 35 * 1000)
-  }, {
-    id: 4,
-    title: "Đến giờ uống thuốc test 5!",
-    text: "Xin hãy uống 2 viên thuốc YY",
-    at: new Date(now + 45 * 1000)
-  }];
+  var weekday = new Array(7);
+  weekday[0]=  "Sun";
+  weekday[1] = "Mon";
+  weekday[2] = "Tue";
+  weekday[3] = "Wed";
+  weekday[4] = "Thur";
+  weekday[5] = "Fri";
+  weekday[6] = "Sat";
+
+  var d = weekday[date.getDay()];
+  var h = date.getHours();
+  var m = date.getMinutes();
+
+  // var schedule = [{
+  //   id: 0,
+  //   title: "Đến giờ uống thuốc test 1!",
+  //   text: "Xin hãy uống 2 viên thuốc X",
+  //   at: new Date(now + 5 * 1000)
+  // }, {
+  //   id: 1,
+  //   title: "Đến giờ uống thuốc test 2!",
+  //   text: "Xin hãy uống 1 viên thuốc Y",
+  //   at: new Date(now + 1e5 * 1000)
+  // }, {
+  //   id: 2,
+  //   title: "Đến giờ uống thuốc test 3!",
+  //   text: "Xin hãy uống 2 viên thuốc Z",
+  //   at: new Date(now + 25 * 1000)
+  // }, {
+  //   id: 3,
+  //   title: "Đến giờ uống thuốc test 4!",
+  //   text: "Xin hãy uống 2 viên thuốc XX",
+  //   at: new Date(now + 35 * 1000)
+  // }, {
+  //   id: 4,
+  //   title: "Đến giờ uống thuốc test 5!",
+  //   text: "Xin hãy uống 2 viên thuốc YY",
+  //   at: new Date(now + 45 * 1000)
+  // }];
   cordova.plugins.notification.local.hasPermission(function(granted) {
     if (!granted) {
       cordova.plugins.notification.local.registerPermission(function(per) {
@@ -41,21 +54,10 @@ Template.prescriptionTemplate.onRendered(function() {
           alert('Chương trình đã có quyền gửi thông báo uống thuốc');
           alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
 
-          var weekday = new Array(7);
-          weekday[0]=  "Sun";
-          weekday[1] = "Mon";
-          weekday[2] = "Tue";
-          weekday[3] = "Wed";
-          weekday[4] = "Thur";
-          weekday[5] = "Fri";
-          weekday[6] = "Sat";
-
-          var d = weekday[date.getDay()];
-          var h = date.getHours();
-          var m = date.getMinutes();
-          var time = h + ":" + m;
           var id = 1;
+          var time = h + ":" + m;
           var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+          if(arr.length != 0){
           arr.forEach(function(res){
             var timeRepeat = res.Repeat;
             timeRepeat.forEach(function(day){
@@ -70,28 +72,19 @@ Template.prescriptionTemplate.onRendered(function() {
             });
             id = id +1;
           });
-          cordova.plugins.notification.local.schedule(schedule);
+        }
+          // cordova.plugins.notification.local.schedule(schedule);
         }
 
       });
     } else {
       alert('Chương trình đã có quyền gửi thông báo uống thuốc');
       alert('Trong vòng 30s, app sẽ gửi 5 thông báo uống thuốc test!');
-      var weekday = new Array(7);
-      weekday[0]=  "Sun";
-      weekday[1] = "Mon";
-      weekday[2] = "Tue";
-      weekday[3] = "Wed";
-      weekday[4] = "Thur";
-      weekday[5] = "Fri";
-      weekday[6] = "Sat";
 
-      var d = weekday[date.getDay()];
-      var h = date.getHours();
-      var m = date.getMinutes();
       var time = h + ":" + m;
       var id = 1;
       var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+      if(arr.length != 0){
       arr.forEach(function(res){
         var timeRepeat = res.Repeat;
         timeRepeat.forEach(function(day){
@@ -106,7 +99,8 @@ Template.prescriptionTemplate.onRendered(function() {
         });
         id = id +1;
       });
-      cordova.plugins.notification.local.schedule(schedule);
+    }
+      // cordova.plugins.notification.local.schedule(schedule);
     }
   });
 
@@ -191,11 +185,11 @@ Template.InsertMedicine.events({
       //update medicne
       if (Meteor.userId())
         updateMedicine.UserId = Meteor.userId();
-      updateMedicine.StartTime = event.target.txtTime.value;
-      updateMedicine.Text = event.target.txtText.value;
-      updateMedicine.Repeat = Repeat;
-      updateMedicine.StartDate = dateStartDate;
-      Meteor.call("updatePrescription", updateMedicine);
+        updateMedicine.StartTime = event.target.txtTime.value;
+        updateMedicine.Text = event.target.txtText.value;
+        updateMedicine.Repeat = Repeat;
+        updateMedicine.StartDate = dateStartDate;
+        Meteor.call("updatePrescription", updateMedicine);
     } else {
       // add medicine
       var addMedicine = {

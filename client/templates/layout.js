@@ -13,6 +13,9 @@ Template.screenLayoutTemplate.events({
     } else {
     }
   },
+  "click #back": function() {
+    history.back();
+  }
 });
 Template.layoutTemplate.events({
   "click #btnMenu": function(event, template) {

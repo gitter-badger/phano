@@ -49,8 +49,59 @@ html.body {
 .style-footer {
   background-image:url('./icon/footer.png');
   width:100%;
-  position: fixed; 
+  position: fixed;
   bottom: 0;
   height: 45px;
   background-size:100% 100%;
+}
+.header-menu {
+   padding-top: 100px;
+}
+.size-icon-image {
+  width: 59px;
+  height: 42px;
+}
+.size-item {
+  height: 100%;
+}
+
+@media screen and (min-width: 800px) {
+  .style-background-image {
+    background-image: url('./icon/background.png');
+    background-size: 58% 65%;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    height:100%;
+  }
+  .style-background {
+    background-image: url('./icon/white.png');
+    background-size: 100% 100%;
+    background-position: relative;
+    background-repeat:no-repeat;
+  }
+  .header-menu {
+     padding-top: 180px;
+  }
+  .size-icon-image {
+    width: 100px;
+    height: 280px;
+  }
+  .size-item {
+    height: 500px;
+  }
+  .ui.statistic > .label {
+    font-size: 20px;
+  }
+  .ui.statistics .statistic > .label, .ui.statistic > .label {
+      font-size: 15px;
+      font-family:verdana;
+  }
+  .style-footer {
+    background-image:url('./icon/footer.png');
+    width:100%;
+    position: fixed;
+    bottom: 0;
+    height: 65px;
+    background-size:100% 100%;
+  }
 }
