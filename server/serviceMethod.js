@@ -2,12 +2,12 @@ Meteor.methods({
   'checkBarcode': function(barcodeResult) {
     this.unblock();
     console.log("runing check barcode with service")
-    return Meteor.http.call("GET", "http://crmservice.phanopharmacy.vn/MainService.svc/GetCustInfoByBarCode/" + barcodeResult);
+    return Meteor.http.call("GET", "http://crm.phanopharmacy.vn/MainService.svc/GetCustInfoByBarCode/" + barcodeResult);
   },
 
   updateGiftInfo: function() {
     // Get top songs from iTunes server
-    HTTP.get('http://crmservice.phanopharmacy.vn/MainService.svc/GetRuleOfGiftInfo', function(error, giftReponse) {
+    HTTP.get('http://crm.phanopharmacy.vn/MainService.svc/GetRuleOfGiftInfo', function(error, giftReponse) {
       var listGifts = [];
       var entries = giftReponse.data;
       var sort = 0;
@@ -36,7 +36,7 @@ Meteor.methods({
   },
   updateNews: function() {
     // Get top songs from iTunes server
-    HTTP.get('http://crmservice.phanopharmacy.vn/MainService.svc/GetPromotionInfo', function(error, newsReponse) {
+    HTTP.get('http://crm.phanopharmacy.vn/MainService.svc/GetPromotionInfo', function(error, newsReponse) {
       var listNews = [];
       var entries = newsReponse.data;
       var sort = 0;
@@ -64,7 +64,6 @@ Meteor.methods({
     // Get top songs from iTunes server
     HTTP.get('http://www.phanopharmacy.com/api/webmethod', function(error, phamaReponse) {
       var listPhama = [];
-      console.log(phamaReponse.data);
       var entries = phamaReponse.data;
       var sort = 0;
       _.each(entries, function(phama) {
