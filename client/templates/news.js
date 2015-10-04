@@ -1,4 +1,4 @@
-
+Meteor.subscribe('news');
 Template.newsTemplate.helpers({
   showNews: function() {
     return News.find({});

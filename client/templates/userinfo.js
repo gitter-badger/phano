@@ -1,3 +1,4 @@
+Meteor.subscribe("users");
 Template.userinfoTemplate.helpers({
   showUserInfo: function() {
     $('#loadingScreen').addClass("active");

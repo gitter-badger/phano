@@ -1,13 +1,13 @@
 <template name="prescriptionTemplate">
-
+  <br /><div align="center">
+    <button type="button" class="ui circular linkedin icon button" data-action="addNew"><i class="plus icon"></i></button>
+  </div>
   {{#each currentPrescription}}
   <div class="ui divided selection list">
     {{> medicineTemplate}}
   </div>
   {{/each}}
-  <div align="center">
-    <button type="button" class="ui circular linkedin icon button" data-action="addNew"><i class="plus icon"></i></button>
-  </div>
+
 </template>
 
 <template name="InsertMedicine">

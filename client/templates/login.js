@@ -24,6 +24,7 @@ Template.loginTemplate.events({
           if (typeof customerInfo !== "undefined" && customerInfo !== null) {
             console.log("da verify voi service xong!")
             //--------------if service return true----------------------------
+            Meteor.call("updateSaleInfo");
             Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
               if (err) {
                 //không thể đăng nhập vì user này chưa tạo trong hệ thống!
@@ -67,6 +68,56 @@ Template.loginTemplate.events({
     // ======comment below block to test with browser=====================
     // -----------------Call barcode scanner-----------------
     if (Meteor.isCordova) {
+      if(barcodeResult == null) {
+        Meteor.call("checkBarcode", barcodeResult, function(error, result) {
+          if (error) {
+            alert("Khong the ket noi voi service !!!");
+            $('#loadingScreen').removeClass("active");
+          } else {
+            console.log("da lay ra ket qua tai client: " + JSON.stringify(result.data));
+            customerInfo = result.data; //results.data should be a JSON object
+            //console.log("Parse data:" + customerInfo.Name);
+
+            if (typeof customerInfo !== "undefined" && customerInfo !== null) {
+              console.log("da verify voi service xong!")
+              //--------------if service return true----------------------------
+              Meteor.call("updateSaleInfo");
+              Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
+                if (err) {
+                  //không thể đăng nhập vì user này chưa tạo trong hệ thống!
+                  //tạo user
+                  var userObject = {
+                    username: barcodeResult,
+                    password: barcodeResult,
+                    profile: customerInfo
+                  };
+                  Meteor.call("createNewUser", userObject, function(err, result) {
+                    if (err) {
+                      alert("Không thể  tạo user!!!" + err);
+                      $('#loadingScreen').removeClass("active");
+                    } else {
+                      Meteor.loginWithPassword(barcodeResult, barcodeResult, function(loginErr, loginres) {
+                        if (!loginErr) {
+                          Router.go("/");
+                        }
+                      });
+                    }
+                  });
+                } else {
+                  Router.go("/");
+                }
+              });
+            }
+            //--------------if service return false----------------------------
+            else {
+              console.log(barcodeResult);
+              alert("Không tìm thấy Barcode này trong hệ thống, xin hãy thử lại!!!");
+              $('#loadingScreen').removeClass("active");
+            }
+          }
+        });
+      }
+      else {
       cordova.plugins.barcodeScanner.scan(
         function(result) {
           barcodeResult = result.text;
@@ -88,6 +139,7 @@ Template.loginTemplate.events({
               if (typeof customerInfo !== "undefined" && customerInfo !== null) {
                 console.log("da verify voi service xong!")
                 //--------------if service return true----------------------------
+                Meteor.call("updateSaleInfo");
                 Meteor.loginWithPassword(barcodeResult, barcodeResult, function(err, res) {
                   if (err) {
                     //không thể đăng nhập vì user này chưa tạo trong hệ thống!
@@ -127,6 +179,7 @@ Template.loginTemplate.events({
           alert("Có lồi xảy ra, mã lỗi:" + EJSON.stringify(error));
           $('#loadingScreen').removeClass("active");
         });
+      }
     }
 
     // ======comment upper block to test with browser=====================

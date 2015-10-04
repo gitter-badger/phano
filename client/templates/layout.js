@@ -10,7 +10,7 @@ Template.screenLayoutTemplate.events({
       Meteor.logout();
       Session.set("currentRoomID",'');
       Session.set("name",'');
-    } else {
+      Router.go("/");
     }
   },
   "click #back": function() {
@@ -28,7 +28,7 @@ Template.layoutTemplate.events({
       Meteor.logout();
       Session.set("currentRoomID",'');
       Session.set("name",'');
-    } else {
+      Router.go("/");
     }
   },
 });

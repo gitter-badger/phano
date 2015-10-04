@@ -1,12 +1,14 @@
 <template name="AdminChat">
-  {{> chat}}
+  <div>
+    {{> chat}}
+  </div>
 </template>
 <template name="chat">
   <div class="container">
     {{#if currentUser}}
     <div class="ui internally celled grid">
       <div class="row">
-        <div class="three wide column" style="width: 200%; max-height: 600px; overflow: auto">
+        <div class="three wide column" >
           <div class="span4 well">
             <a>{{> loginButtons align="left"}}</a>
             {{> rooms}}

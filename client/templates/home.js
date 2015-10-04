@@ -47,7 +47,6 @@ Template.homeTemplate.onRendered(function(){
 
   Meteor.call("updateGiftInfo");
 
-  Meteor.call("updateSaleInfo");
 });
 Template.homeTemplate.onCreated = function() {
   $('#loadingScreen').removeClass("active");

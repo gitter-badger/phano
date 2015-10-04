@@ -62,6 +62,35 @@ Template.scanprescriptionTemplate.events({
   'photo': function(){
     return Session.get('photo');
   },
+  // 'text': function() {
+  //   var DeviceId = '';
+  //   if (Meteor.isCordova) {
+  //     DeviceId = device.uuid;
+  //   } else {
+  //     DeviceId = "Browser";
+  //   }
+  //   Meteor.subscribe('prescription', DeviceId);
+  //   var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+  //   var date = new Date();
+  //   var weekday = new Array(7);
+  //   weekday[0]=  "Sun";
+  //   weekday[1] = "Mon";
+  //   weekday[2] = "Tue";
+  //   weekday[3] = "Wed";
+  //   weekday[4] = "Thur";
+  //   weekday[5] = "Fri";
+  //   weekday[6] = "Sat";
+  //
+  //   var d = weekday[date.getDay()];
+  //   var h = date.getHours();
+  //   var m = date.getMinutes();
+  //   if(m<10)
+  //     m='0'+ m;
+  //   var time = h + ":" + m;
+  //   if(time == "19:17")
+  //     return "tuan";
+  //   return "khong được";
+  // },
   'isUser': function() {
     if(Meteor.userId() != undefined ) {
       return true;

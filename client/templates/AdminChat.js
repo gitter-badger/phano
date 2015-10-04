@@ -1,11 +1,10 @@
-if (Meteor.isClient) {
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
   });
+  Meteor.subscribe("users");
   Session.setDefault("RoomID","thong bao toan bo");
   Meteor.subscribe("rooms");
   Meteor.subscribe("messages");
-
 
   Template.input.events({
     'submit #NewTextForm': function(event) {
@@ -67,4 +66,3 @@ if (Meteor.isClient) {
     }
   }
 });
-}

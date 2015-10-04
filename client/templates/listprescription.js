@@ -1,5 +1,7 @@
 var photoDetails = {};
+var salesDetail = {};
 var photos = Meteor.subscribe("photos");
+Meteor.subscribe("salesinfo");
 Template.listprescriptionTemplate.onRendered(function() {
   $('.menu .item').tab();
   $('.history.example .menu .item')
@@ -14,6 +16,9 @@ Template.listprescriptionTemplate.helpers({
     if(photos.ready()){
       return PrescriptionPhoto.find({status:"null"});
     }
+  },
+  'showSalesInfo': function() {
+    return SalesInfo.find({});
   },
   isUser: function() {
     if(Meteor.userId()) {
@@ -41,6 +46,11 @@ Template.photoPrescription.helpers({
     return photoDetails;
   }
 });
+Template.SalesPrescription.helpers({
+  salesDetail: function() {
+    return salesDetail;
+  }
+});
 Template.photoPrescription.events({
   'click [data-action="Order"]': function() {
     Meteor.call("updatePrescriptionPhoto",this._id);
@@ -51,7 +61,9 @@ Template.listprescriptionTemplate.events({
     photoDetails = PrescriptionPhoto.findOne({_id: this._id});
     SemanticModal.generalModal('photoPrescription');
   },
-  'click #photo': function() {
-    Router.go("/scanprescription");
+  'click [data-action="xemdon"]' : function() {
+    salesDetail = SalesInfo.findOne({_id: this._id});
+    SemanticModal.generalModal('SalesPrescription');
   },
+
 });

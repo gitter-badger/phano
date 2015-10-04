@@ -1,3 +1,4 @@
+Meteor.subscribe('searchphama');
 if (Meteor.isClient) {
   var MAP_ZOOM = 14;
   Meteor.startup(function(e) {

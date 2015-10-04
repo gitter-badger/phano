@@ -71,8 +71,8 @@ Meteor.methods({
         insertSaleInfo._id = sale.Oid;
         insertSaleInfo.DocumentTime = sale.DocumentTime;
         insertSaleInfo.DrugStoreCode = sale.DrugStoreCode;
-        insertSaleInfo.Options = sale.Options;
-        insertSaleInfo.PhanoCareMarked = sale.PhanocareMarked;
+        insertSaleInfo.Options = sale.Option;
+        insertSaleInfo.PhanoCareMarked = sale.PhanoCareMarked;
         insertSaleInfo.Serial = sale.Serial;
         insertSaleInfo.Total = sale.Total;
         // Add news to list
