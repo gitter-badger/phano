@@ -14,11 +14,11 @@ Template.listprescriptionTemplate.onRendered(function() {
 Template.listprescriptionTemplate.helpers({
   'showPhoto': function(){
     if(photos.ready()){
-      return PrescriptionPhoto.find({status:"null"});
+      return PrescriptionPhoto.find({status:"NEW"});
     }
   },
   'showSalesInfo': function() {
-    return SalesInfo.find({});
+    return SalesInfo.find({Status:"NEW"});
   },
   isUser: function() {
     if(Meteor.userId()) {
@@ -27,7 +27,7 @@ Template.listprescriptionTemplate.helpers({
     return false;
   },
   testPhoto: function() {
-    var res = PrescriptionPhoto.find({status:"null"}).fetch();
+    var res = PrescriptionPhoto.find({status:"NEW"}).fetch();
     if(res.length == 0) {
       return false;
     }
@@ -65,5 +65,10 @@ Template.listprescriptionTemplate.events({
     salesDetail = SalesInfo.findOne({_id: this._id});
     SemanticModal.generalModal('SalesPrescription');
   },
-
+  'click [data-action="ReFill"]': function() {
+    var r = confirm("Bạn muốn refill?");
+    if(r == true){
+      Meteor.call("updateSalesInfo",this._id);
+    }
+  },
 });

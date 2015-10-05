@@ -27,7 +27,7 @@
     <form id="createRoomName" class="ui form">
     <div class="navbar-inner" style="width: 100%" id="hidden">
       <div>
-        <b><h5>CHAT HỖ TRỢ TRỰC TUYẾN</h5></b>
+        <b><h5>CHAT HỖ TRỢ TRỰC TUYẾN</h5></b><hr />
         <div class="field">
           <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
         </div>
@@ -42,22 +42,29 @@
     </form>
   </template>
   <template name="inputChat">
-    <form id="inputChatMes">
-      <div class="ui fluid action input">
-        <input type="text" id="txtIput" placeholder="Xin mời nhập tin nhắn" style="margin-right:8px;">
+    <form id="inputChatMes" class="ui form">
+      <div class="field">
+        <input class="form-control" type="text" id="txtInput" placeholder="Xin mời nhập tin nhắn" style="margin-right:8px;">
       </div><br />
-      <input type="submit" value="Gửi Tin Nhắn" class="ui violet button sendMes">
+      <input type="submit" value="Gửi Tin Nhắn" class="ui teal button sendMes">
     </form>
   </template>
   <template name="messageCus">
-
-    <p><strong class="ui label"> <img class="ui right spaced avatar image" src="/img/user.jpg">{{user}}</strong><span style="font-size: 0.5em; color: darkgray"></span>:
-      <i class="ui left pointing white basic label"><i style="font-size: 1.2em;">{{text}}</i><br><i style="font-size: 0.7em;">({{timestamp}})</i></i>
+    <p>
+      <strong class="ui label">
+        <img class="ui right spaced avatar image" src="/img/user.jpg">{{user}}
+      </strong>
+      <span style="font-size: 0.5em; color: darkgray"></span>:
+      <i class="ui left pointing white basic label">
+        <i style="font-size: 1.2em;">{{text}}</i><br>
+        <i style="font-size: 0.7em;">({{timestamp}})</i>
+      </i>
     </p>
   </template>
   <template name="messagesCus">
     Hỗ Trợ Trực Tuyến
-    <div id="messagesCus" style="background-color: #ffffff; border: 3px solid darkgray; max-height: 200px; overflow: auto">
+    <hr />
+    <div id="messagesCus">
       {{#each messagesCus}}
       {{> messageCus}}
       {{/each}}

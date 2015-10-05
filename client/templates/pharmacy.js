@@ -77,6 +77,7 @@ if (Meteor.isClient) {
             position: new google.maps.LatLng(closestMarker.position.lat(), closestMarker.position.lng()),
             map: map.instance,
             icon:'./image10.png',
+            //animation: google.maps.Animation.DROP
           });
         }
         var infowindow = new google.maps.InfoWindow({
@@ -88,14 +89,20 @@ if (Meteor.isClient) {
         google.maps.event.addListener(closestMapMarker, 'click', function() {
           map.instance.setCenter(closestMapMarker.getPosition());
           infowindow.open(map.instance, closestMapMarker);
+          if(infowindow1 != null && infowindow2 != null || infowindow1 != null || infowindow2 != null ){
+            infowindow1.close();
+            infowindow2.close();
+          }
         });
 
         /////////////////////////////////////////////////////////////////////////////////////////marker 2
         if(!closestMapMarker1) {
+          // google.maps.InfoWindow.close( closestMapMarker);
           closestMapMarker1 = new google.maps.Marker({
             position: new google.maps.LatLng(closestMarker1.position.lat(), closestMarker1.position.lng()),
             map: map.instance,
             icon: './image10.png',
+            //animation: google.maps.Animation.DROP
           });
         }
         var infowindow1 = new google.maps.InfoWindow({
@@ -104,9 +111,14 @@ if (Meteor.isClient) {
           "Địa Chỉ: "+closestMarker1.Content.add + closestMarker1.Content.city+"<br/>"+
           "TEL: "+ closestMarker1.Content.tel
         });
+        infowindow.close();
         google.maps.event.addListener(closestMapMarker1, 'click', function() {
           map.instance.setCenter(closestMapMarker1.getPosition());
           infowindow1.open(map.instance, closestMapMarker1);
+          if(infowindow != null && infowindow2 != null || infowindow != null || infowindow2 != null ){
+            infowindow.close();
+            infowindow2.close();
+          }
         });
 
         /////////////////////////////////////////////////////////////////////////////////////////marker 3
@@ -116,6 +128,7 @@ if (Meteor.isClient) {
             map: map.instance,
             mapTypeId: google.maps.MapTypeId.HYBRID,
             icon:'./image10.png',
+            //animation: google.maps.Animation.DROP
           });
         }   var infowindow2 = new google.maps.InfoWindow({
           content:
@@ -123,9 +136,14 @@ if (Meteor.isClient) {
           "Địa Chỉ: "+closestMarker2.Content.add + closestMarker2.Content.city+"<br/>"+
           "TEL: "+ closestMarker2.Content.tel
         });
+
         google.maps.event.addListener(closestMapMarker2, 'click', function() {
           map.instance.setCenter(closestMapMarker2.getPosition());
           infowindow2.open(map.instance, closestMapMarker2);
+          if(infowindow != null && infowindow1 != null || infowindow != null || infowindow1 != null ){
+            infowindow.close();
+            infowindow1.close();
+          }
         });
 
 
@@ -133,6 +151,8 @@ if (Meteor.isClient) {
           marker = new google.maps.Marker({
             position: new google.maps.LatLng(latLng.lat, latLng.lng),
             map: map.instance,
+            icon:'./icon.png',
+            //animation: google.maps.Animation.DROP
           });
         }else {
           marker.setPosition(latLng);
@@ -154,6 +174,11 @@ if (Meteor.isClient) {
         return {
           center: new google.maps.LatLng(latLng.lat, latLng.lng),
           zoom: MAP_ZOOM,
+          disableDefaultUI: true,
+          zoomControl: true,
+          scaleControl: true,
+          scrollwheel: true,
+          // streetViewControl: true,
         };
       }
     },

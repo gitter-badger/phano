@@ -1,24 +1,46 @@
 <template name="userinfoTemplate">
-{{#with showUserInfo}}
+  {{#with showUserInfo}}
+    <div class="ui fluid card">
+      <div class="image">
+        <img src="/img/user.jpg">
+      </div>
+      <div class="content">
+        <a class="header">{{Name}}</a>
+        <div class="meta">
+          <span class="date">{{Address}}</span>
+        </div>
+        <div class="description">
+          Điện thoại: {{Phone}}
+        </div>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="gift icon"></i>
+          Số điểm hiện tại: {{Point}}
+        </a>
+      </div>
+    </div>
+  {{/with}}
   <div class="ui fluid card">
-  <div class="image">
-    <img src="/img/user.jpg">
+    {{> giftInfoTemplate}}
   </div>
-  <div class="content">
-    <a class="header">{{Name}}</a>
-    <div class="meta">
-      <span class="date">{{Address}}</span>
+</template>
+<template name="giftInfoTemplate">
+  <div class="ui relaxed divided list">
+    <h3 style="text-align:center;">Thông tin đổi quà</h3>
+  {{#each showGiftInfo}}
+  <div class="item">
+    <i class="announcement icon"></i>
+    <div class="content">
+      <a class="header">Tên quà tặng:{{ProdName}}</a>
+      <div class="description">
+        <div>Số điểm:{{Point}}</div>
+        <div>Mã sản phẩm:{{ProdCode}}</div>
+        <div>Số lượng:{{Quantity}}</div>
+        <div>Đơn vị tính:{{UnitName}}</div>
+      </div>
     </div>
-    <div class="description">
-      Điện thoại: {{Phone}}
-    </div>
   </div>
-  <div class="extra content">
-    <a>
-      <i class="gift icon"></i>
-      Số điểm hiện tại: {{Point}}
-    </a>
-  </div>
-  </div>
-{{/with}}
+    {{/each}}
+</div>
 </template>

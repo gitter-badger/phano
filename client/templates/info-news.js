@@ -43,7 +43,7 @@ if (Meteor.isClient) {
     {    Session.set("name",document.getElementById("goName").value);
     phone = document.getElementById("goPhone").value;
   }
-  var sendText = event.target.txtIput.value;
+  var sendText = event.target.txtInput.value;
   if(!Session.get("currentRoomID"))
   {
     Meteor.call("insertRoom",{user: Session.get("name"),phone:phone, ts: new Date()},function(error,result){
@@ -57,7 +57,7 @@ if (Meteor.isClient) {
   else {
     Meteor.call("insertChat",{user:Session.get("name"),text: sendText,ts: new Date(),RoomID: Session.get("currentRoomID")});
   }
-  txtIput.value = "";
+  txtInput.value = "";
 };
 _sendMessageLoggin=function(){
   var sendText = event.target.txtIput.value;
@@ -75,7 +75,7 @@ _sendMessageLoggin=function(){
   else {
     Meteor.call("insertChat",{user:Meteor.user().profile.Name,text: sendText,ts: new Date(),RoomID: Session.get("currentRoomID")});
   }
-  txtIput.value = "";
+  txtInput.value = "";
 
 };
 Template.messageCus.helpers({

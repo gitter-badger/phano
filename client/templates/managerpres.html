@@ -1,0 +1,110 @@
+<template name = "templateManagerpres" >
+  <div class="ui top attached tabular menu">
+    <a class="item active" data-tab="first">Đơn thuốc của tôi</a>
+    <a class="item" data-tab="second">Đơn thuốc đã scan</a>
+  </div>
+  <div class="ui bottom attached tab segment active" data-tab="first" >
+    <div class="ui relaxed divided list">
+      {{#if isUser}}
+        {{#if testSale}}
+          {{#each showSalesInfo}}
+            <div class="item">
+              <div class="content">
+                <div class="header">
+                  <a data-action="xemdon">{{Serial}}</a>
+                  <div>{{DocumentTime}}</div>
+                  <button class="ui button" style="margin-left:72%;" data-action="ReFill">Accept</button>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        {{else}}
+          <div  style="height: 400px;">Bạn chưa refill đơn thuốc nào.</div>
+        {{/if}}
+      {{else}}
+        <div  style="height: 400px;">Bạn chưa đăng nhập</div>
+      {{/if}}
+  </div>
+  </div>
+  <div class="ui bottom attached tab segment" data-tab="second">
+    <div class="ui middle aligned selection list">
+      {{#if testPhoto}}
+        {{#each showOrder}}
+        <div class="item">
+          <div class="ui avatar image">
+            <i class="first aid icon"></i>
+          </div>
+          <div class="content">
+            <a class="header" data-action="xem">{{namepres}}</a>
+            <div class="description">{{convertToShowDate dateorder}}</div>
+            <button class="ui button" style="margin-left:72%;" data-action="aceeptOrder">Accept</button>
+          </div>
+        </div>
+        {{/each}}
+      {{else}}
+        <div  style="height: 400px;">Bạn chưa order đơn thuốc nào</div>
+      {{/if}}
+    </div>
+  </div>
+</template>
+<template name="ShowsalesPrescription">
+  <div class="ui" style="margin:15px">
+    {{#with salesDetails}}
+    <form class="ui form" id="newMedicine" method="post">
+      <h3 align="center">Thông tin đơn thuốc</h3>
+      <div class="content">
+        <div class="field">
+          <label>Mã đơn thuốc:</label>
+          <input class="form-control" type="text" value={{Serial}} readonly />
+        </div>
+        <div class="field">
+          <label>Mã thuốc:</label>
+          <input class="form-control" type="text" value={{DrugStoreCode}} readonly />
+        </div>
+        <div class="field">
+          <label>Thời gian:</label>
+          <input class="form-control" type="text" value={{DocumentTime}} readonly />
+        </div>
+        <div class="field">
+          <label>Tổng tiền:</label>
+          <input class="form-control" type="text" value={{Total}} readonly />
+        </div>
+      </div>
+      <div class="actions" style="float:right;margin:15px">
+        <button class="ui black deny button" type="reset">Cancel</button>
+      </div>
+      <div class="field">&nbsp;</div>
+    </form>
+    {{/with}}
+  </div>
+</template>
+<template name="photoOrderPrescription">
+  <div class="ui" style="margin:15px">
+    {{#with photoDetails}}
+    <form class="ui form" id="newMedicine" method="post">
+      <h3 align="center">Thông tin đơn thuốc</h3>
+      <div class="content">
+        <div class="field">
+          <p><img src={{photo}} /></p>
+        </div>
+        <div class="field">
+          <label>Tên đơn thuốc:</label>
+          <input class="form-control" type="text" value={{namepres}} readonly />
+        </div>
+        <div class="field">
+          <label>Họ tên:</label>
+          <input class="form-control" type="text" value={{name}} readonly />
+        </div>
+        <div class="field">
+          <label>Số điện thoại:</label>
+          <input class="form-control" type="text" value={{phone}} readonly />
+        </div>
+      </div>
+      <div class="actions" style="float:right;margin:15px">
+        <button class="ui black deny button" type="reset">Cancel</button>
+      </div>
+      <div class="field">&nbsp;</div>
+    </form>
+    {{/with}}
+  </div>
+</template>

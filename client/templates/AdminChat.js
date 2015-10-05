@@ -1,8 +1,8 @@
-  Accounts.ui.config({
+Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
   });
   Meteor.subscribe("users");
-  Session.setDefault("RoomID","thong bao toan bo");
+  Session.setDefault("RoomID","Thông báo toàn bộ!!");
   Meteor.subscribe("rooms");
   Meteor.subscribe("messages");
 
@@ -56,13 +56,23 @@
       event.preventDefault();
       var name = event.target.txtName.value;
       var pass = event.target.txtPass.value;
-      if (name=="admin") {
-        if (pass=="654321") {
-      return Meteor.loginWithPassword('admin', '654321');
-        } else {
-          alert("password wrong")
+      var result = Meteor.users.findOne({username: name});
+      var password = result.services.password.bcrypt;
+      console.log(password);
+      if (result != undefined) {
+        if(password == pass){
+          Meteor.loginWithPassword(name, pass,function(err){
+            if(err){
+              console.log(err);
+            }
+          });
         }
-      } else {  alert("username wrong")
-    }
+        else {
+          alert("Password wrong")
+        }
+      }
+      else {
+        alert("Username wrong")
+      }
   }
 });

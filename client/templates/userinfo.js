@@ -1,4 +1,5 @@
 Meteor.subscribe("users");
+Meteor.subscribe("giftinfo");
 Template.userinfoTemplate.helpers({
   showUserInfo: function() {
     $('#loadingScreen').addClass("active");
@@ -8,5 +9,15 @@ Template.userinfoTemplate.helpers({
   }
 });
 Template.userinfoTemplate.onRendered = function() {
+  $('#loadingScreen').removeClass("active");
+};
+
+Template.giftInfoTemplate.helpers({
+  showGiftInfo: function() {
+    var result = GiftInfo.find({});
+    return result;
+  }
+});
+Template.giftInfoTemplate.onRendered = function() {
   $('#loadingScreen').removeClass("active");
 };

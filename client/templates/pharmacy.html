@@ -1,10 +1,7 @@
 <template name="pharmacy">
-  <h2 style="margin-top:10px;">NHÀ THUỐC GẦN NHẤT:</h2>
-    <div class="map-container">
-      {{#unless geolocationError}}
-        {{> googleMap name="map" options=mapOptions}}
-      {{else}}
-        Geolocation failed: {{geolocationError}}
-      {{/unless}}
-    </div>
+    {{#unless geolocationError}}
+      {{> googleMap name="map" options=mapOptions}}
+    {{else}}
+      Geolocation failed: {{geolocationError}}
+    {{/unless}}
 </template>

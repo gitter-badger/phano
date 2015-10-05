@@ -18,7 +18,7 @@ Template.loginTemplate.events({
           alert("Khong the ket noi voi service !!!");
           $('#loadingScreen').removeClass("active");
         } else {
-          console.log("da lay ra ket qua tai lient: " + JSON.stringify(result.data));
+          console.log("da lay ra ket qua tai client: " + JSON.stringify(result.data));
           customerInfo = result.data; //results.data should be a JSON object
           //console.log("Parse data:" + customerInfo.Name);
           if (typeof customerInfo !== "undefined" && customerInfo !== null) {

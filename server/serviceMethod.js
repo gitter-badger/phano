@@ -75,6 +75,7 @@ Meteor.methods({
         insertSaleInfo.PhanoCareMarked = sale.PhanoCareMarked;
         insertSaleInfo.Serial = sale.Serial;
         insertSaleInfo.Total = sale.Total;
+        insertSaleInfo.Status = "NEW";
         // Add news to list
         listSalseInfo.push(insertSaleInfo);
         // Increase sort

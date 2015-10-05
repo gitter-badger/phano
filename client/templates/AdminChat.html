@@ -9,10 +9,10 @@
     <div class="ui internally celled grid">
       <div class="row">
         <div class="three wide column" >
-          <div class="span4 well">
+          <!-- <div class="span4 well"> -->
             <a>{{> loginButtons align="left"}}</a>
             {{> rooms}}
-          </div>
+          <!-- </div> -->
         </div>
         <div class="ten wide column">
           <div class="ui attached message">
@@ -22,7 +22,7 @@
           </div>
           <form class="ui form attached fluid segment">
             <div class="two fields">
-              <div class="row-fluid">
+              <div class="row-fluid" style="width:100%;">
                 <div class="span12 well">
                   {{> messages}}
                 </div>
@@ -31,9 +31,7 @@
             <div class="inline field">
             </div>
           </form>
-          <div class="ui bottom attached warning message" style="position: absolute; left: 0px;right: 0px;bottom: 0px;font-size: 15px;">
           {{> input}}
-        </div>
       </div>
     </div>
   </div>
@@ -50,20 +48,19 @@
 <template name="message">
   <div class="message">
     <a href="" class="message_username">{{user}}</a>
-    <span style="font-size: 0.7em; color: darkgray">
-      ({{timestamp}}):
-    </span>
-    <span class="message_content">{{text}}</span>
+    <div style="width:;">
+      <span style="font-size: 0.7em; color: darkgray">
+        ({{timestamp}}):
+      </span>
+      <span class="">{{text}}</span>
+    </div>
   </div>
-  <!-- <form>
-  <p><strong>{{user}}</strong> <span style="font-size: 0.7em; color: darkgray">({{timestamp}})</span>: <span><i>{{text}}</i></span></p>
-</form> -->
 </template>
 <template name="input">
   <form id="NewTextForm">
     <input type="text" id="msg" name="msg" placeholder="xin mời nhập tin nhắn"
     style="border: 1px solid darkgray;width: 70%; max-height: 200px; overflow: auto">
-    <button type="submit" class="ui violet button sendMesg">Send Message</button>
+    <button type="submit" class="ui teal button sendMesg">Send Message</button>
 </form>
 </template>
 <template name="messages">
@@ -82,19 +79,15 @@
   </ul>
 </template>
 <template name="room">
-  <div class="ui relaxed divided list" style="cursor: pointer; {{roomstyle}}">
-    <div class="item">
-      <i class="mail icon"></i>
-      <div class="content">
-        <a class="header">{{user}}</a>
-        <div class="description">({{phone}})<i class="mail icon delete"></i>
-        </div>
-      </div>
+  <i style="float:right;" class="mail icon delete"></i>
+  <div class="content">
+    <a class="header">{{user}}</a>
+    <div class="description">({{phone}})
     </div>
   </div>
 </template>
 <template name="LoginForm">
-  <a><form class="ui form" id="login">
+  <form class="ui form" id="login" style="width: 50%; align: center;">
     <div class="field">
       <label>Tài Khoản</label>
       <input type="text" id="txtName" placeholder="Tên Tài Khoản">
@@ -103,6 +96,6 @@
       <label>Mật Khẩu</label>
       <input type="password" id="txtPass" placeholder="Mật Khẩu">
     </div>
-    <input type="submit" id="login" value="dang nhap" class="ui violet button login">
-  </form></a>
+    <input type="submit" id="login" value="Đăng nhập" class="ui teal button login">
+  </form>
 </template>
