@@ -1,5 +1,4 @@
 Meteor.subscribe('searchphama');
-if (Meteor.isClient) {
   var MAP_ZOOM = 14;
   Meteor.startup(function(e) {
     GoogleMaps.load();
@@ -178,10 +177,15 @@ if (Meteor.isClient) {
           zoomControl: true,
           scaleControl: true,
           scrollwheel: true,
+          mapTypeIds: [
+            google.maps.MapTypeId.ROADMAP,
+            google.maps.MapTypeId.TERRAIN
+          ],
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.TOP_LEFT
+          },
           // streetViewControl: true,
         };
       }
     },
   });
-
-}

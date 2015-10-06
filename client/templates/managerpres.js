@@ -15,8 +15,8 @@ Template.templateManagerpres.helpers({
   'showOrder': function(){
       return PrescriptionPhoto.find({status:"ORDER"});
   },
-  showSalesInfo: function() {
-    return SalesInfo.find({status:"ORDER"});
+  'showSalesInfo': function() {
+    return SalesInfo.find({Status:"ORDER"});
   },
   convertToShowDate: function(thisDate) {
     function pad(s) {
@@ -33,7 +33,7 @@ Template.templateManagerpres.helpers({
     return true;
   },
   testSale: function() {
-      var res = SalesInfo.find({status:"ORDER"}).fetch();
+      var res = SalesInfo.find({Status:"ORDER"}).fetch();
       if(res.length == 0) {
         return false;
       }
@@ -56,6 +56,18 @@ Template.templateManagerpres.events({
     salesDetails = SalesInfo.findOne({_id: this._id});
     SemanticModal.generalModal('ShowsalesPrescription');
   },
+  'click data-action="ReFill"' : function() {
+    var r = confirm("Bạn muốn accept?");
+    if(r == true){
+      Meteor.call("acceptSalesInfo",this._id);
+    }
+  },
+  'click data-action="aceeptOrder"' : function() {
+    var r = confirm("Bạn muốn accept?");
+    if(r == true){
+      Meteor.call("acceptPrescriptionPhoto",this._id);
+    }
+  }
 });
 Template.photoOrderPrescription.helpers({
   'photoDetails': function() {
@@ -65,5 +77,8 @@ Template.photoOrderPrescription.helpers({
 Template.ShowsalesPrescription.helpers({
   salesDetails: function() {
     return salesDetails;
+  },
+  checknumber:function currencyFormat (num) {
+    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
   }
 });

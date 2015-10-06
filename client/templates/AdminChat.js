@@ -18,7 +18,7 @@ Accounts.ui.config({
 
   Template.messages.helpers({
     messages: function() {
-      return Messages.find({RoomID: Session.get("RoomID")}, {sort: {ts: -1}});
+      return Messages.find({RoomID: Session.get("RoomID")}, {sort: {ts: 1}});
     },
     name: function() {
       return Session.get("RoomID",this.name);
@@ -57,19 +57,12 @@ Accounts.ui.config({
       var name = event.target.txtName.value;
       var pass = event.target.txtPass.value;
       var result = Meteor.users.findOne({username: name});
-      var password = result.services.password.bcrypt;
-      console.log(password);
       if (result != undefined) {
-        if(password == pass){
           Meteor.loginWithPassword(name, pass,function(err){
             if(err){
-              console.log(err);
+              alert("Password wrong")
             }
           });
-        }
-        else {
-          alert("Password wrong")
-        }
       }
       else {
         alert("Username wrong")

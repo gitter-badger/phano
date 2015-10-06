@@ -17,7 +17,7 @@
         <div class="ten wide column">
           <div class="ui attached message">
             <div class="header">
-              <h3>BẠN ĐANG CHÁT VỚI: {{user}}</h3>
+              <h3>Bạn đang chat với {{user}}:</h3>
             </div>
           </div>
           <form class="ui form attached fluid segment">
@@ -37,8 +37,6 @@
   </div>
   {{else}}
   <center><div class="hero-unit">
-    <h1>Welcome ADMIN to page chat</h1>
-    <h3>XIN MỜI ĐĂNG NHẬP ĐỂ VÀO PHÒNG CHAT</h3>
     {{>LoginForm}}
   </div></center>
   {{/if}}
@@ -57,10 +55,13 @@
   </div>
 </template>
 <template name="input">
-  <form id="NewTextForm">
-    <input type="text" id="msg" name="msg" placeholder="xin mời nhập tin nhắn"
-    style="border: 1px solid darkgray;width: 70%; max-height: 200px; overflow: auto">
-    <button type="submit" class="ui teal button sendMesg">Send Message</button>
+  <form class="ui form" id="NewTextForm">
+    <div class="field">
+      <input type="text" id="msg" name="msg" placeholder="Xin mời nhập tin nhắn" class="ui form-control">
+    </div>
+    <div class="field">
+      <button type="submit" class="ui teal button sendMesg">Gửi tin nhắn</button>
+    </div>
 </form>
 </template>
 <template name="messages">
@@ -71,7 +72,7 @@
   </form>
 </template>
 <template name="rooms">
-  <h3>DANH SÁCH KHÁCH HÀNG:</h3>
+  <h3>Thành viên đang chat:</h3>
   <ul>
     {{#each rooms}}
     {{> room}}
@@ -87,15 +88,32 @@
   </div>
 </template>
 <template name="LoginForm">
-  <form class="ui form" id="login" style="width: 50%; align: center;">
-    <div class="field">
-      <label>Tài Khoản</label>
-      <input type="text" id="txtName" placeholder="Tên Tài Khoản">
+  <div class="ui middle aligned center aligned grid">
+  <div class="column" style="width: 50%; align: center;margin-top:10px;">
+    <h2 class="ui teal image header">
+      <div class="content">
+        <h1>Welcome ADMIN to page chat</h1>
+        <h3>XIN MỜI ĐĂNG NHẬP ĐỂ VÀO PHÒNG CHAT</h3>
+      </div>
+    </h2>
+    <form class="ui large form" id="login">
+      <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" id="txtName" placeholder="Tên tài khoản">
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" id="txtPass" placeholder="Mật khẩu">
+            </div>
+          </div>
+          <button class="ui fluid large teal submit button" id="login">Đăng nhập</button>
+        </div>
+      </form>
     </div>
-    <div class="field">
-      <label>Mật Khẩu</label>
-      <input type="password" id="txtPass" placeholder="Mật Khẩu">
-    </div>
-    <input type="submit" id="login" value="Đăng nhập" class="ui teal button login">
-  </form>
+  </div>
+
 </template>

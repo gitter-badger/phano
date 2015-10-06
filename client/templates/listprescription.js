@@ -49,6 +49,9 @@ Template.photoPrescription.helpers({
 Template.SalesPrescription.helpers({
   salesDetail: function() {
     return salesDetail;
+  },
+  checknumber:function currencyFormat (num) {
+    return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
   }
 });
 Template.photoPrescription.events({

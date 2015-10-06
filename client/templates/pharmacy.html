@@ -1,7 +1,9 @@
 <template name="pharmacy">
+  <div class="map-container" style="margin-top:10px;">
     {{#unless geolocationError}}
       {{> googleMap name="map" options=mapOptions}}
     {{else}}
       Geolocation failed: {{geolocationError}}
     {{/unless}}
+  </div>
 </template>

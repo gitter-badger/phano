@@ -60,7 +60,7 @@ if (Meteor.isClient) {
   txtInput.value = "";
 };
 _sendMessageLoggin=function(){
-  var sendText = event.target.txtIput.value;
+  var sendText = event.target.txtInput.value;
   if(!Session.get("currentRoomID"))
   {
     Meteor.call("insertRoom",{user: Meteor.user().profile.Name,phone:Meteor.user().profile.Phone, ts: new Date()},function(error,result){
@@ -82,10 +82,17 @@ Template.messageCus.helpers({
   timestamp: function() {
     return this.ts.toLocaleString();
   },
+  checkuser: function(name) {
+    if(name == "admin"){
+      return false;
+    }
+    return true;
+  }
 });
 Template.messagesCus.helpers({
   messagesCus: function() {
-    return Messages.find({RoomID: Session.get("currentRoomID")}, {sort: {ts: -1}}).fetch();
+    return Messages.find({RoomID: Session.get("currentRoomID")}, {sort: {ts: 1}}).fetch();
   },
+
 });
 }

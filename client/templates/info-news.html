@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div>
+    <div style="margin-bottom:10px;">
       {{#unless currentUser}}
       {{#if showUserInfo}}
       <p id="UserInfor">{{>createNewRoom}}</p>
@@ -19,7 +19,9 @@
       {{/unless}}
       <p id="chatBox" style="visibility:{{isShowChatBox}}">
         {{> messagesCus}}
-        {{> inputChat}}
+        <div style="margin-top:20px;">
+          {{> inputChat}}
+        </div>
       </p>
     </div>
   </template>
@@ -29,14 +31,16 @@
       <div>
         <b><h5>CHAT HỖ TRỢ TRỰC TUYẾN</h5></b><hr />
         <div class="field">
-          <input type="text" id="goName" placeholder="Mời nhập Họ Tên" style="width: 100%; margin-bottom: 10px">
+          <input type="text" id="goName" placeholder="Mời nhập Họ Tên"  class="ui form-control">
         </div>
         <div class="field">
-          <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" style="width: 100%; margin-bottom: 0px">
+          <input type="text" id="goPhone" placeholder="Mời nhập số Điện Thoại" class="ui form-control">
         </div>
-        <center>
-          <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui button teal createRoom">
-        </center><br />
+        <div class="field">
+          <center>
+            <input type="submit" id="createRoom" value="Bắt đầu trò chuyện" class="ui button teal createRoom">
+          </center>
+        </div><br />
       </div>
     </div>
     </form>
@@ -45,21 +49,40 @@
     <form id="inputChatMes" class="ui form">
       <div class="field">
         <input class="form-control" type="text" id="txtInput" placeholder="Xin mời nhập tin nhắn" style="margin-right:8px;">
-      </div><br />
-      <input type="submit" value="Gửi Tin Nhắn" class="ui teal button sendMes">
+      </div>
+      <div class="field">
+        <input type="submit" value="Gửi Tin Nhắn" class="ui teal button sendMes" style="margin-top:5px;">
+      </div>
     </form>
   </template>
   <template name="messageCus">
-    <p>
+    <!-- <div style="float:right;">
       <strong class="ui label">
-        <img class="ui right spaced avatar image" src="/img/user.jpg">{{user}}
+        {{user}}:
       </strong>
-      <span style="font-size: 0.5em; color: darkgray"></span>:
-      <i class="ui left pointing white basic label">
-        <i style="font-size: 1.2em;">{{text}}</i><br>
-        <i style="font-size: 0.7em;">({{timestamp}})</i>
-      </i>
-    </p>
+    </div> -->
+    {{#if checkuser user}}
+      <br />
+      <div style="float:right;">
+        <i class="ui right pointing white basic label">
+          <i style="font-size: 1.2em;">{{text}}</i><br>
+          <i style="font-size: 0.7em;">({{timestamp}})</i>
+        </i>
+      </div><br />
+    {{else}}
+      <br />
+      <div style="float:left;">
+        <strong class="ui label">
+          {{user}}:
+        </strong>
+      </div>
+      <div style="float:left;">
+        <i class="ui left pointing white basic label">
+          <i style="font-size: 1.2em;">{{text}}</i><br>
+          <i style="font-size: 0.7em;">({{timestamp}})</i>
+        </i>
+      </div><br />
+    {{/if}}
   </template>
   <template name="messagesCus">
     Hỗ Trợ Trực Tuyến

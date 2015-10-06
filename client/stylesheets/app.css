@@ -5,7 +5,7 @@
 .map-container {
   width: 800px;
   max-width: 100%;
-  height: 500px;
+  height: 700px;
 }
 html.ios {
   overflow-x: hidden;
@@ -57,8 +57,28 @@ html.body {
 .header-menu {
    padding-top: 100px;
 }
-.size-icon-image {
-  width: 44px;
+.size-image-phanocare {
+  width: 59px;
+  height: 42px;
+}
+.size-image-new {
+  width: 41px;
+  height: 42px;
+}
+.size-image-photo {
+  width: 45px;
+  height: 42px;
+}
+.size-image-pharmacy {
+  width: 32px;
+  height: 42px;
+}
+.size-image-infonew {
+  width: 52px;
+  height: 42px;
+}
+.size-image-pres {
+  width: 42px;
   height: 42px;
 }
 .size-item {
@@ -82,10 +102,6 @@ html.body {
   .header-menu {
      padding-top: 180px;
   }
-  .size-icon-image {
-    width: 100px;
-    height: 280px;
-  }
   .size-item {
     height: 500px;
   }
@@ -103,5 +119,34 @@ html.body {
     bottom: 0;
     height: 65px;
     background-size:100% 100%;
+  }
+  .size-image-phanocare {
+    width: 118px;
+    height: 84px;
+  }
+  .size-image-new {
+    width: 82px;
+    height: 84px;
+  }
+  .size-image-photo {
+    width: 90px;
+    height: 84px;
+  }
+  .size-image-pharmacy {
+    width: 64px;
+    height: 84px;
+  }
+  .size-image-infonew {
+    width: 104px;
+    height: 84px;
+  }
+  .size-image-pres {
+    width: 84px;
+    height: 84px;
+  }
+  .map-container {
+    width: 800px;
+    max-width: 100%;
+    height: 1000px;
   }
 }
