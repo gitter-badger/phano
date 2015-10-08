@@ -1,4 +1,4 @@
-Meteor.subscribe('searchphama');
+
   var MAP_ZOOM = 14;
   Meteor.startup(function(e) {
     GoogleMaps.load();

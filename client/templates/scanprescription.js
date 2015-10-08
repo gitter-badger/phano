@@ -1,4 +1,9 @@
-
+if (Meteor.isCordova) {
+  DeviceId = device.uuid;
+} else {
+  DeviceId = "Browser";
+}
+Meteor.subscribe('prescription', DeviceId);
 Template.scanprescriptionTemplate.events({
    'click #capture': function(){
      MeteorCamera.getPicture({}, function(error, data){
@@ -64,32 +69,23 @@ Template.scanprescriptionTemplate.events({
   },
   // 'text': function() {
   //   var DeviceId = '';
-  //   if (Meteor.isCordova) {
-  //     DeviceId = device.uuid;
-  //   } else {
-  //     DeviceId = "Browser";
-  //   }
-  //   Meteor.subscribe('prescription', DeviceId);
+  //   var r = [];
   //   var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
-  //   var date = new Date();
-  //   var weekday = new Array(7);
-  //   weekday[0]=  "Sun";
-  //   weekday[1] = "Mon";
-  //   weekday[2] = "Tue";
-  //   weekday[3] = "Wed";
-  //   weekday[4] = "Thur";
-  //   weekday[5] = "Fri";
-  //   weekday[6] = "Sat";
+  //   var i=0;
+  //   var time='';
+  //   var day="";
+  //   for(var j=0;j<arr.length;j++){
+  //     if(j==1){
+  //       time=arr[j].Repeat;
   //
-  //   var d = weekday[date.getDay()];
-  //   var h = date.getHours();
-  //   var m = date.getMinutes();
-  //   if(m<10)
-  //     m='0'+ m;
-  //   var time = h + ":" + m;
-  //   if(time == "19:17")
-  //     return "tuan";
-  //   return "khong được";
+  //     }
+  //   }
+  //   for(var k=0;k<time.length;k++){
+  //     if(k==1){
+  //       day= time[k];
+  //     }
+  //   }
+  //   return day;
   // },
   'isUser': function() {
     if(Meteor.userId() != undefined ) {

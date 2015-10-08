@@ -57,7 +57,7 @@ html.body {
 .header-menu {
    padding-top: 100px;
 }
-.size-image-phanocare {
+/*.size-image-phanocare {
   width: 59px;
   height: 42px;
 }
@@ -80,17 +80,17 @@ html.body {
 .size-image-pres {
   width: 42px;
   height: 42px;
-}
+}*/
 .size-item {
   height: 100%;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 750px) {
   .style-background-image {
     background-image: url('./icon/background.png');
     background-size: 58% 65%;
     background-repeat: no-repeat;
-    background-position: bottom;
+    background-position:left bottom;
     height:100%;
   }
   .style-background {
@@ -147,6 +147,6 @@ html.body {
   .map-container {
     width: 800px;
     max-width: 100%;
-    height: 1000px;
+    height: 1024px;
   }
 }

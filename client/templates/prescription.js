@@ -5,26 +5,40 @@ var thisMedicine = {} ;
 var currentID;
 //var DeviceId;
 var DeviceId = '';
+var date = new Date();
+var weekday = new Array(7);
+weekday[0]=  "Sun";
+weekday[1] = "Mon";
+weekday[2] = "Tue";
+weekday[3] = "Wed";
+weekday[4] = "Thur";
+weekday[5] = "Fri";
+weekday[6] = "Sat";
+
+var d = weekday[date.getDay()];
+var h = date.getHours();
+var m = date.getMinutes();
+if(m<10)
+  m = '0' + m;
+var time = h + ":" + m;
+var info = null;
+//thêm thông báo
+function addNotification(id,message,schedule_time){
+  cordova.plugins.notification.local.schedule({
+    id:id,
+    title: "Phano care",
+    message: message,
+    at: schedule_time,
+ });
+ var array = [id, message, schedule_time];
+ info.data[info.data.length] = array;
+ localStorage.setItem("rp_data", JSON.stringify(info));
+ navigator.notification.alert("Reminder added successfully")
+}
 //============= MAIN TEMPLATE PRESCRIPTION====================//
 Template.prescriptionTemplate.onRendered(function() {
   $('#loadingScreen').removeClass("active");
-  var date = new Date();
-  var weekday = new Array(7);
-  weekday[0]=  "Sun";
-  weekday[1] = "Mon";
-  weekday[2] = "Tue";
-  weekday[3] = "Wed";
-  weekday[4] = "Thur";
-  weekday[5] = "Fri";
-  weekday[6] = "Sat";
-
-  var d = weekday[date.getDay()];
-  var h = date.getHours();
-  var m = date.getMinutes();
-  if(m<10)
-    m = '0' + m;
-  var time = h + ":" + m;
-  var arr = Prescription.find({IsActive:{$in:[true,1]}}).fetch();
+  var arr = Prescription.find({IsActive:{$in:[true,1]}});
 
   if(Meteor.isCordova){
   cordova.plugins.notification.local.hasPermission(function(granted) {
@@ -33,45 +47,37 @@ Template.prescriptionTemplate.onRendered(function() {
         if (per) {
           var id = 1;
           if(arr.length != 0){
-          arr.forEach(function(res){
-            var timeRepeat = res.Repeat;
-            timeRepeat.forEach(function(day){
-              if(d == day && time == res.StartTime){
-                cordova.plugins.notification.local.schedule({
-                  id:id,
-                  title: "Phano care",
-                  message: res.Text,
-                  at: new Date(Date.now()),
-                });
+            var timeRepeat ='';
+            var day="";
+            for(var i=0;i<arr.length;i++){
+                timeRepeat=arr[i].Repeat;
+                for(var k=0;k<timeRepeat.length;k++){
+                  if(d == timeRepeat[k]){
+                    var repeattime = new Date ((new Date() + " " + arr[i].StartTime).replace(/-/g, "/")).getTime();
+                    addNotification(i,arr[i].Text,repeattime);
+                  }
+                }
               }
-            });
-            id = id +1;
-          });
+            }
         }
-          // cordova.plugins.notification.local.schedule(schedule);
-        }
-
       });
-    } else {
+    }
+   else {
       var id = 1;
       if(arr.length != 0){
-      arr.forEach(function(res){
-        var timeRepeat = res.Repeat;
-        timeRepeat.forEach(function(day){
-          if(d == day && time == res.StartTime){
-            cordova.plugins.notification.local.schedule({
-              id:id,
-              title: "Phano care",
-              message: res.Text,
-              at: new Date(),
-            });
+        var timeRepeat ='';
+        var day="";
+        for(var i=0;i<arr.length;i++){
+            timeRepeat=arr[i].Repeat;
+            for(var k=0;k<timeRepeat.length;k++){
+              if(d == timeRepeat[k]){
+                var repeattime = new Date ((new Date() + " " + arr[i].StartTime).replace(/-/g, "/")).getTime();
+                addNotification(i,arr[i].Text,repeattime);
+              }
+            }
           }
-        });
-        id = id +1;
-      });
-    }
-      // cordova.plugins.notification.local.schedule(schedule);
-    }
+         }
+      }
   });
 }
 
@@ -160,6 +166,31 @@ Template.InsertMedicine.events({
         updateMedicine.Text = event.target.txtText.value;
         updateMedicine.Repeat = Repeat;
         updateMedicine.StartDate = dateStartDate;
+        if(Meteor.isCordova){
+          var id = info.data.length;
+          var schedule_time = new Date((dateStartDate + " " + event.target.txtTime.value).replace(/-/g, "/")).getTime();
+          schedule_time = new Date(schedule_time);
+          cordova.plugins.notification.local.hasPermission(function(granted){
+            if(granted == true)
+            {
+              addNotification(id,event.target.txtText.value,schedule_time);
+            }
+            else
+            {
+              cordova.plugins.notification.local.registerPermission(function(granted) {
+                  if(granted == true)
+                  {
+                    addNotification(id,event.target.txtText.value,schedule_time);
+                  }
+                  else
+                  {
+                    navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
+                  }
+              });
+            }
+          });
+
+        }
         Meteor.call("updatePrescription", updateMedicine);
     } else {
       // add medicine
@@ -175,6 +206,30 @@ Template.InsertMedicine.events({
       }
       if (Meteor.userId())
         addMedicine.UserId = Meteor.userId();
+      if(Meteor.isCordova){
+        var id = info.data.length;
+        var schedule_time = new Date((dateStartDate + " " + event.target.txtTime.value).replace(/-/g, "/")).getTime();
+        schedule_time = new Date(schedule_time);
+        cordova.plugins.notification.local.hasPermission(function(granted){
+          if(granted == true)
+          {
+            addNotification(id,event.target.txtText.value,schedule_time);
+          }
+          else
+          {
+            cordova.plugins.notification.local.registerPermission(function(granted) {
+                if(granted == true)
+                {
+                  addNotification(id,event.target.txtText.value,schedule_time);
+                }
+                else
+                {
+                  navigator.notification.alert("Reminder cannot be added because app doesn't have permission");
+                }
+            });
+          }
+        });
+      }
       Meteor.call("insertPrescription", addMedicine);
     }
   }

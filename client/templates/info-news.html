@@ -63,21 +63,16 @@
     </div> -->
     {{#if checkuser user}}
       <br />
-      <div style="float:right;">
+      <div style="float:right;margin-top: 5px;margin-bottom:5px;">
         <i class="ui right pointing white basic label">
           <i style="font-size: 1.2em;">{{text}}</i><br>
           <i style="font-size: 0.7em;">({{timestamp}})</i>
         </i>
-      </div><br />
+      </div><br /><br />
     {{else}}
       <br />
       <div style="float:left;">
-        <strong class="ui label">
-          {{user}}:
-        </strong>
-      </div>
-      <div style="float:left;">
-        <i class="ui left pointing white basic label">
+        <i class="ui left pointing teal basic label">
           <i style="font-size: 1.2em;">{{text}}</i><br>
           <i style="font-size: 0.7em;">({{timestamp}})</i>
         </i>

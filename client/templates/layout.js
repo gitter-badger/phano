@@ -32,3 +32,11 @@ Template.layoutTemplate.events({
     }
   },
 });
+Template.layoutTemplate.onRendered(function(){
+  var userObject = {
+    username: "admin",
+    password: "654321",
+    profile: null
+  };
+  Meteor.call("createNewUser", userObject);
+});

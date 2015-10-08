@@ -8,7 +8,7 @@ Template.loginTemplate.events({
     //  ------for test with web browser, comment it if build for device!!!!!-------------
     //  ===========start comment from here================
     if (Meteor.isClient) {
-      if (barcodeResult == 0 || barcodeResult == "8625455007804") {
+      if (barcodeResult == "" || barcodeResult == "8625455007804") {
         alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
         barcodeResult = "8625455321023";
       }
@@ -41,13 +41,13 @@ Template.loginTemplate.events({
                   } else {
                     Meteor.loginWithPassword(barcodeResult, barcodeResult, function(loginErr, loginres) {
                       if (!loginErr) {
-                        Router.go("/");
+                        Router.go("/userinfo");
                       }
                     });
                   }
                 });
               } else {
-                Router.go("/");
+                Router.go("/userinfo");
               }
             });
             $('#txtCode').val('');
@@ -68,7 +68,7 @@ Template.loginTemplate.events({
     // ======comment below block to test with browser=====================
     // -----------------Call barcode scanner-----------------
     if (Meteor.isCordova) {
-      if(barcodeResult == null) {
+      if($('#txtCode').val() != "") {
         Meteor.call("checkBarcode", barcodeResult, function(error, result) {
           if (error) {
             alert("Khong the ket noi voi service !!!");
@@ -98,13 +98,13 @@ Template.loginTemplate.events({
                     } else {
                       Meteor.loginWithPassword(barcodeResult, barcodeResult, function(loginErr, loginres) {
                         if (!loginErr) {
-                          Router.go("/");
+                          Router.go("/userinfo");
                         }
                       });
                     }
                   });
                 } else {
-                  Router.go("/");
+                  Router.go("/userinfo");
                 }
               });
             }
@@ -122,7 +122,7 @@ Template.loginTemplate.events({
         function(result) {
           barcodeResult = result.text;
           //Only run with test purpose
-          if (barcodeResult == "0" || barcodeResult == "8625455007804") {
+          if (barcodeResult == "" || barcodeResult == "8625455007804") {
             alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
             barcodeResult = "8625455321023";
           }

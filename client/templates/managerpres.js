@@ -56,13 +56,13 @@ Template.templateManagerpres.events({
     salesDetails = SalesInfo.findOne({_id: this._id});
     SemanticModal.generalModal('ShowsalesPrescription');
   },
-  'click data-action="ReFill"' : function() {
+  'click [data-action="ReFill"]' : function() {
     var r = confirm("Bạn muốn accept?");
     if(r == true){
       Meteor.call("acceptSalesInfo",this._id);
     }
   },
-  'click data-action="aceeptOrder"' : function() {
+  'click [data-action="aceeptOrder"]' : function() {
     var r = confirm("Bạn muốn accept?");
     if(r == true){
       Meteor.call("acceptPrescriptionPhoto",this._id);
@@ -81,4 +81,22 @@ Template.ShowsalesPrescription.helpers({
   checknumber:function currencyFormat (num) {
     return num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
   }
+});
+Template.Login.events({
+  'submit #login': function(event){
+    event.preventDefault();
+    var name = event.target.txtName.value;
+    var pass = event.target.txtPass.value;
+    var result = Meteor.users.findOne({username: name});
+    if (result != undefined) {
+        Meteor.loginWithPassword(name, pass,function(err){
+          if(err){
+            alert("Password wrong")
+          }
+        });
+    }
+    else {
+      alert("Username wrong")
+    }
+}
 });
