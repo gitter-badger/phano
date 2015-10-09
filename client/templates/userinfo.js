@@ -1,4 +1,3 @@
-Meteor.subscribe("users");
 Meteor.subscribe("giftinfo");
 Template.userinfoTemplate.helpers({
   showUserInfo: function() {

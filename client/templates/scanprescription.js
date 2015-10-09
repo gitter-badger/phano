@@ -1,9 +1,9 @@
-if (Meteor.isCordova) {
-  DeviceId = device.uuid;
-} else {
-  DeviceId = "Browser";
-}
-Meteor.subscribe('prescription', DeviceId);
+// if (Meteor.isCordova) {
+//   DeviceId = device.uuid;
+// } else {
+//   DeviceId = "Browser";
+// }
+// Meteor.subscribe('prescription', DeviceId);
 Template.scanprescriptionTemplate.events({
    'click #capture': function(){
      MeteorCamera.getPicture({}, function(error, data){

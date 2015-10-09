@@ -17,10 +17,6 @@
       <i class="smile icon"></i>
       Danh sách đơn thuốc
     </a>
-    <a class="item" href="{{pathFor route='managerpres'}}">
-      <i class="smile icon"></i>
-      Danh sách đơn thuốc đã đặt
-    </a>
     <!-- <a class="item" href="{{pathFor route='giftinfo'}}">
       <i class="smile icon"></i>
       Thông tin đổi quà
@@ -33,10 +29,12 @@
       <i class="smile icon"></i>
       Tài khoản PCare
     </a>
-    <a class="item" id="btnLogout">
-      <i class="sign out icon"></i>
-      LogOut
-    </a>
+    {{#if currentUser}}
+      <a class="item" id="btnLogout">
+        <i class="sign out icon"></i>
+        LogOut
+      </a>
+    {{/if}}
 </div>
     <div id="content" class=" pusher"  style="height: 100%;">
       <div class="ui borderless menu teal top fixed inverted small">
@@ -98,10 +96,6 @@
       <i class="smile icon"></i>
       Danh sách đơn thuốc
     </a>
-    <a class="item" href="{{pathFor route='managerpres'}}">
-      <i class="smile icon"></i>
-      Danh sách đơn thuốc đã đặt
-    </a>
     <!-- <a class="item" href="{{pathFor route='giftinfo'}}">
       <i class="smile icon"></i>
       Thông tin đổi quà
@@ -114,11 +108,13 @@
       <i class="smile icon"></i>
       Tài khoản PCare
     </a>
-    <a class="item" id="btnLogout">
-      <i class="sign out icon"></i>
-      LogOut
-    </a>
-</div>
+    {{#if currentUser}}
+      <a class="item" id="btnLogout">
+        <i class="sign out icon"></i>
+        LogOut
+      </a>
+    {{/if}}
+  </div>
     <div id="content" class=" pusher">
       <div class="ui borderless menu teal top fixed inverted small">
           <a class="item" id="back">

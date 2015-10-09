@@ -161,12 +161,13 @@ Template.InsertMedicine.events({
     if (updateMedicine) {
       //update medicne
       if (Meteor.userId())
-        updateMedicine.UserId = Meteor.userId();
-        updateMedicine.StartTime = event.target.txtTime.value;
-        updateMedicine.Text = event.target.txtText.value;
-        updateMedicine.Repeat = Repeat;
-        updateMedicine.StartDate = dateStartDate;
+
         if(Meteor.isCordova){
+          updateMedicine.UserId = Meteor.userId();
+          updateMedicine.StartTime = event.target.txtTime.value;
+          updateMedicine.Text = event.target.txtText.value;
+          updateMedicine.Repeat = Repeat;
+          updateMedicine.StartDate = dateStartDate;
           var id = info.data.length;
           var schedule_time = new Date((dateStartDate + " " + event.target.txtTime.value).replace(/-/g, "/")).getTime();
           schedule_time = new Date(schedule_time);
@@ -189,24 +190,34 @@ Template.InsertMedicine.events({
               });
             }
           });
-
+          Meteor.call("updatePrescription", updateMedicine);
         }
-        Meteor.call("updatePrescription", updateMedicine);
+        else {
+          updateMedicine.UserId = Meteor.userId();
+          updateMedicine.StartTime = event.target.txtTime.value;
+          updateMedicine.Text = event.target.txtText.value;
+          updateMedicine.Repeat = Repeat;
+          updateMedicine.StartDate = dateStartDate;
+
+          Meteor.call("updatePrescription", updateMedicine);
+        }
+
     } else {
-      // add medicine
-      var addMedicine = {
-        _id: Random.id(),
-        UserId: 'N/A',
-        DeviceId: DeviceId,
-        Text: event.target.txtText.value,
-        Repeat: Repeat,
-        StartTime: event.target.txtTime.value,
-        StartDate: dateStartDate,
-        IsActive: true,
-      }
-      if (Meteor.userId())
-        addMedicine.UserId = Meteor.userId();
+
       if(Meteor.isCordova){
+        // add medicine
+        var addMedicine = {
+          _id: Random.id(),
+          UserId: 'N/A',
+          DeviceId: DeviceId,
+          Text: event.target.txtText.value,
+          Repeat: Repeat,
+          StartTime: event.target.txtTime.value,
+          StartDate: dateStartDate,
+          IsActive: true,
+        }
+        if (Meteor.userId())
+          addMedicine.UserId = Meteor.userId();
         var id = info.data.length;
         var schedule_time = new Date((dateStartDate + " " + event.target.txtTime.value).replace(/-/g, "/")).getTime();
         schedule_time = new Date(schedule_time);
@@ -229,8 +240,25 @@ Template.InsertMedicine.events({
             });
           }
         });
+        Meteor.call("insertPrescription", addMedicine);
       }
-      Meteor.call("insertPrescription", addMedicine);
+      else {
+        var addMedicine = {
+          _id: Random.id(),
+          UserId: 'N/A',
+          DeviceId: DeviceId,
+          Text: event.target.txtText.value,
+          Repeat: Repeat,
+          StartTime: event.target.txtTime.value,
+          StartDate: dateStartDate,
+          IsActive: true,
+        }
+        if (Meteor.userId())
+          addMedicine.UserId = Meteor.userId();
+
+          Meteor.call("insertPrescription", addMedicine);
+      }
+
     }
   }
 });

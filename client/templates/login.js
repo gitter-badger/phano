@@ -3,11 +3,12 @@ Template.loginTemplate.events({
   'click #btnLogin': function(event) {
     $('#loadingScreen').addClass("active");
     //start scan barcode!
-    var barcodeResult = $('#txtCode').val();
+    var barcodeResult = "";
     var customerInfo;
     //  ------for test with web browser, comment it if build for device!!!!!-------------
     //  ===========start comment from here================
     if (Meteor.isClient) {
+        barcodeResult = $('#txtCode').val();
       if (barcodeResult == "" || barcodeResult == "8625455007804") {
         alert("Chưa nhận được barcode hoặc barcode nhận được không có trên service, hệ thống sẽ tự động đăng nhập bằng mã 8625455321023 (chỉ dành cho demo)!");
         barcodeResult = "8625455321023";
@@ -50,7 +51,6 @@ Template.loginTemplate.events({
                 Router.go("/userinfo");
               }
             });
-            $('#txtCode').val('');
           }
           //--------------if service return false----------------------------
           else {
@@ -69,6 +69,7 @@ Template.loginTemplate.events({
     // -----------------Call barcode scanner-----------------
     if (Meteor.isCordova) {
       if($('#txtCode').val() != "") {
+        barcodeResult = $('#txtCode').val('');
         Meteor.call("checkBarcode", barcodeResult, function(error, result) {
           if (error) {
             alert("Khong the ket noi voi service !!!");
@@ -156,13 +157,13 @@ Template.loginTemplate.events({
                       } else {
                         Meteor.loginWithPassword(barcodeResult, barcodeResult, function(loginErr, loginres) {
                           if (!loginErr) {
-                            Router.go("/");
+                            Router.go("/userinfo");
                           }
                         });
                       }
                     });
                   } else {
-                    Router.go("/");
+                    Router.go("/userinfo");
                   }
                 });
               }
